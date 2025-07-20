@@ -24,6 +24,7 @@ sys.path.append('/workspace/ComfyUI')
 # Global ComfyUI process
 comfyui_process = None
 COMFYUI_URL = "http://127.0.0.1:8188"
+models_checked = False
 
 def download_model_if_needed(model_name: str, model_path: str, download_url: str, hf_token: Optional[str] = None) -> bool:
     """Download a model if it doesn't exist."""
@@ -56,6 +57,12 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
 
 def ensure_models(hf_token=None):
     """Ensure all required models are downloaded."""
+    global models_checked
+    
+    # Skip if already checked with a valid token
+    if models_checked and hf_token:
+        return
+    
     models_base = "/workspace/ComfyUI/models"
     
     # Get Hugging Face token from environment if not provided
@@ -95,6 +102,10 @@ def ensure_models(hf_token=None):
         token_to_use = hf_token if model.get('requires_auth', False) else None
         if not download_model_if_needed(model["name"], model["path"], model["url"], token_to_use):
             logger.warning(f"Failed to download {model['name']}, continuing anyway...")
+    
+    # Mark as checked if we had a valid token
+    if hf_token:
+        models_checked = True
 
 def start_comfyui():
     """Start ComfyUI server in the background"""
@@ -207,6 +218,10 @@ def handler(job):
             logger.info("Using HF token from job input")
             # Set it in environment for this job
             os.environ['HF_TOKEN'] = hf_token
+            
+            # Ensure models are downloaded with the provided token
+            logger.info("Checking for required models with HF token...")
+            ensure_models(hf_token)
         
         # Parse workflow from input
         if "workflow" not in job_input:
@@ -288,9 +303,8 @@ def handler(job):
 # Initialize on container start
 logger.info("Initializing ComfyUI for RunPod...")
 
-# Ensure models are downloaded (will use env vars on startup)
-logger.info("Checking for required models...")
-ensure_models()
+# Skip model download on startup - will download when job arrives with HF token
+logger.info("Skipping initial model download - will download on first job")
 
 # Start ComfyUI
 if not start_comfyui():

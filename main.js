@@ -244,7 +244,8 @@ ipcMain.handle('save-runpod-key', async (event, { apiKey, endpointId }) => {
         await fluxServiceRunPod.initialize({
             runpodApiKey: apiKey,
             runpodEndpointId: endpointId || config.runpodEndpointId,
-            modelPrecision: config.modelPrecision || 'fp8'
+            modelPrecision: config.modelPrecision || 'fp8',
+            huggingfaceToken: HUGGINGFACE_TOKEN
         });
         
         return { success: true };
@@ -267,7 +268,8 @@ ipcMain.handle('test-runpod-connection', async (event, { apiKey, endpointId }) =
         await testService.initialize({
             runpodApiKey: apiKey,
             runpodEndpointId: endpointId,
-            modelPrecision: 'fp8'
+            modelPrecision: 'fp8',
+            huggingfaceToken: HUGGINGFACE_TOKEN
         });
         const result = await testService.testConnection();
         return result;
@@ -1019,7 +1021,8 @@ ipcMain.handle('flux-generate-image', async (event, { prompt, settings }) => {
                 await fluxServiceRunPod.initialize({
                     runpodApiKey: RUNPOD_API_KEY,
                     runpodEndpointId: RUNPOD_ENDPOINT_ID,
-                    modelPrecision: settings.modelPrecision || 'fp8'
+                    modelPrecision: settings.modelPrecision || 'fp8',
+                    huggingfaceToken: HUGGINGFACE_TOKEN
                 });
             }
             
@@ -1518,7 +1521,8 @@ app.whenReady().then(async () => {
             await fluxServiceRunPod.initialize({
                 runpodApiKey: RUNPOD_API_KEY,
                 runpodEndpointId: RUNPOD_ENDPOINT_ID,
-                modelPrecision: 'fp8'
+                modelPrecision: 'fp8',
+                huggingfaceToken: HUGGINGFACE_TOKEN
             });
             console.log('[Main] RunPod service initialized successfully');
         } catch (error) {

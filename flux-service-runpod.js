@@ -12,12 +12,14 @@ class FluxServiceRunPod {
         this.modelPrecision = 'fp8';
         this.activeJobs = new Map();
         this.isRunPod = true; // Flag to identify this as RunPod service
+        this.huggingfaceToken = null;
     }
 
     async initialize(config) {
         this.apiKey = config.runpodApiKey;
         this.endpointId = config.runpodEndpointId;
         this.modelPrecision = config.modelPrecision || 'fp8';
+        this.huggingfaceToken = config.huggingfaceToken || null;
         
         if (!this.apiKey) {
             throw new Error('RunPod API key not configured');
@@ -101,7 +103,8 @@ class FluxServiceRunPod {
         
         const payload = {
             input: {
-                workflow: workflow  // Send as object, not string
+                workflow: workflow,  // Send as object, not string
+                hf_token: this.huggingfaceToken  // Pass HF token if available
             }
         };
 

@@ -54,12 +54,13 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
         logger.error(f"Error downloading {model_name}: {str(e)}")
         return False
 
-def ensure_models():
+def ensure_models(hf_token=None):
     """Ensure all required models are downloaded."""
     models_base = "/workspace/ComfyUI/models"
     
-    # Get Hugging Face token from environment if available
-    hf_token = os.environ.get('HF_TOKEN', os.environ.get('HUGGING_FACE_TOKEN', None))
+    # Get Hugging Face token from environment if not provided
+    if not hf_token:
+        hf_token = os.environ.get('HF_TOKEN', os.environ.get('HUGGING_FACE_TOKEN', None))
     
     # Define required models
     required_models = [
@@ -200,6 +201,13 @@ def handler(job):
         job_input = job["input"]
         logger.info(f"Received job with input keys: {list(job_input.keys())}")
         
+        # Extract HF token if provided
+        hf_token = job_input.get('hf_token', None)
+        if hf_token:
+            logger.info("Using HF token from job input")
+            # Set it in environment for this job
+            os.environ['HF_TOKEN'] = hf_token
+        
         # Parse workflow from input
         if "workflow" not in job_input:
             return {"error": "No workflow provided"}
@@ -280,7 +288,7 @@ def handler(job):
 # Initialize on container start
 logger.info("Initializing ComfyUI for RunPod...")
 
-# Ensure models are downloaded
+# Ensure models are downloaded (will use env vars on startup)
 logger.info("Checking for required models...")
 ensure_models()
 

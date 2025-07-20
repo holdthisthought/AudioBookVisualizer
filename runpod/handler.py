@@ -60,12 +60,17 @@ def ensure_models(hf_token=None):
     global models_checked
     
     # Check if Network Volume is mounted (RunPod mounts at /runpod-volume)
-    if os.path.exists("/runpod-volume"):
+    if os.path.exists("/runpod-volume") and os.path.ismount("/runpod-volume"):
         models_base = "/runpod-volume/models"
         logger.info(f"Using Network Volume for models: {models_base}")
+        
+        # Ensure the models directory structure exists
+        for subdir in ["", "unet", "clip", "vae", "checkpoints"]:
+            os.makedirs(f"{models_base}/{subdir}", exist_ok=True)
     else:
         models_base = "/workspace/ComfyUI/models"
         logger.info(f"Using local storage for models: {models_base}")
+        logger.warning("Network Volume not detected - may run out of disk space!")
     
     # Get Hugging Face token from environment if not provided
     if not hf_token:
@@ -353,6 +358,23 @@ def handler(job):
 
 # Initialize on container start
 logger.info("Initializing ComfyUI for RunPod...")
+
+# Check disk space
+try:
+    import shutil
+    disk_usage = shutil.disk_usage("/workspace")
+    free_gb = disk_usage.free / (1024**3)
+    total_gb = disk_usage.total / (1024**3)
+    logger.info(f"Disk space: {free_gb:.1f}GB free of {total_gb:.1f}GB total")
+    
+    # Check for Network Volume
+    if os.path.exists("/runpod-volume"):
+        vol_usage = shutil.disk_usage("/runpod-volume")
+        vol_free_gb = vol_usage.free / (1024**3)
+        vol_total_gb = vol_usage.total / (1024**3)
+        logger.info(f"Network Volume: {vol_free_gb:.1f}GB free of {vol_total_gb:.1f}GB total")
+except Exception as e:
+    logger.warning(f"Could not check disk space: {e}")
 
 # Try to download models on startup if HF token is in environment
 logger.info("Checking for required models...")

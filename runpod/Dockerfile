@@ -45,20 +45,23 @@ WORKDIR /workspace/ComfyUI/custom_nodes
 RUN mkdir -p ComfyUI-Manager ComfyUI-Flux-Kontext
 
 # Create a script to install custom nodes at runtime
-RUN echo '#!/bin/bash\n\
-echo "Checking for custom nodes..."\n\
-cd /workspace/ComfyUI/custom_nodes\n\
-if [ ! -f ComfyUI-Flux-Kontext/.installed ]; then\n\
-    echo "Installing ComfyUI-Flux-Kontext..."\n\
-    rm -rf ComfyUI-Flux-Kontext\n\
-    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>/dev/null || \\\n\
-    wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \\\n\
-    unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext\n\
-    cd ComfyUI-Flux-Kontext && touch .installed\n\
-    if [ -f requirements.txt ]; then pip install -q -r requirements.txt 2>/dev/null || true; fi\n\
-fi\n\
-echo "Custom nodes ready"' > /workspace/install_custom_nodes.sh && \
-    chmod +x /workspace/install_custom_nodes.sh
+RUN cat > /workspace/install_custom_nodes.sh << 'EOF'
+#!/bin/bash
+echo "Checking for custom nodes..."
+cd /workspace/ComfyUI/custom_nodes
+if [ ! -f ComfyUI-Flux-Kontext/.installed ]; then
+    echo "Installing ComfyUI-Flux-Kontext..."
+    rm -rf ComfyUI-Flux-Kontext
+    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>/dev/null || \
+    (wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \
+     unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext)
+    cd ComfyUI-Flux-Kontext && touch .installed
+    if [ -f requirements.txt ]; then pip install -q -r requirements.txt 2>/dev/null || true; fi
+fi
+echo "Custom nodes ready"
+EOF
+
+RUN chmod +x /workspace/install_custom_nodes.sh
 
 # Create model directories
 RUN mkdir -p /workspace/ComfyUI/models/unet \
@@ -79,15 +82,19 @@ RUN pip install --no-cache-dir runpod
 # Set working directory back to workspace
 WORKDIR /workspace
 
-# Create start script inline
-RUN echo '#!/bin/bash\n\
-echo "Starting RunPod ComfyUI worker..."\n\
-export PYTHONUNBUFFERED=1\n\
-export COMFYUI_PATH=/workspace/ComfyUI\n\
-# Install custom nodes if needed\n\
-/workspace/install_custom_nodes.sh\n\
-cd /workspace\n\
-python handler.py' > /workspace/start.sh && chmod +x /workspace/start.sh
+# Create start script inline using heredoc
+RUN cat > /workspace/start.sh << 'EOF'
+#!/bin/bash
+echo "Starting RunPod ComfyUI worker..."
+export PYTHONUNBUFFERED=1
+export COMFYUI_PATH=/workspace/ComfyUI
+# Install custom nodes if needed
+/workspace/install_custom_nodes.sh
+cd /workspace
+python handler.py
+EOF
+
+RUN chmod +x /workspace/start.sh
 
 # RunPod serverless entrypoint
 CMD ["/workspace/start.sh"]

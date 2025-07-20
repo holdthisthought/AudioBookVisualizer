@@ -40,32 +40,49 @@ RUN pip install --no-cache-dir \
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes
 
-# Install ComfyUI-Flux-Kontext during build (using wget to avoid git issues)
-RUN wget https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O flux-kontext.zip && \
-    unzip flux-kontext.zip && \
-    rm flux-kontext.zip && \
-    mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext && \
-    cd ComfyUI-Flux-Kontext && \
-    if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
+# Create empty directory for custom nodes (will be populated at runtime)
+RUN mkdir -p ComfyUI-Flux-Kontext
 
 # Create a script to install custom nodes at runtime
 RUN cat > /workspace/install_custom_nodes.sh << 'EOF'
 #!/bin/bash
 echo "Checking for custom nodes..."
 cd /workspace/ComfyUI/custom_nodes
-if [ -d ComfyUI-Flux-Kontext ]; then
+
+# Check if the custom node has actual content (not just empty directory)
+if [ -d ComfyUI-Flux-Kontext ] && [ -f ComfyUI-Flux-Kontext/__init__.py ]; then
     echo "ComfyUI-Flux-Kontext already installed"
 else
     echo "Installing ComfyUI-Flux-Kontext..."
-    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git || \
-    (wget https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \
-     unzip k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext)
-    if [ -d ComfyUI-Flux-Kontext ]; then
+    rm -rf ComfyUI-Flux-Kontext
+    
+    # Try multiple methods to download
+    if command -v git &> /dev/null; then
+        echo "Trying git clone..."
+        git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>&1
+    fi
+    
+    if [ ! -d ComfyUI-Flux-Kontext ] || [ ! -f ComfyUI-Flux-Kontext/__init__.py ]; then
+        echo "Git failed, trying wget..."
+        wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip 2>&1 && \
+        unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext
+    fi
+    
+    if [ ! -d ComfyUI-Flux-Kontext ] || [ ! -f ComfyUI-Flux-Kontext/__init__.py ]; then
+        echo "Wget failed, trying curl..."
+        curl -L https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -o k.zip 2>&1 && \
+        unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext
+    fi
+    
+    if [ -d ComfyUI-Flux-Kontext ] && [ -f ComfyUI-Flux-Kontext/__init__.py ]; then
         cd ComfyUI-Flux-Kontext
-        if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
+        if [ -f requirements.txt ]; then 
+            echo "Installing requirements..."
+            pip install -r requirements.txt 2>&1 || true
+        fi
         echo "ComfyUI-Flux-Kontext installed successfully"
     else
-        echo "Failed to install ComfyUI-Flux-Kontext"
+        echo "ERROR: Failed to install ComfyUI-Flux-Kontext - workflow may not work correctly"
     fi
 fi
 echo "Custom nodes ready"

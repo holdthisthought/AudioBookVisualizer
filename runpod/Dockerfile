@@ -56,7 +56,6 @@ RUN mkdir -p /workspace/ComfyUI/models/unet \
 # Copy scripts from current directory
 COPY download_models.py /workspace/download_models.py
 COPY handler.py /workspace/handler.py
-COPY start.sh /workspace/start.sh
 
 # Download models during build (optional - can be done at runtime)
 # RUN python /workspace/download_models.py
@@ -67,8 +66,13 @@ RUN pip install --no-cache-dir runpod
 # Set working directory back to workspace
 WORKDIR /workspace
 
-# Make startup script executable
-RUN chmod +x /workspace/start.sh
+# Create start script inline
+RUN echo '#!/bin/bash\n\
+echo "Starting RunPod ComfyUI worker..."\n\
+export PYTHONUNBUFFERED=1\n\
+export COMFYUI_PATH=/workspace/ComfyUI\n\
+cd /workspace\n\
+python handler.py' > /workspace/start.sh && chmod +x /workspace/start.sh
 
 # RunPod serverless entrypoint
 CMD ["/workspace/start.sh"]

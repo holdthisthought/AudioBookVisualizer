@@ -271,6 +271,14 @@ def handler(job):
             logger.info("Downloading missing models...")
             ensure_models(hf_token)
             
+            # Log model sizes after download attempt
+            for model_path in critical_models:
+                if os.path.exists(model_path):
+                    size_mb = os.path.getsize(model_path) / (1024 * 1024)
+                    logger.info(f"{os.path.basename(model_path)}: {size_mb:.1f} MB")
+                else:
+                    logger.info(f"{os.path.basename(model_path)}: NOT FOUND")
+            
             # Wait a moment for filesystem to sync
             time.sleep(2)
             
@@ -304,6 +312,11 @@ def handler(job):
             if history and prompt_id in history:
                 logger.info(f"Prompt completed after {attempt * 5} seconds")
                 outputs = history[prompt_id].get("outputs", {})
+                
+                # Debug: log the output structure
+                logger.info(f"Output nodes: {list(outputs.keys())}")
+                for node_id, node_output in outputs.items():
+                    logger.info(f"Node {node_id} output keys: {list(node_output.keys())}")
                 
                 # Look for saved images
                 images = []

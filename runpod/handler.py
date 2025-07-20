@@ -59,10 +59,6 @@ def ensure_models(hf_token=None):
     """Ensure all required models are downloaded."""
     global models_checked
     
-    # Skip if already checked with a valid token
-    if models_checked and hf_token:
-        return
-    
     models_base = "/workspace/ComfyUI/models"
     
     # Get Hugging Face token from environment if not provided
@@ -98,14 +94,19 @@ def ensure_models(hf_token=None):
     ]
     
     # Download models if needed
+    all_success = True
     for model in required_models:
         token_to_use = hf_token if model.get('requires_auth', False) else None
         if not download_model_if_needed(model["name"], model["path"], model["url"], token_to_use):
-            logger.warning(f"Failed to download {model['name']}, continuing anyway...")
+            logger.warning(f"Failed to download {model['name']}")
+            all_success = False
     
-    # Mark as checked if we had a valid token
-    if hf_token:
+    # Mark as checked only if all models downloaded successfully
+    if all_success:
         models_checked = True
+        logger.info("All models downloaded successfully")
+    else:
+        logger.warning("Some models failed to download")
 
 def start_comfyui():
     """Start ComfyUI server in the background"""
@@ -215,24 +216,35 @@ def handler(job):
         # Extract HF token if provided
         hf_token = job_input.get('hf_token', None)
         
-        # Check if critical models are missing
-        vae_path = "/workspace/ComfyUI/models/vae/ae.safetensors"
-        needs_download = not os.path.exists(vae_path)
+        # Check if any critical models are missing
+        models_base = "/workspace/ComfyUI/models"
+        critical_models = [
+            f"{models_base}/unet/flux1-kontext-dev.safetensors",
+            f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
+            f"{models_base}/clip/clip_l.safetensors",
+            f"{models_base}/vae/ae.safetensors"
+        ]
         
-        if hf_token and needs_download:
-            logger.info("Using HF token from job input")
-            # Set it in environment
-            os.environ['HF_TOKEN'] = hf_token
+        missing_models = [m for m in critical_models if not os.path.exists(m)]
+        
+        if missing_models:
+            logger.info(f"Missing {len(missing_models)} critical models: {[os.path.basename(m) for m in missing_models]}")
             
-            logger.info("Critical models missing, downloading with HF token...")
+            if hf_token:
+                logger.info("Using HF token from job input")
+                # Set it in environment
+                os.environ['HF_TOKEN'] = hf_token
+            
+            logger.info("Downloading missing models...")
             ensure_models(hf_token)
             
             # Wait a moment for filesystem to sync
             time.sleep(2)
             
-            # Verify VAE was downloaded
-            if not os.path.exists(vae_path):
-                return {"error": "Failed to download VAE model even with HF token"}
+            # Verify all models were downloaded
+            still_missing = [m for m in critical_models if not os.path.exists(m)]
+            if still_missing:
+                return {"error": f"Failed to download models: {[os.path.basename(m) for m in still_missing]}"}
         
         # Parse workflow from input
         if "workflow" not in job_input:

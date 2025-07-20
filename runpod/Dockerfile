@@ -46,46 +46,7 @@ RUN mkdir -p ComfyUI-Flux-Kontext
 # Create a script to install custom nodes at runtime
 RUN cat > /workspace/install_custom_nodes.sh << 'EOF'
 #!/bin/bash
-echo "Checking for custom nodes..."
-cd /workspace/ComfyUI/custom_nodes
-
-# Check if the custom node has actual content (not just empty directory)
-if [ -d ComfyUI-Flux-Kontext ] && [ -f ComfyUI-Flux-Kontext/__init__.py ]; then
-    echo "ComfyUI-Flux-Kontext already installed"
-else
-    echo "Installing ComfyUI-Flux-Kontext..."
-    rm -rf ComfyUI-Flux-Kontext
-    
-    # Try multiple methods to download
-    if command -v git &> /dev/null; then
-        echo "Trying git clone..."
-        git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>&1
-    fi
-    
-    if [ ! -d ComfyUI-Flux-Kontext ] || [ ! -f ComfyUI-Flux-Kontext/__init__.py ]; then
-        echo "Git failed, trying wget..."
-        wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip 2>&1 && \
-        unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext
-    fi
-    
-    if [ ! -d ComfyUI-Flux-Kontext ] || [ ! -f ComfyUI-Flux-Kontext/__init__.py ]; then
-        echo "Wget failed, trying curl..."
-        curl -L https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -o k.zip 2>&1 && \
-        unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext
-    fi
-    
-    if [ -d ComfyUI-Flux-Kontext ] && [ -f ComfyUI-Flux-Kontext/__init__.py ]; then
-        cd ComfyUI-Flux-Kontext
-        if [ -f requirements.txt ]; then 
-            echo "Installing requirements..."
-            pip install -r requirements.txt 2>&1 || true
-        fi
-        echo "ComfyUI-Flux-Kontext installed successfully"
-    else
-        echo "ERROR: Failed to install ComfyUI-Flux-Kontext - workflow may not work correctly"
-    fi
-fi
-echo "Custom nodes ready"
+echo "Custom nodes check skipped - using standard ComfyUI nodes"
 EOF
 
 RUN chmod +x /workspace/install_custom_nodes.sh

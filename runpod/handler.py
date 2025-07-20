@@ -325,8 +325,26 @@ def handler(job):
                 
                 outputs = prompt_data.get("outputs", {})
                 
-                # Debug: log the output structure
+                # Debug: log the entire history structure
+                logger.info(f"Prompt data keys: {list(prompt_data.keys())}")
                 logger.info(f"Output nodes: {list(outputs.keys())}")
+                
+                # If no outputs, check for execution info
+                if not outputs:
+                    logger.warning("No outputs found, checking execution data...")
+                    if "execution" in prompt_data:
+                        logger.info(f"Execution data: {prompt_data['execution']}")
+                    
+                    # Try to get the raw history
+                    try:
+                        raw_response = requests.get(f"{COMFYUI_URL}/history")
+                        if raw_response.status_code == 200:
+                            all_history = raw_response.json()
+                            if prompt_id in all_history:
+                                logger.info(f"Raw history data: {json.dumps(all_history[prompt_id], indent=2)}")
+                    except Exception as e:
+                        logger.error(f"Could not get raw history: {e}")
+                
                 for node_id, node_output in outputs.items():
                     logger.info(f"Node {node_id} output keys: {list(node_output.keys())}")
                 

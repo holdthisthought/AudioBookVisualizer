@@ -214,14 +214,25 @@ def handler(job):
         
         # Extract HF token if provided
         hf_token = job_input.get('hf_token', None)
-        if hf_token:
+        
+        # Check if critical models are missing
+        vae_path = "/workspace/ComfyUI/models/vae/ae.safetensors"
+        needs_download = not os.path.exists(vae_path)
+        
+        if hf_token and needs_download:
             logger.info("Using HF token from job input")
-            # Set it in environment for this job
+            # Set it in environment
             os.environ['HF_TOKEN'] = hf_token
             
-            # Ensure models are downloaded with the provided token
-            logger.info("Checking for required models with HF token...")
+            logger.info("Critical models missing, downloading with HF token...")
             ensure_models(hf_token)
+            
+            # Wait a moment for filesystem to sync
+            time.sleep(2)
+            
+            # Verify VAE was downloaded
+            if not os.path.exists(vae_path):
+                return {"error": "Failed to download VAE model even with HF token"}
         
         # Parse workflow from input
         if "workflow" not in job_input:

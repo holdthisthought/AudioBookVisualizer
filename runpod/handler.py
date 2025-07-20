@@ -311,7 +311,19 @@ def handler(job):
             
             if history and prompt_id in history:
                 logger.info(f"Prompt completed after {attempt * 5} seconds")
-                outputs = history[prompt_id].get("outputs", {})
+                prompt_data = history[prompt_id]
+                
+                # Check if there was an error
+                if "status" in prompt_data:
+                    status = prompt_data.get("status")
+                    if status and "status_str" in status:
+                        logger.info(f"Prompt status: {status['status_str']}")
+                        if status['status_str'] == "error":
+                            error_msg = status.get("messages", ["Unknown error"])
+                            logger.error(f"Workflow error: {error_msg}")
+                            return {"error": f"Workflow failed: {error_msg}"}
+                
+                outputs = prompt_data.get("outputs", {})
                 
                 # Debug: log the output structure
                 logger.info(f"Output nodes: {list(outputs.keys())}")
@@ -401,6 +413,16 @@ else:
 # Start ComfyUI
 if not start_comfyui():
     logger.error("Failed to start ComfyUI, but continuing anyway...")
+
+# Log available node types
+try:
+    response = requests.get(f"{COMFYUI_URL}/object_info")
+    if response.status_code == 200:
+        node_types = list(response.json().keys())
+        flux_nodes = [n for n in node_types if 'flux' in n.lower() or 'FLUX' in n]
+        logger.info(f"Available FLUX-related nodes: {flux_nodes}")
+except Exception as e:
+    logger.warning(f"Could not get node info: {e}")
 
 # RunPod serverless handler
 logger.info("Starting RunPod handler...")

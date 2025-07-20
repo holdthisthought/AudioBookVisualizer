@@ -53,9 +53,10 @@ RUN mkdir -p /workspace/ComfyUI/models/unet \
     /workspace/ComfyUI/models/vae \
     /workspace/ComfyUI/models/checkpoints
 
-# Copy model download script
+# Copy scripts from current directory
 COPY download_models.py /workspace/download_models.py
 COPY handler.py /workspace/handler.py
+COPY start.sh /workspace/start.sh
 
 # Download models during build (optional - can be done at runtime)
 # RUN python /workspace/download_models.py
@@ -66,8 +67,7 @@ RUN pip install --no-cache-dir runpod
 # Set working directory back to workspace
 WORKDIR /workspace
 
-# Create startup script
-COPY start.sh /workspace/start.sh
+# Make startup script executable
 RUN chmod +x /workspace/start.sh
 
 # RunPod serverless entrypoint

@@ -1,0 +1,476 @@
+// Terminal component for AI CLI integration
+class AITerminal {
+    constructor() {
+        this.ws = null;
+        this.sessionId = null;
+        this.currentTool = null; // null, 'claude' or 'gemini'
+        this.terminalElement = null;
+        this.inputElement = null;
+        this.outputElement = null;
+        this.isConnected = false;
+        this.inInteractiveMode = false; // Track if we're in a menu
+        this.lastMenuOutput = null; // Store last menu for updates
+    }
+
+    async init(containerId) {
+        // Create terminal UI
+        const container = document.getElementById(containerId);
+        container.innerHTML = `
+            <div class="ai-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-title">AI Assistant Terminal</div>
+                    <div class="terminal-controls">
+                        <button id="ai-tool-gemini" class="terminal-tool-btn ${this.currentTool === 'gemini' ? 'active' : ''}" data-tool="gemini">
+                            <span class="tool-status-dot"></span>
+                            Gemini CLI
+                        </button>
+                        <button id="ai-tool-claude" class="terminal-tool-btn ${this.currentTool === 'claude' ? 'active' : ''}" data-tool="claude">
+                            <span class="tool-status-dot"></span>
+                            Claude Code
+                        </button>
+                        <div class="terminal-separator"></div>
+                        <button id="terminal-clear" class="terminal-btn">Clear</button>
+                        <button id="terminal-toggle" class="terminal-btn">▼</button>
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div id="terminal-output" class="terminal-output"></div>
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt">$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" placeholder="Type command...">
+                        <button id="terminal-return" class="terminal-return-btn" title="Send Return key (for interactive menus)">↵</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        this.terminalElement = container.querySelector('.ai-terminal');
+        this.outputElement = document.getElementById('terminal-output');
+        this.inputElement = document.getElementById('terminal-input');
+
+        // Set up event listeners
+        this.setupEventListeners();
+
+        // Don't connect automatically - wait for user to select a tool
+        this.appendOutput('Please select an AI Assistant (Claude Code or Gemini CLI) to start.\n', 'system');
+    }
+
+    setupEventListeners() {
+        // Tool buttons
+        document.getElementById('ai-tool-gemini').addEventListener('click', async () => {
+            await this.switchToolWithRestart('gemini');
+        });
+        
+        document.getElementById('ai-tool-claude').addEventListener('click', async () => {
+            await this.switchToolWithRestart('claude');
+        });
+
+        // Clear button
+        document.getElementById('terminal-clear').addEventListener('click', () => {
+            this.clear();
+        });
+
+        // Toggle button
+        document.getElementById('terminal-toggle').addEventListener('click', () => {
+            this.toggle();
+        });
+
+        // Focus input when clicking anywhere in the terminal
+        this.terminalElement.addEventListener('click', (e) => {
+            // Don't focus if clicking on buttons
+            if (!e.target.matches('button') && !e.target.closest('button')) {
+                this.inputElement.focus();
+            }
+        });
+
+        // Return button for interactive menus
+        document.getElementById('terminal-return').addEventListener('click', () => {
+            if (this.isConnected) {
+                const value = this.inputElement.value.trim();
+                if (value) {
+                    // If there's text, send it as a command
+                    this.sendInput(value);
+                    this.inputElement.value = '';
+                } else {
+                    // If no text, send raw Enter for menu selection
+                    this.sendRawInput('\r');
+                }
+                this.inputElement.focus();
+            }
+        });
+
+        // Input handling - capture all keys including special ones
+        this.inputElement.addEventListener('keydown', (e) => {
+            if (!this.isConnected) {
+                if (this.currentTool === null) {
+                    e.preventDefault();
+                    this.appendOutput('Please select an AI Assistant first.\n', 'error');
+                }
+                return;
+            }
+            
+            // Handle special keys
+            const specialKeys = {
+                'ArrowUp': '\x1b[A',
+                'ArrowDown': '\x1b[B',
+                'ArrowRight': '\x1b[C',
+                'ArrowLeft': '\x1b[D',
+                'Tab': '\t',
+                'Escape': '\x1b',
+                'Backspace': '\x7f',
+                'Delete': '\x1b[3~',
+                'Home': '\x1b[H',
+                'End': '\x1b[F',
+                'PageUp': '\x1b[5~',
+                'PageDown': '\x1b[6~'
+            };
+            
+            // Handle Enter key separately
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                // In interactive mode, send raw Enter
+                if (this.inInteractiveMode) {
+                    this.sendRawInput('\r');
+                } else {
+                    // Normal mode - send the command if there's input
+                    const value = this.inputElement.value.trim();
+                    if (value) {
+                        this.sendInput(value);
+                        this.inputElement.value = '';
+                    }
+                }
+                return;
+            }
+            
+            if (specialKeys[e.key]) {
+                e.preventDefault();
+                this.sendRawInput(specialKeys[e.key]);
+            } else if (e.ctrlKey && e.key.length === 1) {
+                // Handle Ctrl+key combinations
+                e.preventDefault();
+                const code = e.key.toUpperCase().charCodeAt(0) - 64;
+                this.sendRawInput(String.fromCharCode(code));
+            }
+        });
+        
+        // Remove keypress listener - all key handling is now in keydown
+    }
+
+    async connect() {
+        if (this.currentTool === null) {
+            this.appendOutput('No AI Assistant selected. Please choose Claude Code or Gemini CLI.\n', 'error');
+            return;
+        }
+        
+        try {
+            this.ws = new WebSocket('ws://localhost:8003');
+            
+            this.ws.onopen = () => {
+                this.isConnected = true;
+                this.sessionId = this.generateSessionId();
+                
+                // Initialize session
+                this.ws.send(JSON.stringify({
+                    command: 'init',
+                    sessionId: this.sessionId,
+                    tool: this.currentTool
+                }));
+                
+                this.appendOutput(`Connected to ${this.currentTool === 'claude' ? 'Claude Code' : 'Gemini CLI'}...\n`, 'system');
+            };
+
+            this.ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'output') {
+                    this.appendOutput(data.data);
+                    // Keep input focused for interactive menus
+                    this.inputElement.focus();
+                } else if (data.type === 'initialized') {
+                    this.appendOutput(`Session initialized. Ready for commands.\n`, 'system');
+                    this.inputElement.focus();
+                } else if (data.type === 'error') {
+                    this.appendOutput(data.data, 'error');
+                }
+            };
+
+            this.ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                this.appendOutput(`WebSocket connection error\n`, 'error');
+            };
+
+            this.ws.onclose = () => {
+                this.isConnected = false;
+                this.appendOutput('Disconnected from terminal server.\n', 'error');
+            };
+        } catch (error) {
+            console.error('Failed to connect to terminal server:', error);
+            this.appendOutput(`Failed to connect: ${error.message}\n`, 'error');
+        }
+    }
+
+    async switchTool(tool) {
+        this.currentTool = tool;
+        if (this.isConnected) {
+            // Close current session and start new one
+            this.ws.close();
+            await this.connect();
+        }
+    }
+    
+    async switchToolWithRestart(tool) {
+        const wasNull = this.currentTool === null;
+        
+        if (this.currentTool === tool) {
+            // Already on this tool, but restart anyway for fresh environment
+            this.appendOutput(`Restarting ${tool === 'gemini' ? 'Gemini CLI' : 'Claude Code'}...\n`, 'system');
+        } else {
+            this.currentTool = tool;
+            if (wasNull) {
+                this.appendOutput(`Starting ${tool === 'gemini' ? 'Gemini CLI' : 'Claude Code'}...\n`, 'system');
+            } else {
+                this.appendOutput(`Switching to ${tool === 'gemini' ? 'Gemini CLI' : 'Claude Code'}...\n`, 'system');
+            }
+        }
+        
+        // Update button states
+        document.querySelectorAll('.terminal-tool-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById(`ai-tool-${tool}`).classList.add('active');
+        
+        // Show loading state
+        this.appendOutput('Restarting AI Services container...\n', 'system');
+        
+        try {
+            // Close current connection
+            if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                this.ws.close();
+                this.isConnected = false;
+                // Wait for close to complete
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // Restart the whisper service container
+            const result = await ipcRenderer.invoke('whisper-restart-service');
+            
+            if (result.error) {
+                this.appendOutput(`Error restarting service: ${result.error}\n`, 'error');
+                return;
+            }
+            
+            // Wait for the service to be ready with status updates
+            this.appendOutput('Waiting for service to be ready...\n', 'system');
+            
+            // Poll for service readiness
+            let attempts = 0;
+            const maxAttempts = 20; // 20 seconds max
+            
+            while (attempts < maxAttempts) {
+                try {
+                    // Try to connect
+                    const testWs = new WebSocket('ws://localhost:8003');
+                    await new Promise((resolve, reject) => {
+                        testWs.onopen = () => {
+                            testWs.close();
+                            resolve();
+                        };
+                        testWs.onerror = reject;
+                        setTimeout(() => reject(new Error('Timeout')), 1000);
+                    });
+                    
+                    // If we get here, service is ready
+                    this.appendOutput('Service is ready!\n', 'system');
+                    break;
+                } catch (e) {
+                    // Not ready yet
+                    if (attempts % 4 === 0) {
+                        this.appendOutput('.', 'system');
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    attempts++;
+                }
+            }
+            
+            if (attempts >= maxAttempts) {
+                this.appendOutput('\nService took too long to start.\n', 'error');
+                return;
+            }
+            
+            // Reconnect to the selected tool
+            this.appendOutput(`Connecting to ${this.currentTool === 'gemini' ? 'Gemini CLI' : 'Claude Code'}...\n`, 'system');
+            await this.connect();
+        } catch (error) {
+            this.appendOutput(`Failed to restart service: ${error.message}\n`, 'error');
+        }
+    }
+
+    sendInput(input) {
+        if (!this.isConnected || !input.trim()) {
+            if (this.currentTool === null && input.trim()) {
+                this.appendOutput('Please select an AI Assistant first.\n', 'error');
+            }
+            return;
+        }
+
+        // Display input in terminal
+        this.appendOutput(`$ ${input}\n`, 'input');
+
+        // Send to server
+        this.ws.send(JSON.stringify({
+            command: 'input',
+            data: input + '\n'
+        }));
+    }
+    
+    sendRawInput(data) {
+        if (!this.isConnected) return;
+        
+        // Send raw input directly without display
+        this.ws.send(JSON.stringify({
+            command: 'input',
+            data: data
+        }));
+    }
+
+    appendOutput(text, className = '') {
+        // Detect if this is a Gemini interactive menu
+        if (text.includes('Select Theme') || text.includes('(Use Enter to select)') || 
+            text.includes('╭─') || text.includes('│ ○') || text.includes('│ ●') ||
+            text.includes('Select from the options below') || text.includes('▶') || 
+            text.includes('◉') || text.includes('◯')) {
+            this.inInteractiveMode = true;
+            
+            // For interactive menus, replace the entire content
+            if (this.inInteractiveMode) {
+                // Find or create a menu container
+                let menuContainer = this.outputElement.querySelector('.interactive-menu');
+                if (!menuContainer) {
+                    // Clear everything and create menu container
+                    this.outputElement.innerHTML = '';
+                    menuContainer = document.createElement('div');
+                    menuContainer.className = 'interactive-menu';
+                    this.outputElement.appendChild(menuContainer);
+                }
+                
+                // Update menu content
+                menuContainer.innerHTML = this.ansiToHtml(text);
+                this.outputElement.scrollTop = this.outputElement.scrollHeight;
+                
+                // Return button is always visible now
+                return;
+            }
+        }
+        
+        // Check if we're exiting interactive mode
+        if (this.inInteractiveMode && !text.includes('│') && !text.includes('╭') && !text.includes('╰') &&
+            !text.includes('▶') && !text.includes('◉') && !text.includes('◯') &&
+            !text.includes('Select') && !text.includes('(Use Enter to select)')) {
+            this.inInteractiveMode = false;
+            // Clear the menu
+            const menuContainer = this.outputElement.querySelector('.interactive-menu');
+            if (menuContainer) {
+                menuContainer.remove();
+            }
+            
+            // Return button stays visible
+        }
+        
+        // Normal output handling
+        const div = document.createElement('div');
+        div.className = 'terminal-line' + (className ? ' ' + className : '');
+        
+        // Convert ANSI escape sequences to HTML
+        div.innerHTML = this.ansiToHtml(text);
+        
+        this.outputElement.appendChild(div);
+        this.outputElement.scrollTop = this.outputElement.scrollHeight;
+    }
+
+    ansiToHtml(text) {
+        // Enhanced ANSI to HTML conversion
+        let html = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+            
+        // Handle cursor control sequences (already handled in appendOutput)
+        html = html.replace(/\x1b\[2J/g, ''); // Clear screen
+        html = html.replace(/\x1b\[H/g, ''); // Home cursor
+        html = html.replace(/\x1b\[\d+;\d+H/g, ''); // Position cursor
+        html = html.replace(/\x1b\[\?25[lh]/g, ''); // Hide/show cursor
+        html = html.replace(/\x1b\[K/g, ''); // Clear to end of line
+        html = html.replace(/\x1b\[\d*[ABCD]/g, ''); // Cursor movement
+        html = html.replace(/\x1b\[\d*J/g, ''); // Clear screen variants
+        html = html.replace(/\x1b\[s/g, ''); // Save cursor
+        html = html.replace(/\x1b\[u/g, ''); // Restore cursor
+        html = html.replace(/\r/g, ''); // Carriage return
+        
+        // Handle color and style codes
+        html = html.replace(/\x1b\[([0-9;]+)m/g, (match, codes) => {
+            const codeList = codes.split(';');
+            let styles = [];
+            
+            for (const code of codeList) {
+                switch(code) {
+                    case '0': return '</span>'; // Reset
+                    case '1': styles.push('font-weight:bold'); break;
+                    case '3': styles.push('font-style:italic'); break;
+                    case '4': styles.push('text-decoration:underline'); break;
+                    // Foreground colors
+                    case '30': styles.push('color:#000'); break;
+                    case '31': styles.push('color:#c00'); break;
+                    case '32': styles.push('color:#0c0'); break;
+                    case '33': styles.push('color:#cc0'); break;
+                    case '34': styles.push('color:#00c'); break;
+                    case '35': styles.push('color:#c0c'); break;
+                    case '36': styles.push('color:#0cc'); break;
+                    case '37': styles.push('color:#ccc'); break;
+                    // Background colors
+                    case '40': styles.push('background-color:#000'); break;
+                    case '41': styles.push('background-color:#c00'); break;
+                    case '42': styles.push('background-color:#0c0'); break;
+                    case '43': styles.push('background-color:#cc0'); break;
+                    case '44': styles.push('background-color:#00c'); break;
+                    case '45': styles.push('background-color:#c0c'); break;
+                    case '46': styles.push('background-color:#0cc'); break;
+                    case '47': styles.push('background-color:#ccc'); break;
+                }
+            }
+            
+            return styles.length ? `<span style="${styles.join(';')}">` : '';
+        });
+        
+        // Remove any remaining escape sequences
+        html = html.replace(/\x1b\[[0-9;]*[a-zA-Z]/g, '');
+        
+        // Convert newlines to breaks
+        html = html.replace(/\n/g, '<br>');
+        
+        return html;
+    }
+
+    clear() {
+        this.outputElement.innerHTML = '';
+    }
+
+    async reconnect() {
+        if (this.ws) {
+            this.ws.close();
+        }
+        await this.connect();
+    }
+
+    toggle() {
+        this.terminalElement.classList.toggle('collapsed');
+        const toggleBtn = document.getElementById('terminal-toggle');
+        toggleBtn.textContent = this.terminalElement.classList.contains('collapsed') ? '▲' : '▼';
+    }
+
+    generateSessionId() {
+        return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+}
+
+// Export for use in main app
+window.AITerminal = AITerminal;

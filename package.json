@@ -1,0 +1,68 @@
+{
+  "name": "audiobook-player",
+  "version": "1.0.0",
+  "description": "An audiobook player",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "postinstall": "echo '\n📝 Note: AI CLI tools are optional dependencies.\n   - Claude Code: npm install @anthropic-ai/claude-code\n   - Gemini CLI: npm install @google/gemini-cli\n   On Windows, install these in WSL.\n'",
+    "rebuild": "electron-rebuild"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.6.0",
+    "form-data": "^4.0.0",
+    "ws": "^8.18.3",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0",
+    "xterm-addon-web-links": "^0.9.0"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/claude-code": "^1.0.51",
+    "@google/gemini-cli": "^0.1.12"
+  },
+  "devDependencies": {
+    "electron": "^37.1.0",
+    "electron-builder": "^26.0.12",
+    "electron-rebuild": "^3.2.9"
+  },
+  "build": {
+    "appId": "com.audiobook.visualizer",
+    "productName": "AudioBook Visualizer",
+    "files": [
+      "main.js",
+      "preload.js",
+      "script.js",
+      "style.css",
+      "index.html",
+      "whisper-local.js",
+      "whisper-client.js",
+      "whisper-installer.js",
+      "whisper-python.js",
+      "terminal-local.js",
+      "terminal-local-nodepty.js",
+      "terminal-local-windows.js",
+      "terminal.js",
+      "terminal.css",
+      "characterExtractionCLI.js",
+      "system-monitor.js",
+      "system-monitor.css",
+      "comfyui-manager.js",
+      "flux-service-local.js",
+      "flux-service-runpod.js",
+      "placeholder.png",
+      "audiobooks/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "extraResources": [
+      {
+        "from": "audiobooks",
+        "to": "audiobooks"
+      }
+    ]
+  }
+}

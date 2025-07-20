@@ -1,0 +1,10 @@
+# Ignore files not needed in the Docker image
+*.md
+*.sh
+test_*.py
+.git
+.gitignore
+__pycache__
+*.pyc
+.DS_Store
+*.log

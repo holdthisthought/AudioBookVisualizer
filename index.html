@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audiobook Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="browser">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>Audiobooks</h1>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button id="ai-services-btn" style="padding: 5px 10px; display: flex; align-items: center; gap: 5px;">
+                        <span class="ai-status-indicator"></span>
+                        <span>AI Services</span>
+                    </button>
+                    <button id="settings-btn" style="padding: 5px 10px;">⚙️ Settings</button>
+                    <button id="hello-world-btn" style="padding: 5px 10px;">Hello World</button>
+                </div>
+            </div>
+            <button id="refresh-chapters-btn" style="margin-bottom: 10px;">Refresh Chapter List</button>
+            <div id="book-list"></div>
+        </div>
+        <div id="player">
+            <h1 id="title">Audiobook Player</h1>
+            <h2 id="current-chapter"></h2>
+            <audio id="audio" controls></audio>
+            <div id="captions-display"></div>
+            <div id="playlist"></div>
+        </div>
+        <div id="characters-panel">
+            <h2>Characters</h2>
+            <div id="character-list-display"></div>
+        </div>
+        <div id="flux-panel">
+            <h2>🎨 FLUX Settings</h2>
+            <div id="flux-service-status" class="flux-service-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">Checking service...</span>
+                <button id="flux-service-toggle" class="service-toggle-btn" style="display: none;">Start Service</button>
+            </div>
+            <div id="flux-models-section" class="flux-section">
+                <h3>Models</h3>
+                <div id="flux-models-list"></div>
+            </div>
+            <div id="flux-settings-section" class="flux-section">
+                <h3>Generation Settings</h3>
+                <div id="flux-settings-content"></div>
+            </div>
+            <div id="flux-test-section" class="flux-section">
+                <h3>Test FLUX</h3>
+                <div class="flux-test-input">
+                    <label>Text to Image Prompt:</label>
+                    <textarea id="flux-test-prompt" placeholder="Enter your prompt here..." rows="3"></textarea>
+                    <button id="flux-test-generate">Generate Test Image</button>
+                </div>
+                <div id="flux-test-result"></div>
+            </div>
+            <div id="flux-kontext-section" class="flux-section">
+                <h3>FLUX Kontext (Character Fusion)</h3>
+                <div class="kontext-inputs">
+                    <div class="character-select">
+                        <label>Character 1:</label>
+                        <select id="kontext-char1"></select>
+                        <div id="kontext-char1-preview"></div>
+                    </div>
+                    <div class="character-select">
+                        <label>Character 2:</label>
+                        <select id="kontext-char2"></select>
+                        <div id="kontext-char2-preview"></div>
+                    </div>
+                    <label>Scene Description:</label>
+                    <textarea id="kontext-prompt" placeholder="Describe the scene with both characters..." rows="3"></textarea>
+                    <button id="kontext-generate">Generate Kontext Image</button>
+                </div>
+                <div id="kontext-result"></div>
+            </div>
+        </div>
+    </div>
+    <div id="chapter-settings-modal" class="modal">
+        <div class="modal-content">
+            <span id="chapter-settings-close-button" class="close-button">&times;</span>
+            <h2>Chapter Settings</h2>
+            <div>
+                <label for="rename-chapter-input">Rename Chapter:</label>
+                <input type="text" id="rename-chapter-input">
+            </div>
+            <div>
+                <h3>Change Order</h3>
+                <select id="chapter-order-select"></select>
+            </div>
+            <button id="save-chapter-settings-button">Save</button>
+            <button id="cancel-chapter-settings-button">Cancel</button>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span id="settings-close-button" class="close-button">&times;</span>
+            <h2>Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Google Gemini API Key</h3>
+                <p>Required for character extraction and analysis features.</p>
+                <div class="input-group">
+                    <input type="password" id="gemini-api-key-input" placeholder="Enter your Gemini API key">
+                    <button id="toggle-api-key-visibility" type="button">👁️</button>
+                </div>
+                <p class="help-text">
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank">Get your API key from Google AI Studio</a>
+                </p>
+                <div class="button-group">
+                    <button id="test-api-key-btn">Test API Key</button>
+                    <button id="save-api-key-btn">Save</button>
+                </div>
+                <div id="api-key-status" class="status-message"></div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>HuggingFace Token</h3>
+                <p>Required for downloading certain FLUX models (like Kontext Dev).</p>
+                <div class="input-group">
+                    <input type="password" id="hf-token-input" placeholder="Enter your HuggingFace token">
+                    <button id="toggle-hf-token-visibility" type="button">👁️</button>
+                </div>
+                <p class="help-text">
+                    <a href="https://huggingface.co/settings/tokens" target="_blank">Get your token from HuggingFace</a>
+                </p>
+                <div class="button-group">
+                    <button id="save-hf-token-btn">Save Token</button>
+                </div>
+                <div id="hf-token-status" class="status-message"></div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Image Generation Service</h3>
+                <p>Choose between local ComfyUI or RunPod cloud GPU rendering.</p>
+                <div class="service-selector">
+                    <label>
+                        <input type="radio" name="generation-service" value="local" id="service-local" checked>
+                        <span>Local ComfyUI</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="generation-service" value="runpod" id="service-runpod">
+                        <span>RunPod Cloud GPU</span>
+                    </label>
+                </div>
+                
+                <div id="local-service-settings" class="service-settings">
+                    <h4>ComfyUI Settings</h4>
+                    <p>Configure local ComfyUI installation for FLUX image generation.</p>
+                    <div class="input-group">
+                        <input type="text" id="comfyui-path-input" placeholder="Path to ComfyUI installation folder">
+                        <button id="browse-comfyui-path" type="button">Browse</button>
+                    </div>
+                    <p class="help-text">
+                        Point to your ComfyUI installation directory (contains main.py)
+                    </p>
+                    <div id="comfyui-validation-status" class="status-message"></div>
+                    <div class="button-group">
+                        <button id="validate-comfyui-btn">Validate Installation</button>
+                        <button id="save-comfyui-path-btn">Save Path</button>
+                    </div>
+                    <div id="comfyui-requirements" style="display: none; margin-top: 15px;">
+                        <h4>Requirements:</h4>
+                        <ul style="font-size: 14px; color: #666;">
+                            <li>ComfyUI nightly build with FLUX support</li>
+                            <li>FLUX Kontext custom nodes installed</li>
+                            <li>Python 3.10+ with required dependencies</li>
+                        </ul>
+                        <p class="help-text">
+                            <a href="https://github.com/melMass/ComfyUI-Flux-Kontext" target="_blank">Install FLUX Kontext nodes</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div id="runpod-service-settings" class="service-settings" style="display: none;">
+                    <h4>RunPod Settings</h4>
+                    <p>Use RunPod's cloud GPUs for faster rendering without local GPU requirements.</p>
+                    <div class="input-group">
+                        <input type="password" id="runpod-api-key-input" placeholder="Enter your RunPod API key">
+                        <button id="toggle-runpod-key-visibility" type="button">👁️</button>
+                    </div>
+                    <p class="help-text">
+                        <a href="https://www.runpod.io/console/user/settings" target="_blank">Get your API key from RunPod Dashboard</a>
+                    </p>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <input type="text" id="runpod-endpoint-id-input" placeholder="Enter your RunPod Endpoint ID (optional)">
+                    </div>
+                    <p class="help-text">
+                        <a href="https://www.runpod.io/console/serverless" target="_blank">Create a serverless endpoint with ComfyUI</a>
+                    </p>
+                    <div id="runpod-endpoint-status" class="status-message"></div>
+                    <div class="button-group">
+                        <button id="test-runpod-btn">Test Connection</button>
+                        <button id="save-runpod-key-btn">Save</button>
+                    </div>
+                    <div id="runpod-cost-info" style="display: none; margin-top: 15px;">
+                        <h4>Estimated Costs:</h4>
+                        <ul style="font-size: 14px; color: #666;">
+                            <li>RTX 3090: ~$0.54/hour (auto-scales to zero when idle)</li>
+                            <li>Average image: ~$0.005-0.015</li>
+                            <li>Endpoint auto-stops after 60 seconds of inactivity</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- RunPod Setup Instructions -->
+                    <div id="runpod-setup-info" style="margin-top: 20px; padding: 15px; background: #f0f4ff; border-radius: 8px;">
+                        <h4>Quick Setup Instructions</h4>
+                        <ol style="font-size: 14px; color: #333; margin: 10px 0; padding-left: 20px;">
+                            <li>Create a new endpoint on <a href="https://www.runpod.io/console/serverless" target="_blank">RunPod Serverless</a></li>
+                            <li>Use this Docker image: <code style="background: #e0e0e0; padding: 2px 6px; border-radius: 3px;">chester00000/audiobook-visualizer-flux:latest</code></li>
+                            <li>Select <strong>RTX 3090</strong> GPU type</li>
+                            <li>Enable <strong>Flash Boot</strong> for faster starts</li>
+                            <li>Copy the endpoint ID and paste it above</li>
+                        </ol>
+                        <p style="font-size: 13px; color: #666; margin-top: 10px;">
+                            📖 For detailed instructions, see the <a href="#" onclick="shell.openExternal('https://github.com/your-repo/AudioBookVisualizer/blob/main/RUNPOD_SETUP.md'); return false;">RunPod Setup Guide</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Story Context (Optional Override)</h3>
+                <p><strong>Note:</strong> The AI automatically detects time period and location from your story during character extraction. Only set these manually if you want to override the AI's detection or if the story doesn't clearly indicate the setting.</p>
+                <p style="font-size: 0.9em; color: #666;">This context is automatically included at the beginning of all image prompts to ensure period-appropriate clothing, hairstyles, and accessories.</p>
+                <div id="current-book-context-indicator" style="margin-bottom: 10px; font-style: italic; color: #666;"></div>
+                
+                <div class="context-setting">
+                    <label for="story-time-period">Time Period:</label>
+                    <input type="text" id="story-time-period" placeholder="e.g., Ancient Rome 79 AD, Victorian England 1880s, Modern Day 2023">
+                    <p class="help-text">Specify the time period of your story. This affects clothing, hairstyles, and social conventions.</p>
+                </div>
+                
+                <div class="context-setting">
+                    <label for="story-location">Location/Setting:</label>
+                    <input type="text" id="story-location" placeholder="e.g., Rome, London, New York City, Fantasy Kingdom">
+                    <p class="help-text">Specify the geographical location or setting. This affects cultural dress and environmental details.</p>
+                </div>
+                
+                <div class="button-group">
+                    <button id="save-context-btn">Save Context</button>
+                </div>
+                <div id="context-status" class="status-message"></div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Character Extraction Prompts</h3>
+                <p>Customize how AI extracts character parameters from your audiobooks. These prompts guide the AI to extract structured data (identity, physical features, attire, etc.) rather than paragraph descriptions.</p>
+                <div id="current-book-indicator" style="margin-bottom: 10px; font-style: italic; color: #666;"></div>
+                
+                <div class="prompt-setting">
+                    <label for="character-identification-prompt">Character Identification Instructions:</label>
+                    <textarea id="character-identification-prompt" rows="4" placeholder="Instructions for how AI should identify characters and handle aliases..."></textarea>
+                </div>
+                
+                <div class="prompt-setting">
+                    <label for="physical-description-prompt">Physical Parameter Extraction:</label>
+                    <textarea id="physical-description-prompt" rows="4" placeholder="Instructions for how AI should extract physical parameters (height, build, skin tone, eyes, hair, attire, etc.)..."></textarea>
+                </div>
+                
+                <div class="prompt-setting">
+                    <label for="character-evolution-prompt">Character Evolution Instructions:</label>
+                    <textarea id="character-evolution-prompt" rows="4" placeholder="Instructions for how AI should track character changes over time..."></textarea>
+                </div>
+                
+                <div class="prompt-setting">
+                    <label for="description-detail-prompt">Visual Detail Requirements:</label>
+                    <textarea id="description-detail-prompt" rows="4" placeholder="Instructions for level of visual detail required (e.g., 'never use vague terms', 'describe exact appearance not function', 'include wear and damage')..."></textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button id="reset-prompts-btn">Reset to Defaults</button>
+                    <button id="save-prompts-btn">Save Prompts</button>
+                </div>
+                <div id="prompts-status" class="status-message"></div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Image Generation Tags</h3>
+                <p>Global tags applied to all character image generations for this book.</p>
+                <div id="current-book-tags-indicator" style="margin-bottom: 10px; font-style: italic; color: #666;"></div>
+                
+                <div class="tags-container">
+                    <div id="global-tags-list" class="tags-list"></div>
+                    <div class="tag-input-container">
+                        <input type="text" id="new-tag-input" placeholder="Add a new tag..." class="tag-input">
+                        <button id="add-tag-btn" class="add-tag-btn">Add Tag</button>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="reset-tags-btn">Reset to Defaults</button>
+                    <button id="save-tags-btn">Save Tags</button>
+                </div>
+                <div id="tags-status" class="status-message"></div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Story Board Art Style Tags</h3>
+                <p>Art style tags applied to all story board scene generations. These will be included in the scene parameters.</p>
+                <div id="current-book-storyboard-tags-indicator" style="margin-bottom: 10px; font-style: italic; color: #666;"></div>
+                
+                <div class="tags-container">
+                    <div id="storyboard-tags-list" class="tags-list"></div>
+                    <div class="tag-input-container">
+                        <input type="text" id="new-storyboard-tag-input" placeholder="Add a story board tag..." class="tag-input">
+                        <button id="add-storyboard-tag-btn" class="add-tag-btn">Add Tag</button>
+                    </div>
+                </div>
+                
+                <p class="help-text" style="margin-top: 10px;">
+                    Examples: "cinematic", "epic fantasy", "photorealistic", "dramatic lighting", "ancient Rome aesthetic"
+                </p>
+                
+                <div class="button-group">
+                    <button id="reset-storyboard-tags-btn">Reset to Defaults</button>
+                    <button id="save-storyboard-tags-btn">Save Tags</button>
+                </div>
+                <div id="storyboard-tags-status" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Regenerate Character Modal -->
+    <div id="regenerate-character-modal" class="modal">
+        <div class="modal-content">
+            <span id="regenerate-close-button" class="close-button">&times;</span>
+            <h2>Regenerate Character Description</h2>
+            <p id="regenerate-character-name" style="font-weight: bold; margin-bottom: 20px;"></p>
+            
+            <div class="chapter-selection-section">
+                <h3>Select Chapters to Analyze</h3>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                    Choose which chapters Gemini should reference when regenerating the character description.
+                </p>
+                
+                <div class="chapter-selection-controls">
+                    <button id="select-all-chapters" class="chapter-control-btn">Select All</button>
+                    <button id="deselect-all-chapters" class="chapter-control-btn">Deselect All</button>
+                    <div class="range-selector">
+                        <label>Range:</label>
+                        <input type="number" id="range-start" min="1" placeholder="Start">
+                        <span>to</span>
+                        <input type="number" id="range-end" min="1" placeholder="End">
+                        <button id="apply-range" class="chapter-control-btn">Apply</button>
+                    </div>
+                </div>
+                
+                <div id="chapter-checkboxes" class="chapter-checkboxes-container"></div>
+                
+                <div class="regenerate-actions">
+                    <button id="regenerate-character-btn" class="primary-btn">Regenerate Description</button>
+                    <button id="cancel-regenerate-btn" class="secondary-btn">Cancel</button>
+                </div>
+                
+                <div id="regenerate-status" class="status-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Terminal Container -->
+    <div id="ai-terminal-container"></div>
+    
+    <!-- System Monitor Footer -->
+    <div id="system-monitor-footer" class="system-monitor">
+        <div class="monitor-item">
+            <span class="monitor-label">Memory:</span>
+            <span id="memory-usage" class="monitor-value">0%</span>
+            <div class="monitor-bar">
+                <div id="memory-bar" class="monitor-bar-fill"></div>
+            </div>
+        </div>
+        <div class="monitor-item">
+            <span class="monitor-label">CPU:</span>
+            <span id="cpu-usage" class="monitor-value">0%</span>
+            <div class="monitor-bar">
+                <div id="cpu-bar" class="monitor-bar-fill"></div>
+            </div>
+        </div>
+        <div class="monitor-item">
+            <span class="monitor-label">GPU:</span>
+            <span id="gpu-usage" class="monitor-value">0%</span>
+            <div class="monitor-bar">
+                <div id="gpu-bar" class="monitor-bar-fill"></div>
+            </div>
+        </div>
+        <div class="monitor-item">
+            <span class="monitor-label">VRAM:</span>
+            <span id="vram-usage" class="monitor-value">0%</span>
+            <div class="monitor-bar">
+                <div id="vram-bar" class="monitor-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+    
+    <link rel="stylesheet" href="node_modules/xterm/css/xterm.css">
+    <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="system-monitor.css">
+    <script src="terminal.js"></script>
+    <script src="system-monitor.js"></script>
+    <script src="whisper-client.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

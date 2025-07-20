@@ -1,0 +1,163 @@
+/* AI Terminal Styles */
+.ai-terminal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: #1e1e1e;
+    border-top: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    transition: height 0.3s ease;
+    z-index: 1000;
+}
+
+.ai-terminal.collapsed {
+    height: 40px;
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-title {
+    color: #ccc;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.terminal-tool-btn {
+    padding: 6px 12px;
+    background: #2d2d2d;
+    color: #999;
+    border: 1px solid #444;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.terminal-tool-btn:hover {
+    background: #3d3d3d;
+    color: #ccc;
+    border-color: #555;
+}
+
+.terminal-tool-btn.active {
+    background: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
+.terminal-tool-btn .tool-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #666;
+    transition: background-color 0.3s ease;
+}
+
+.terminal-tool-btn.active .tool-status-dot {
+    animation: pulse 2s infinite;
+}
+
+.terminal-separator {
+    width: 1px;
+    height: 20px;
+    background: #444;
+    margin: 0 10px;
+}
+
+.terminal-btn {
+    padding: 4px 10px;
+    background: #333;
+    color: #ccc;
+    border: 1px solid #444;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.terminal-btn:hover {
+    background: #444;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.ai-terminal.collapsed .terminal-body {
+    display: none;
+}
+
+/* xterm.js terminal container */
+#terminal-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Override xterm viewport to ensure proper sizing */
+#terminal-container .xterm-viewport {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Ensure the screen maintains full size */
+#terminal-container .xterm-screen {
+    width: 100% !important;
+    min-height: 100% !important;
+}
+
+/* Style the scrollbar */
+#terminal-container .xterm-viewport::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#terminal-container .xterm-viewport::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+#terminal-container .xterm-viewport::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* xterm.js has its own scrollbar styles */
+
+/* Remove old input container styles - xterm.js handles input */
+
+/* xterm.js handles all terminal output styling and ANSI colors */
+
+/* Terminal positioning adjustments */
+.ai-terminal {
+    bottom: 35px; /* Account for system monitor height */
+}
+
+/* Adjust main container to account for terminal and system monitor */
+body #container {
+    padding-bottom: 75px; /* Terminal collapsed (40px) + System Monitor (35px) */
+}
+
+body.terminal-open #container {
+    padding-bottom: 335px; /* Terminal (300px) + System Monitor (35px) */
+}

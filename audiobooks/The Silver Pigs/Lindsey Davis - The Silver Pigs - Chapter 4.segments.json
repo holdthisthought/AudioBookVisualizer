@@ -1,0 +1,5395 @@
+[
+  {
+    "id": 0,
+    "start": 0,
+    "end": 4.98,
+    "text": "Chapter 4 The law settled his breathing rate after the",
+    "words": [
+      {
+        "word": " Chapter",
+        "start": 0,
+        "end": 0.98
+      },
+      {
+        "word": " 4",
+        "start": 0.98,
+        "end": 2.3
+      },
+      {
+        "word": " The",
+        "start": 2.3,
+        "end": 2.9
+      },
+      {
+        "word": " law",
+        "start": 2.9,
+        "end": 3.18
+      },
+      {
+        "word": " settled",
+        "start": 3.18,
+        "end": 3.52
+      },
+      {
+        "word": " his",
+        "start": 3.52,
+        "end": 3.74
+      },
+      {
+        "word": " breathing",
+        "start": 3.74,
+        "end": 4.08
+      },
+      {
+        "word": " rate",
+        "start": 4.08,
+        "end": 4.34
+      },
+      {
+        "word": " after",
+        "start": 4.34,
+        "end": 4.68
+      },
+      {
+        "word": " the",
+        "start": 4.68,
+        "end": 4.98
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "start": 4.98,
+    "end": 5.38,
+    "text": "stairs.",
+    "words": [
+      {
+        "word": " stairs.",
+        "start": 4.98,
+        "end": 5.38
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "start": 6.38,
+    "end": 8.28,
+    "text": "\"'Do come in,' I said mildly.",
+    "words": [
+      {
+        "word": " \"'Do",
+        "start": 6.38,
+        "end": 6.68
+      },
+      {
+        "word": " come",
+        "start": 6.68,
+        "end": 6.94
+      },
+      {
+        "word": " in,'",
+        "start": 6.94,
+        "end": 7.24
+      },
+      {
+        "word": " I",
+        "start": 7.24,
+        "end": 7.56
+      },
+      {
+        "word": " said",
+        "start": 7.56,
+        "end": 7.74
+      },
+      {
+        "word": " mildly.",
+        "start": 7.74,
+        "end": 8.28
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "start": 8.28,
+    "end": 10.1,
+    "text": "\"'It's not locked.'",
+    "words": [
+      {
+        "word": " \"'It's",
+        "start": 8.28,
+        "end": 8.56
+      },
+      {
+        "word": " not",
+        "start": 8.56,
+        "end": 8.8
+      },
+      {
+        "word": " locked.'",
+        "start": 8.8,
+        "end": 10.1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "start": 10.1,
+    "end": 11.14,
+    "text": "He was in.",
+    "words": [
+      {
+        "word": " He",
+        "start": 10.1,
+        "end": 10.4
+      },
+      {
+        "word": " was",
+        "start": 10.4,
+        "end": 10.72
+      },
+      {
+        "word": " in.",
+        "start": 10.72,
+        "end": 11.14
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "start": 11.4,
+    "end": 13.44,
+    "text": "He collapsed at the other end of my bench.",
+    "words": [
+      {
+        "word": " He",
+        "start": 11.4,
+        "end": 11.88
+      },
+      {
+        "word": " collapsed",
+        "start": 11.88,
+        "end": 12.26
+      },
+      {
+        "word": " at",
+        "start": 12.26,
+        "end": 12.46
+      },
+      {
+        "word": " the",
+        "start": 12.46,
+        "end": 12.58
+      },
+      {
+        "word": " other",
+        "start": 12.58,
+        "end": 12.74
+      },
+      {
+        "word": " end",
+        "start": 12.74,
+        "end": 12.88
+      },
+      {
+        "word": " of",
+        "start": 12.88,
+        "end": 12.98
+      },
+      {
+        "word": " my",
+        "start": 12.98,
+        "end": 13.18
+      },
+      {
+        "word": " bench.",
+        "start": 13.18,
+        "end": 13.44
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "start": 13.76,
+    "end": 15.62,
+    "text": "\"'Have a seat,' I offered.",
+    "words": [
+      {
+        "word": " \"'Have",
+        "start": 13.76,
+        "end": 14.38
+      },
+      {
+        "word": " a",
+        "start": 14.38,
+        "end": 14.62
+      },
+      {
+        "word": " seat,'",
+        "start": 14.62,
+        "end": 14.98
+      },
+      {
+        "word": " I",
+        "start": 14.98,
+        "end": 15.32
+      },
+      {
+        "word": " offered.",
+        "start": 15.32,
+        "end": 15.62
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "start": 16.88,
+    "end": 18.28,
+    "text": "\"'Falco, you villain!",
+    "words": [
+      {
+        "word": " \"'Falco,",
+        "start": 16.88,
+        "end": 17.52
+      },
+      {
+        "word": " you",
+        "start": 17.56,
+        "end": 17.92
+      },
+      {
+        "word": " villain!",
+        "start": 17.92,
+        "end": 18.28
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "start": 19.3,
+    "end": 21.32,
+    "text": "Well, this is an improvement!'",
+    "words": [
+      {
+        "word": " Well,",
+        "start": 19.3,
+        "end": 19.62
+      },
+      {
+        "word": " this",
+        "start": 19.62,
+        "end": 19.86
+      },
+      {
+        "word": " is",
+        "start": 19.86,
+        "end": 20.08
+      },
+      {
+        "word": " an",
+        "start": 20.08,
+        "end": 20.38
+      },
+      {
+        "word": " improvement!'",
+        "start": 20.38,
+        "end": 21.32
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "start": 22,
+    "end": 23.66,
+    "text": "He gave me a slow grin.",
+    "words": [
+      {
+        "word": " He",
+        "start": 21.84,
+        "end": 22.16
+      },
+      {
+        "word": " gave",
+        "start": 22.16,
+        "end": 22.42
+      },
+      {
+        "word": " me",
+        "start": 22.42,
+        "end": 22.7
+      },
+      {
+        "word": " a",
+        "start": 22.7,
+        "end": 22.74
+      },
+      {
+        "word": " slow",
+        "start": 22.74,
+        "end": 23.2
+      },
+      {
+        "word": " grin.",
+        "start": 23.2,
+        "end": 23.66
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "start": 25.18,
+    "end": 28.5,
+    "text": "\"'Petronius Longus, patrol captain of the Aventine watch.",
+    "words": [
+      {
+        "word": " \"'Petronius",
+        "start": 25.18,
+        "end": 25.68
+      },
+      {
+        "word": " Longus,",
+        "start": 25.68,
+        "end": 26.18
+      },
+      {
+        "word": " patrol",
+        "start": 26.5,
+        "end": 26.92
+      },
+      {
+        "word": " captain",
+        "start": 26.92,
+        "end": 27.3
+      },
+      {
+        "word": " of",
+        "start": 27.3,
+        "end": 27.5
+      },
+      {
+        "word": " the",
+        "start": 27.5,
+        "end": 27.68
+      },
+      {
+        "word": " Aventine",
+        "start": 27.68,
+        "end": 28.16
+      },
+      {
+        "word": " watch.",
+        "start": 28.16,
+        "end": 28.5
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "start": 28.6,
+    "end": 32.74,
+    "text": "A big, placid, sleepy-looking man with a face people trusted.",
+    "words": [
+      {
+        "word": " A",
+        "start": 28.6,
+        "end": 29.08
+      },
+      {
+        "word": " big,",
+        "start": 29.08,
+        "end": 29.46
+      },
+      {
+        "word": " placid,",
+        "start": 29.7,
+        "end": 30.18
+      },
+      {
+        "word": " sleepy",
+        "start": 30.5,
+        "end": 30.68
+      },
+      {
+        "word": "-looking",
+        "start": 30.68,
+        "end": 31
+      },
+      {
+        "word": " man",
+        "start": 31,
+        "end": 31.34
+      },
+      {
+        "word": " with",
+        "start": 31.34,
+        "end": 31.54
+      },
+      {
+        "word": " a",
+        "start": 31.54,
+        "end": 31.72
+      },
+      {
+        "word": " face",
+        "start": 31.72,
+        "end": 31.94
+      },
+      {
+        "word": " people",
+        "start": 31.94,
+        "end": 32.28
+      },
+      {
+        "word": " trusted.",
+        "start": 32.28,
+        "end": 32.74
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "start": 33.24,
+    "end": 35.019999999999996,
+    "text": "Probably because it gave so little away.'",
+    "words": [
+      {
+        "word": " Probably",
+        "start": 33.24,
+        "end": 33.74
+      },
+      {
+        "word": " because",
+        "start": 33.74,
+        "end": 34
+      },
+      {
+        "word": " it",
+        "start": 34,
+        "end": 34.14
+      },
+      {
+        "word": " gave",
+        "start": 34.14,
+        "end": 34.32
+      },
+      {
+        "word": " so",
+        "start": 34.32,
+        "end": 34.52
+      },
+      {
+        "word": " little",
+        "start": 34.52,
+        "end": 34.68
+      },
+      {
+        "word": " away.'",
+        "start": 34.68,
+        "end": 35.019999999999996
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "start": 36.5,
+    "end": 38.4,
+    "text": "Petronius and I went back a long time.",
+    "words": [
+      {
+        "word": " Petronius",
+        "start": 36.5,
+        "end": 37
+      },
+      {
+        "word": " and",
+        "start": 37,
+        "end": 37.12
+      },
+      {
+        "word": " I",
+        "start": 37.12,
+        "end": 37.2
+      },
+      {
+        "word": " went",
+        "start": 37.2,
+        "end": 37.36
+      },
+      {
+        "word": " back",
+        "start": 37.36,
+        "end": 37.6
+      },
+      {
+        "word": " a",
+        "start": 37.6,
+        "end": 37.74
+      },
+      {
+        "word": " long",
+        "start": 37.74,
+        "end": 37.98
+      },
+      {
+        "word": " time.",
+        "start": 37.98,
+        "end": 38.4
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "start": 38.78,
+    "end": 43.16,
+    "text": "We joined the army on the same day, finding each other in the queue to take the oath to",
+    "words": [
+      {
+        "word": " We",
+        "start": 38.78,
+        "end": 39.14
+      },
+      {
+        "word": " joined",
+        "start": 39.14,
+        "end": 39.36
+      },
+      {
+        "word": " the",
+        "start": 39.36,
+        "end": 39.58
+      },
+      {
+        "word": " army",
+        "start": 39.58,
+        "end": 39.72
+      },
+      {
+        "word": " on",
+        "start": 39.72,
+        "end": 39.88
+      },
+      {
+        "word": " the",
+        "start": 39.88,
+        "end": 40.12
+      },
+      {
+        "word": " same",
+        "start": 40.12,
+        "end": 40.4
+      },
+      {
+        "word": " day,",
+        "start": 40.4,
+        "end": 40.84
+      },
+      {
+        "word": " finding",
+        "start": 41.02,
+        "end": 41.36
+      },
+      {
+        "word": " each",
+        "start": 41.36,
+        "end": 41.66
+      },
+      {
+        "word": " other",
+        "start": 41.66,
+        "end": 41.82
+      },
+      {
+        "word": " in",
+        "start": 41.82,
+        "end": 41.98
+      },
+      {
+        "word": " the",
+        "start": 41.98,
+        "end": 42.16
+      },
+      {
+        "word": " queue",
+        "start": 42.16,
+        "end": 42.28
+      },
+      {
+        "word": " to",
+        "start": 42.28,
+        "end": 42.42
+      },
+      {
+        "word": " take",
+        "start": 42.42,
+        "end": 42.7
+      },
+      {
+        "word": " the",
+        "start": 42.7,
+        "end": 42.86
+      },
+      {
+        "word": " oath",
+        "start": 42.86,
+        "end": 42.96
+      },
+      {
+        "word": " to",
+        "start": 42.96,
+        "end": 43.16
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "start": 43.16,
+    "end": 47.74,
+    "text": "the emperor, and finding, too, that we'd been brought up only five streets apart.",
+    "words": [
+      {
+        "word": " the",
+        "start": 43.16,
+        "end": 43.3
+      },
+      {
+        "word": " emperor,",
+        "start": 43.3,
+        "end": 43.6
+      },
+      {
+        "word": " and",
+        "start": 44.14,
+        "end": 44.4
+      },
+      {
+        "word": " finding,",
+        "start": 44.4,
+        "end": 44.82
+      },
+      {
+        "word": " too,",
+        "start": 44.94,
+        "end": 45.26
+      },
+      {
+        "word": " that",
+        "start": 45.34,
+        "end": 45.5
+      },
+      {
+        "word": " we'd",
+        "start": 45.5,
+        "end": 45.64
+      },
+      {
+        "word": " been",
+        "start": 45.64,
+        "end": 45.9
+      },
+      {
+        "word": " brought",
+        "start": 45.9,
+        "end": 46.12
+      },
+      {
+        "word": " up",
+        "start": 46.12,
+        "end": 46.34
+      },
+      {
+        "word": " only",
+        "start": 46.34,
+        "end": 46.6
+      },
+      {
+        "word": " five",
+        "start": 46.6,
+        "end": 46.98
+      },
+      {
+        "word": " streets",
+        "start": 46.98,
+        "end": 47.32
+      },
+      {
+        "word": " apart.",
+        "start": 47.32,
+        "end": 47.74
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "start": 48.56,
+    "end": 53.98,
+    "text": "We were tentmates for seven years, and when we came home, we had another thing in common.",
+    "words": [
+      {
+        "word": " We",
+        "start": 48.56,
+        "end": 49.08
+      },
+      {
+        "word": " were",
+        "start": 49.08,
+        "end": 49.32
+      },
+      {
+        "word": " tentmates",
+        "start": 49.32,
+        "end": 49.86
+      },
+      {
+        "word": " for",
+        "start": 49.86,
+        "end": 50.12
+      },
+      {
+        "word": " seven",
+        "start": 50.12,
+        "end": 50.46
+      },
+      {
+        "word": " years,",
+        "start": 50.46,
+        "end": 51
+      },
+      {
+        "word": " and",
+        "start": 51.06,
+        "end": 51.54
+      },
+      {
+        "word": " when",
+        "start": 51.54,
+        "end": 51.66
+      },
+      {
+        "word": " we",
+        "start": 51.66,
+        "end": 51.84
+      },
+      {
+        "word": " came",
+        "start": 51.84,
+        "end": 52.02
+      },
+      {
+        "word": " home,",
+        "start": 52.02,
+        "end": 52.34
+      },
+      {
+        "word": " we",
+        "start": 52.64,
+        "end": 52.74
+      },
+      {
+        "word": " had",
+        "start": 52.74,
+        "end": 52.92
+      },
+      {
+        "word": " another",
+        "start": 52.92,
+        "end": 53.26
+      },
+      {
+        "word": " thing",
+        "start": 53.26,
+        "end": 53.46
+      },
+      {
+        "word": " in",
+        "start": 53.46,
+        "end": 53.76
+      },
+      {
+        "word": " common.",
+        "start": 53.76,
+        "end": 53.98
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "start": 54.74,
+    "end": 57.78,
+    "text": "We were veterans of the Second Augustine Legion in Britain.",
+    "words": [
+      {
+        "word": " We",
+        "start": 54.74,
+        "end": 54.98
+      },
+      {
+        "word": " were",
+        "start": 54.98,
+        "end": 55.18
+      },
+      {
+        "word": " veterans",
+        "start": 55.18,
+        "end": 55.62
+      },
+      {
+        "word": " of",
+        "start": 55.62,
+        "end": 55.84
+      },
+      {
+        "word": " the",
+        "start": 55.84,
+        "end": 56.04
+      },
+      {
+        "word": " Second",
+        "start": 56.04,
+        "end": 56.32
+      },
+      {
+        "word": " Augustine",
+        "start": 56.32,
+        "end": 56.84
+      },
+      {
+        "word": " Legion",
+        "start": 56.84,
+        "end": 57.16
+      },
+      {
+        "word": " in",
+        "start": 57.16,
+        "end": 57.38
+      },
+      {
+        "word": " Britain.",
+        "start": 57.38,
+        "end": 57.78
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "start": 58.6,
+    "end": 63.76,
+    "text": "Not only that, we were veterans of the Second at the time of Queen Boudicca's revolt against",
+    "words": [
+      {
+        "word": " Not",
+        "start": 58.6,
+        "end": 58.84
+      },
+      {
+        "word": " only",
+        "start": 58.84,
+        "end": 59.12
+      },
+      {
+        "word": " that,",
+        "start": 59.12,
+        "end": 59.62
+      },
+      {
+        "word": " we",
+        "start": 59.82,
+        "end": 60.06
+      },
+      {
+        "word": " were",
+        "start": 60.06,
+        "end": 60.24
+      },
+      {
+        "word": " veterans",
+        "start": 60.24,
+        "end": 60.64
+      },
+      {
+        "word": " of",
+        "start": 60.64,
+        "end": 60.84
+      },
+      {
+        "word": " the",
+        "start": 60.84,
+        "end": 61.1
+      },
+      {
+        "word": " Second",
+        "start": 61.1,
+        "end": 61.46
+      },
+      {
+        "word": " at",
+        "start": 61.46,
+        "end": 61.8
+      },
+      {
+        "word": " the",
+        "start": 61.8,
+        "end": 62.04
+      },
+      {
+        "word": " time",
+        "start": 62.04,
+        "end": 62.2
+      },
+      {
+        "word": " of",
+        "start": 62.2,
+        "end": 62.38
+      },
+      {
+        "word": " Queen",
+        "start": 62.38,
+        "end": 62.58
+      },
+      {
+        "word": " Boudicca's",
+        "start": 62.58,
+        "end": 63.14
+      },
+      {
+        "word": " revolt",
+        "start": 63.14,
+        "end": 63.44
+      },
+      {
+        "word": " against",
+        "start": 63.44,
+        "end": 63.76
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "start": 63.76,
+    "end": 64.2,
+    "text": "Rome.",
+    "words": [
+      {
+        "word": " Rome.",
+        "start": 63.76,
+        "end": 64.2
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "start": 64.86,
+    "end": 69.78,
+    "text": "So, because of the Second's abysmal performance, we both left the army eighteen years early,",
+    "words": [
+      {
+        "word": " So,",
+        "start": 64.86,
+        "end": 65.24
+      },
+      {
+        "word": " because",
+        "start": 65.24,
+        "end": 65.48
+      },
+      {
+        "word": " of",
+        "start": 65.48,
+        "end": 65.64
+      },
+      {
+        "word": " the",
+        "start": 65.64,
+        "end": 65.84
+      },
+      {
+        "word": " Second's",
+        "start": 65.84,
+        "end": 66.24
+      },
+      {
+        "word": " abysmal",
+        "start": 66.24,
+        "end": 66.58
+      },
+      {
+        "word": " performance,",
+        "start": 66.58,
+        "end": 67.22
+      },
+      {
+        "word": " we",
+        "start": 67.6,
+        "end": 67.74
+      },
+      {
+        "word": " both",
+        "start": 67.74,
+        "end": 67.96
+      },
+      {
+        "word": " left",
+        "start": 67.96,
+        "end": 68.2
+      },
+      {
+        "word": " the",
+        "start": 68.2,
+        "end": 68.44
+      },
+      {
+        "word": " army",
+        "start": 68.44,
+        "end": 68.62
+      },
+      {
+        "word": " eighteen",
+        "start": 68.62,
+        "end": 69
+      },
+      {
+        "word": " years",
+        "start": 69,
+        "end": 69.3
+      },
+      {
+        "word": " early,",
+        "start": 69.3,
+        "end": 69.78
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "start": 69.78,
+    "end": 72.52,
+    "text": "and we both had something we never wanted to talk about.",
+    "words": [
+      {
+        "word": " and",
+        "start": 69.78,
+        "end": 70.32
+      },
+      {
+        "word": " we",
+        "start": 70.32,
+        "end": 70.48
+      },
+      {
+        "word": " both",
+        "start": 70.48,
+        "end": 70.66
+      },
+      {
+        "word": " had",
+        "start": 70.66,
+        "end": 70.82
+      },
+      {
+        "word": " something",
+        "start": 70.82,
+        "end": 71.14
+      },
+      {
+        "word": " we",
+        "start": 71.14,
+        "end": 71.32
+      },
+      {
+        "word": " never",
+        "start": 71.32,
+        "end": 71.54
+      },
+      {
+        "word": " wanted",
+        "start": 71.54,
+        "end": 71.74
+      },
+      {
+        "word": " to",
+        "start": 71.74,
+        "end": 72.02
+      },
+      {
+        "word": " talk",
+        "start": 72.02,
+        "end": 72.18
+      },
+      {
+        "word": " about.",
+        "start": 72.18,
+        "end": 72.52
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "start": 74.36,
+    "end": 76.32,
+    "text": "\"'Poke your eyes back in,' I told him.",
+    "words": [
+      {
+        "word": " \"'Poke",
+        "start": 74.36,
+        "end": 74.66
+      },
+      {
+        "word": " your",
+        "start": 74.66,
+        "end": 74.82
+      },
+      {
+        "word": " eyes",
+        "start": 74.82,
+        "end": 75.02
+      },
+      {
+        "word": " back",
+        "start": 75.02,
+        "end": 75.3
+      },
+      {
+        "word": " in,'",
+        "start": 75.3,
+        "end": 75.54
+      },
+      {
+        "word": " I",
+        "start": 75.54,
+        "end": 75.8
+      },
+      {
+        "word": " told",
+        "start": 75.8,
+        "end": 75.96
+      },
+      {
+        "word": " him.",
+        "start": 75.96,
+        "end": 76.32
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "start": 76.32,
+    "end": 77.55999999999999,
+    "text": "Her name's Helena.'",
+    "words": [
+      {
+        "word": " Her",
+        "start": 76.32,
+        "end": 76.8
+      },
+      {
+        "word": " name's",
+        "start": 76.8,
+        "end": 77.22
+      },
+      {
+        "word": " Helena.'",
+        "start": 77.22,
+        "end": 77.55999999999999
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "start": 78.94000000000001,
+    "end": 79.98,
+    "text": "\"'Hello, Helena.",
+    "words": [
+      {
+        "word": " \"'Hello,",
+        "start": 78.94000000000001,
+        "end": 79.46000000000001
+      },
+      {
+        "word": " Helena.",
+        "start": 79.46000000000001,
+        "end": 79.98
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "start": 80.54,
+    "end": 81.75999999999999,
+    "text": "What a pretty name.'",
+    "words": [
+      {
+        "word": " What",
+        "start": 80.54,
+        "end": 80.88
+      },
+      {
+        "word": " a",
+        "start": 80.88,
+        "end": 81.14
+      },
+      {
+        "word": " pretty",
+        "start": 81.14,
+        "end": 81.38
+      },
+      {
+        "word": " name.'",
+        "start": 81.38,
+        "end": 81.75999999999999
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "start": 82.86,
+    "end": 83.38,
+    "text": "\"'Falco?",
+    "words": [
+      {
+        "word": " \"'Falco?",
+        "start": 82.86,
+        "end": 83.38
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "start": 83.7,
+    "end": 85.36,
+    "text": "Where did you find that?'",
+    "words": [
+      {
+        "word": " Where",
+        "start": 83.7,
+        "end": 84.04
+      },
+      {
+        "word": " did",
+        "start": 84.04,
+        "end": 84.22
+      },
+      {
+        "word": " you",
+        "start": 84.22,
+        "end": 84.44
+      },
+      {
+        "word": " find",
+        "start": 84.44,
+        "end": 84.78
+      },
+      {
+        "word": " that?'",
+        "start": 84.78,
+        "end": 85.36
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "start": 86.02,
+    "end": 88.1,
+    "text": "Running a foot race round the Temple of Saturn.",
+    "words": [
+      {
+        "word": " Running",
+        "start": 86.02,
+        "end": 86.44
+      },
+      {
+        "word": " a",
+        "start": 86.44,
+        "end": 86.68
+      },
+      {
+        "word": " foot",
+        "start": 86.68,
+        "end": 86.88
+      },
+      {
+        "word": " race",
+        "start": 86.88,
+        "end": 87.02
+      },
+      {
+        "word": " round",
+        "start": 87.02,
+        "end": 87.2
+      },
+      {
+        "word": " the",
+        "start": 87.2,
+        "end": 87.4
+      },
+      {
+        "word": " Temple",
+        "start": 87.4,
+        "end": 87.6
+      },
+      {
+        "word": " of",
+        "start": 87.6,
+        "end": 87.84
+      },
+      {
+        "word": " Saturn.",
+        "start": 87.84,
+        "end": 88.1
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "start": 88.96,
+    "end": 93.36,
+    "text": "I'd chosen to answer him with such simple honesty, because there was a slim chance Petronius",
+    "words": [
+      {
+        "word": " I'd",
+        "start": 88.96,
+        "end": 89.46
+      },
+      {
+        "word": " chosen",
+        "start": 89.46,
+        "end": 89.68
+      },
+      {
+        "word": " to",
+        "start": 89.68,
+        "end": 89.9
+      },
+      {
+        "word": " answer",
+        "start": 89.9,
+        "end": 90.14
+      },
+      {
+        "word": " him",
+        "start": 90.14,
+        "end": 90.24
+      },
+      {
+        "word": " with",
+        "start": 90.24,
+        "end": 90.42
+      },
+      {
+        "word": " such",
+        "start": 90.42,
+        "end": 90.58
+      },
+      {
+        "word": " simple",
+        "start": 90.58,
+        "end": 90.92
+      },
+      {
+        "word": " honesty,",
+        "start": 90.92,
+        "end": 91.42
+      },
+      {
+        "word": " because",
+        "start": 91.66,
+        "end": 91.88
+      },
+      {
+        "word": " there",
+        "start": 91.88,
+        "end": 92
+      },
+      {
+        "word": " was",
+        "start": 92,
+        "end": 92.22
+      },
+      {
+        "word": " a",
+        "start": 92.22,
+        "end": 92.36
+      },
+      {
+        "word": " slim",
+        "start": 92.36,
+        "end": 92.52
+      },
+      {
+        "word": " chance",
+        "start": 92.52,
+        "end": 92.82
+      },
+      {
+        "word": " Petronius",
+        "start": 92.82,
+        "end": 93.36
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "start": 93.36,
+    "end": 94.18,
+    "text": "already knew.",
+    "words": [
+      {
+        "word": " already",
+        "start": 93.36,
+        "end": 93.84
+      },
+      {
+        "word": " knew.",
+        "start": 93.84,
+        "end": 94.18
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "start": 95.14,
+    "end": 99.26,
+    "text": "Besides, I wanted the girl to believe she was dealing with a man who told the truth.",
+    "words": [
+      {
+        "word": " Besides,",
+        "start": 95.14,
+        "end": 95.66
+      },
+      {
+        "word": " I",
+        "start": 96.06,
+        "end": 96.32
+      },
+      {
+        "word": " wanted",
+        "start": 96.32,
+        "end": 96.48
+      },
+      {
+        "word": " the",
+        "start": 96.48,
+        "end": 96.66
+      },
+      {
+        "word": " girl",
+        "start": 96.66,
+        "end": 96.82
+      },
+      {
+        "word": " to",
+        "start": 96.82,
+        "end": 97.02
+      },
+      {
+        "word": " believe",
+        "start": 97.02,
+        "end": 97.18
+      },
+      {
+        "word": " she",
+        "start": 97.18,
+        "end": 97.32
+      },
+      {
+        "word": " was",
+        "start": 97.32,
+        "end": 97.48
+      },
+      {
+        "word": " dealing",
+        "start": 97.48,
+        "end": 97.7
+      },
+      {
+        "word": " with",
+        "start": 97.7,
+        "end": 97.9
+      },
+      {
+        "word": " a",
+        "start": 97.9,
+        "end": 98.02
+      },
+      {
+        "word": " man",
+        "start": 98.02,
+        "end": 98.2
+      },
+      {
+        "word": " who",
+        "start": 98.2,
+        "end": 98.42
+      },
+      {
+        "word": " told",
+        "start": 98.42,
+        "end": 98.68
+      },
+      {
+        "word": " the",
+        "start": 98.68,
+        "end": 98.94
+      },
+      {
+        "word": " truth.",
+        "start": 98.94,
+        "end": 99.26
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "start": 100.26,
+    "end": 103.36,
+    "text": "I introduced the watch-captain to my dazzling client.",
+    "words": [
+      {
+        "word": " I",
+        "start": 100.26,
+        "end": 100.78
+      },
+      {
+        "word": " introduced",
+        "start": 100.78,
+        "end": 101.18
+      },
+      {
+        "word": " the",
+        "start": 101.18,
+        "end": 101.38
+      },
+      {
+        "word": " watch",
+        "start": 101.38,
+        "end": 101.62
+      },
+      {
+        "word": "-captain",
+        "start": 101.62,
+        "end": 101.92
+      },
+      {
+        "word": " to",
+        "start": 101.92,
+        "end": 102.06
+      },
+      {
+        "word": " my",
+        "start": 102.06,
+        "end": 102.38
+      },
+      {
+        "word": " dazzling",
+        "start": 102.38,
+        "end": 102.84
+      },
+      {
+        "word": " client.",
+        "start": 102.84,
+        "end": 103.36
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "start": 104.42,
+    "end": 106.96,
+    "text": "\"'Petronius Longus, District Patrolman.",
+    "words": [
+      {
+        "word": " \"'Petronius",
+        "start": 104.42,
+        "end": 104.98
+      },
+      {
+        "word": " Longus,",
+        "start": 104.98,
+        "end": 105.46
+      },
+      {
+        "word": " District",
+        "start": 105.8,
+        "end": 106.22
+      },
+      {
+        "word": " Patrolman.",
+        "start": 106.22,
+        "end": 106.96
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "start": 107.32,
+    "end": 108.68,
+    "text": "The best.'",
+    "words": [
+      {
+        "word": " The",
+        "start": 107.32,
+        "end": 107.68
+      },
+      {
+        "word": " best.'",
+        "start": 107.68,
+        "end": 108.68
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "start": 108.68,
+    "end": 111.38,
+    "text": "\"'Good evening, sir,' she said.",
+    "words": [
+      {
+        "word": " \"'Good",
+        "start": 108.68,
+        "end": 109.7
+      },
+      {
+        "word": " evening,",
+        "start": 109.7,
+        "end": 110.08
+      },
+      {
+        "word": " sir,'",
+        "start": 110.26,
+        "end": 110.54
+      },
+      {
+        "word": " she",
+        "start": 110.54,
+        "end": 111.08
+      },
+      {
+        "word": " said.",
+        "start": 111.08,
+        "end": 111.38
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "start": 112.26,
+    "end": 113.9,
+    "text": "I go forward bitterly.",
+    "words": [
+      {
+        "word": " I",
+        "start": 112.26,
+        "end": 112.56
+      },
+      {
+        "word": " go",
+        "start": 112.56,
+        "end": 112.82
+      },
+      {
+        "word": " forward",
+        "start": 112.82,
+        "end": 113.08
+      },
+      {
+        "word": " bitterly.",
+        "start": 113.08,
+        "end": 113.9
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "start": 113.98,
+    "end": 115.94,
+    "text": "\"'Take a job in local government.",
+    "words": [
+      {
+        "word": " \"'Take",
+        "start": 113.98,
+        "end": 114.54
+      },
+      {
+        "word": " a",
+        "start": 114.54,
+        "end": 114.72
+      },
+      {
+        "word": " job",
+        "start": 114.72,
+        "end": 114.9
+      },
+      {
+        "word": " in",
+        "start": 114.9,
+        "end": 115.06
+      },
+      {
+        "word": " local",
+        "start": 115.06,
+        "end": 115.46
+      },
+      {
+        "word": " government.",
+        "start": 115.46,
+        "end": 115.94
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "start": 116.22,
+    "end": 117.52,
+    "text": "Women will call you sir.",
+    "words": [
+      {
+        "word": " Women",
+        "start": 116.22,
+        "end": 116.48
+      },
+      {
+        "word": " will",
+        "start": 116.48,
+        "end": 116.74
+      },
+      {
+        "word": " call",
+        "start": 116.74,
+        "end": 116.94
+      },
+      {
+        "word": " you",
+        "start": 116.94,
+        "end": 117.16
+      },
+      {
+        "word": " sir.",
+        "start": 117.16,
+        "end": 117.52
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "start": 118.2,
+    "end": 120.78,
+    "text": "Sweetheart, there's no need to overdo it.'",
+    "words": [
+      {
+        "word": " Sweetheart,",
+        "start": 118.2,
+        "end": 118.76
+      },
+      {
+        "word": " there's",
+        "start": 118.9,
+        "end": 119.1
+      },
+      {
+        "word": " no",
+        "start": 119.1,
+        "end": 119.28
+      },
+      {
+        "word": " need",
+        "start": 119.28,
+        "end": 119.42
+      },
+      {
+        "word": " to",
+        "start": 119.42,
+        "end": 119.68
+      },
+      {
+        "word": " overdo",
+        "start": 119.68,
+        "end": 119.94
+      },
+      {
+        "word": " it.'",
+        "start": 119.94,
+        "end": 120.78
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "start": 120.78,
+    "end": 125.92,
+    "text": "\"'Take no notice of this tricky character,' Petronius scoffed in his easy way, smiling",
+    "words": [
+      {
+        "word": " \"'Take",
+        "start": 120.78,
+        "end": 121.56
+      },
+      {
+        "word": " no",
+        "start": 121.56,
+        "end": 121.84
+      },
+      {
+        "word": " notice",
+        "start": 121.84,
+        "end": 122.12
+      },
+      {
+        "word": " of",
+        "start": 122.12,
+        "end": 122.28
+      },
+      {
+        "word": " this",
+        "start": 122.28,
+        "end": 122.54
+      },
+      {
+        "word": " tricky",
+        "start": 122.54,
+        "end": 122.84
+      },
+      {
+        "word": " character,'",
+        "start": 122.84,
+        "end": 123.42
+      },
+      {
+        "word": " Petronius",
+        "start": 123.42,
+        "end": 124.08
+      },
+      {
+        "word": " scoffed",
+        "start": 124.08,
+        "end": 124.44
+      },
+      {
+        "word": " in",
+        "start": 124.44,
+        "end": 124.58
+      },
+      {
+        "word": " his",
+        "start": 124.58,
+        "end": 124.74
+      },
+      {
+        "word": " easy",
+        "start": 124.74,
+        "end": 124.98
+      },
+      {
+        "word": " way,",
+        "start": 124.98,
+        "end": 125.3
+      },
+      {
+        "word": " smiling",
+        "start": 125.58,
+        "end": 125.92
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "start": 125.92,
+    "end": 128.28,
+    "text": "at her with an interest I did not altogether like.",
+    "words": [
+      {
+        "word": " at",
+        "start": 125.92,
+        "end": 126.12
+      },
+      {
+        "word": " her",
+        "start": 126.12,
+        "end": 126.22
+      },
+      {
+        "word": " with",
+        "start": 126.22,
+        "end": 126.36
+      },
+      {
+        "word": " an",
+        "start": 126.36,
+        "end": 126.54
+      },
+      {
+        "word": " interest",
+        "start": 126.54,
+        "end": 126.82
+      },
+      {
+        "word": " I",
+        "start": 126.82,
+        "end": 127
+      },
+      {
+        "word": " did",
+        "start": 127,
+        "end": 127.16
+      },
+      {
+        "word": " not",
+        "start": 127.16,
+        "end": 127.38
+      },
+      {
+        "word": " altogether",
+        "start": 127.38,
+        "end": 127.78
+      },
+      {
+        "word": " like.",
+        "start": 127.78,
+        "end": 128.28
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "start": 129.1,
+    "end": 130.68,
+    "text": "She smiled back at him.",
+    "words": [
+      {
+        "word": " She",
+        "start": 129.1,
+        "end": 129.62
+      },
+      {
+        "word": " smiled",
+        "start": 129.62,
+        "end": 129.94
+      },
+      {
+        "word": " back",
+        "start": 129.94,
+        "end": 130.2
+      },
+      {
+        "word": " at",
+        "start": 130.2,
+        "end": 130.28
+      },
+      {
+        "word": " him.",
+        "start": 130.28,
+        "end": 130.68
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "start": 130.68,
+    "end": 134.7,
+    "text": "So I clipped tersely, \"'We men want to gossip with a winejerk.",
+    "words": [
+      {
+        "word": " So",
+        "start": 130.68,
+        "end": 130.96
+      },
+      {
+        "word": " I",
+        "start": 130.96,
+        "end": 131.2
+      },
+      {
+        "word": " clipped",
+        "start": 131.2,
+        "end": 131.5
+      },
+      {
+        "word": " tersely,",
+        "start": 131.5,
+        "end": 132.06
+      },
+      {
+        "word": " \"'We",
+        "start": 132.76,
+        "end": 133.02
+      },
+      {
+        "word": " men",
+        "start": 133.02,
+        "end": 133.22
+      },
+      {
+        "word": " want",
+        "start": 133.22,
+        "end": 133.44
+      },
+      {
+        "word": " to",
+        "start": 133.44,
+        "end": 133.56
+      },
+      {
+        "word": " gossip",
+        "start": 133.56,
+        "end": 133.8
+      },
+      {
+        "word": " with",
+        "start": 133.8,
+        "end": 133.96
+      },
+      {
+        "word": " a",
+        "start": 133.96,
+        "end": 134.16
+      },
+      {
+        "word": " winejerk.",
+        "start": 134.16,
+        "end": 134.7
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "start": 135,
+    "end": 137.28,
+    "text": "Go into the bedroom and wait for me.'",
+    "words": [
+      {
+        "word": " Go",
+        "start": 135,
+        "end": 135.2
+      },
+      {
+        "word": " into",
+        "start": 135.2,
+        "end": 135.38
+      },
+      {
+        "word": " the",
+        "start": 135.38,
+        "end": 135.54
+      },
+      {
+        "word": " bedroom",
+        "start": 135.54,
+        "end": 135.76
+      },
+      {
+        "word": " and",
+        "start": 135.76,
+        "end": 135.92
+      },
+      {
+        "word": " wait",
+        "start": 135.92,
+        "end": 136.12
+      },
+      {
+        "word": " for",
+        "start": 136.12,
+        "end": 136.3
+      },
+      {
+        "word": " me.'",
+        "start": 136.3,
+        "end": 137.28
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "start": 137.92000000000002,
+    "end": 139.72,
+    "text": "She shot me a look, but she went.",
+    "words": [
+      {
+        "word": " She",
+        "start": 137.73999999999998,
+        "end": 137.98
+      },
+      {
+        "word": " shot",
+        "start": 137.98,
+        "end": 138.22
+      },
+      {
+        "word": " me",
+        "start": 138.22,
+        "end": 138.42
+      },
+      {
+        "word": " a",
+        "start": 138.42,
+        "end": 138.56
+      },
+      {
+        "word": " look,",
+        "start": 138.56,
+        "end": 138.84
+      },
+      {
+        "word": " but",
+        "start": 139.04,
+        "end": 139.16
+      },
+      {
+        "word": " she",
+        "start": 139.16,
+        "end": 139.36
+      },
+      {
+        "word": " went.",
+        "start": 139.36,
+        "end": 139.72
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "start": 140.62,
+    "end": 142.86,
+    "text": "\"'That's the benefit of a liberal education.",
+    "words": [
+      {
+        "word": " \"'That's",
+        "start": 140.62,
+        "end": 141.1
+      },
+      {
+        "word": " the",
+        "start": 141.1,
+        "end": 141.3
+      },
+      {
+        "word": " benefit",
+        "start": 141.3,
+        "end": 141.6
+      },
+      {
+        "word": " of",
+        "start": 141.6,
+        "end": 141.76
+      },
+      {
+        "word": " a",
+        "start": 141.76,
+        "end": 141.92
+      },
+      {
+        "word": " liberal",
+        "start": 141.92,
+        "end": 142.2
+      },
+      {
+        "word": " education.",
+        "start": 142.2,
+        "end": 142.86
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "start": 143.34,
+    "end": 145.76,
+    "text": "This little girl knew she lived in a man's world.",
+    "words": [
+      {
+        "word": " This",
+        "start": 143.34,
+        "end": 143.64
+      },
+      {
+        "word": " little",
+        "start": 143.64,
+        "end": 143.92
+      },
+      {
+        "word": " girl",
+        "start": 143.92,
+        "end": 144.1
+      },
+      {
+        "word": " knew",
+        "start": 144.1,
+        "end": 144.28
+      },
+      {
+        "word": " she",
+        "start": 144.28,
+        "end": 144.48
+      },
+      {
+        "word": " lived",
+        "start": 144.48,
+        "end": 144.68
+      },
+      {
+        "word": " in",
+        "start": 144.68,
+        "end": 144.84
+      },
+      {
+        "word": " a",
+        "start": 144.84,
+        "end": 145
+      },
+      {
+        "word": " man's",
+        "start": 145,
+        "end": 145.4
+      },
+      {
+        "word": " world.",
+        "start": 145.4,
+        "end": 145.76
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "start": 146.32,
+    "end": 149.44,
+    "text": "Besides, she had pretty manners and it was my house.'",
+    "words": [
+      {
+        "word": " Besides,",
+        "start": 146.32,
+        "end": 146.8
+      },
+      {
+        "word": " she",
+        "start": 147.14,
+        "end": 147.32
+      },
+      {
+        "word": " had",
+        "start": 147.32,
+        "end": 147.5
+      },
+      {
+        "word": " pretty",
+        "start": 147.5,
+        "end": 147.82
+      },
+      {
+        "word": " manners",
+        "start": 147.82,
+        "end": 148.14
+      },
+      {
+        "word": " and",
+        "start": 148.14,
+        "end": 148.56
+      },
+      {
+        "word": " it",
+        "start": 148.56,
+        "end": 148.7
+      },
+      {
+        "word": " was",
+        "start": 148.7,
+        "end": 148.82
+      },
+      {
+        "word": " my",
+        "start": 148.82,
+        "end": 149.08
+      },
+      {
+        "word": " house.'",
+        "start": 149.08,
+        "end": 149.44
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "start": 150.89999999999998,
+    "end": 153.32,
+    "text": "\"'Nice,' approved Petronius in a low voice.",
+    "words": [
+      {
+        "word": " \"'Nice,'",
+        "start": 150.89999999999998,
+        "end": 151.38
+      },
+      {
+        "word": " approved",
+        "start": 151.38,
+        "end": 151.86
+      },
+      {
+        "word": " Petronius",
+        "start": 151.86,
+        "end": 152.42
+      },
+      {
+        "word": " in",
+        "start": 152.42,
+        "end": 152.58
+      },
+      {
+        "word": " a",
+        "start": 152.58,
+        "end": 152.72
+      },
+      {
+        "word": " low",
+        "start": 152.72,
+        "end": 152.9
+      },
+      {
+        "word": " voice.",
+        "start": 152.9,
+        "end": 153.32
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "start": 154.4,
+    "end": 157.66,
+    "text": "\"'He has a wife who for some reason adores him.",
+    "words": [
+      {
+        "word": " \"'He",
+        "start": 154.4,
+        "end": 154.88
+      },
+      {
+        "word": " has",
+        "start": 154.88,
+        "end": 155.12
+      },
+      {
+        "word": " a",
+        "start": 155.12,
+        "end": 155.32
+      },
+      {
+        "word": " wife",
+        "start": 155.32,
+        "end": 155.66
+      },
+      {
+        "word": " who",
+        "start": 155.66,
+        "end": 156.02
+      },
+      {
+        "word": " for",
+        "start": 156.02,
+        "end": 156.26
+      },
+      {
+        "word": " some",
+        "start": 156.26,
+        "end": 156.52
+      },
+      {
+        "word": " reason",
+        "start": 156.52,
+        "end": 156.74
+      },
+      {
+        "word": " adores",
+        "start": 156.74,
+        "end": 157.24
+      },
+      {
+        "word": " him.",
+        "start": 157.24,
+        "end": 157.66
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "start": 157.66,
+    "end": 160.84,
+    "text": "He never refers to her, but must care about her.",
+    "words": [
+      {
+        "word": " He",
+        "start": 157.66,
+        "end": 158.24
+      },
+      {
+        "word": " never",
+        "start": 158.24,
+        "end": 158.48
+      },
+      {
+        "word": " refers",
+        "start": 158.48,
+        "end": 158.94
+      },
+      {
+        "word": " to",
+        "start": 158.94,
+        "end": 159.12
+      },
+      {
+        "word": " her,",
+        "start": 159.12,
+        "end": 159.52
+      },
+      {
+        "word": " but",
+        "start": 159.66,
+        "end": 159.82
+      },
+      {
+        "word": " must",
+        "start": 159.82,
+        "end": 160.04
+      },
+      {
+        "word": " care",
+        "start": 160.04,
+        "end": 160.3
+      },
+      {
+        "word": " about",
+        "start": 160.3,
+        "end": 160.56
+      },
+      {
+        "word": " her.",
+        "start": 160.56,
+        "end": 160.84
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "start": 161.4,
+    "end": 162.34,
+    "text": "He's the type who would.",
+    "words": [
+      {
+        "word": " He's",
+        "start": 161.4,
+        "end": 161.52
+      },
+      {
+        "word": " the",
+        "start": 161.52,
+        "end": 161.64
+      },
+      {
+        "word": " type",
+        "start": 161.64,
+        "end": 161.86
+      },
+      {
+        "word": " who",
+        "start": 161.86,
+        "end": 162.04
+      },
+      {
+        "word": " would.",
+        "start": 162.04,
+        "end": 162.34
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "start": 163.08,
+    "end": 168.42,
+    "text": "They have three daughters, and like a good Roman father, he's utterly sentimental about",
+    "words": [
+      {
+        "word": " They",
+        "start": 163.08,
+        "end": 163.26
+      },
+      {
+        "word": " have",
+        "start": 163.26,
+        "end": 163.46
+      },
+      {
+        "word": " three",
+        "start": 163.46,
+        "end": 163.74
+      },
+      {
+        "word": " daughters,",
+        "start": 163.74,
+        "end": 164.2
+      },
+      {
+        "word": " and",
+        "start": 164.2,
+        "end": 165.18
+      },
+      {
+        "word": " like",
+        "start": 165.18,
+        "end": 165.38
+      },
+      {
+        "word": " a",
+        "start": 165.38,
+        "end": 165.54
+      },
+      {
+        "word": " good",
+        "start": 165.54,
+        "end": 165.68
+      },
+      {
+        "word": " Roman",
+        "start": 165.68,
+        "end": 165.98
+      },
+      {
+        "word": " father,",
+        "start": 165.98,
+        "end": 166.42
+      },
+      {
+        "word": " he's",
+        "start": 166.76,
+        "end": 167.02
+      },
+      {
+        "word": " utterly",
+        "start": 167.02,
+        "end": 167.4
+      },
+      {
+        "word": " sentimental",
+        "start": 167.4,
+        "end": 168.06
+      },
+      {
+        "word": " about",
+        "start": 168.06,
+        "end": 168.42
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "start": 168.42,
+    "end": 169.02,
+    "text": "his girls.",
+    "words": [
+      {
+        "word": " his",
+        "start": 168.42,
+        "end": 168.68
+      },
+      {
+        "word": " girls.",
+        "start": 168.68,
+        "end": 169.02
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "start": 169.78,
+    "end": 174.12,
+    "text": "I could see a day coming when the two Lyannum jail would be crammed with frightful young",
+    "words": [
+      {
+        "word": " I",
+        "start": 169.78,
+        "end": 170.1
+      },
+      {
+        "word": " could",
+        "start": 170.1,
+        "end": 170.26
+      },
+      {
+        "word": " see",
+        "start": 170.26,
+        "end": 170.38
+      },
+      {
+        "word": " a",
+        "start": 170.38,
+        "end": 170.56
+      },
+      {
+        "word": " day",
+        "start": 170.56,
+        "end": 170.7
+      },
+      {
+        "word": " coming",
+        "start": 170.7,
+        "end": 170.94
+      },
+      {
+        "word": " when",
+        "start": 170.94,
+        "end": 171.3
+      },
+      {
+        "word": " the",
+        "start": 171.3,
+        "end": 171.48
+      },
+      {
+        "word": " two",
+        "start": 171.48,
+        "end": 171.6
+      },
+      {
+        "word": " Lyannum",
+        "start": 171.6,
+        "end": 172.02
+      },
+      {
+        "word": " jail",
+        "start": 172.02,
+        "end": 172.3
+      },
+      {
+        "word": " would",
+        "start": 172.3,
+        "end": 172.5
+      },
+      {
+        "word": " be",
+        "start": 172.5,
+        "end": 172.8
+      },
+      {
+        "word": " crammed",
+        "start": 172.8,
+        "end": 173.02
+      },
+      {
+        "word": " with",
+        "start": 173.02,
+        "end": 173.3
+      },
+      {
+        "word": " frightful",
+        "start": 173.3,
+        "end": 173.72
+      },
+      {
+        "word": " young",
+        "start": 173.72,
+        "end": 174.12
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "start": 174.12,
+    "end": 176.74,
+    "text": "sprogs who'd cast their beady eyes at Petro's girls.",
+    "words": [
+      {
+        "word": " sprogs",
+        "start": 174.12,
+        "end": 174.52
+      },
+      {
+        "word": " who'd",
+        "start": 174.52,
+        "end": 174.88
+      },
+      {
+        "word": " cast",
+        "start": 174.88,
+        "end": 175
+      },
+      {
+        "word": " their",
+        "start": 175,
+        "end": 175.3
+      },
+      {
+        "word": " beady",
+        "start": 175.3,
+        "end": 175.54
+      },
+      {
+        "word": " eyes",
+        "start": 175.54,
+        "end": 175.78
+      },
+      {
+        "word": " at",
+        "start": 175.78,
+        "end": 175.98
+      },
+      {
+        "word": " Petro's",
+        "start": 175.98,
+        "end": 176.5
+      },
+      {
+        "word": " girls.",
+        "start": 176.5,
+        "end": 176.74
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "start": 177.98,
+    "end": 182.76,
+    "text": "I produced two wine cups which looked clean, though I polished up Petro's on the hem of",
+    "words": [
+      {
+        "word": " I",
+        "start": 177.98,
+        "end": 178.32
+      },
+      {
+        "word": " produced",
+        "start": 178.32,
+        "end": 178.62
+      },
+      {
+        "word": " two",
+        "start": 178.62,
+        "end": 178.88
+      },
+      {
+        "word": " wine",
+        "start": 178.88,
+        "end": 179.18
+      },
+      {
+        "word": " cups",
+        "start": 179.18,
+        "end": 179.36
+      },
+      {
+        "word": " which",
+        "start": 179.36,
+        "end": 179.7
+      },
+      {
+        "word": " looked",
+        "start": 179.7,
+        "end": 179.98
+      },
+      {
+        "word": " clean,",
+        "start": 179.98,
+        "end": 180.48
+      },
+      {
+        "word": " though",
+        "start": 180.96,
+        "end": 181.06
+      },
+      {
+        "word": " I",
+        "start": 181.06,
+        "end": 181.28
+      },
+      {
+        "word": " polished",
+        "start": 181.28,
+        "end": 181.54
+      },
+      {
+        "word": " up",
+        "start": 181.54,
+        "end": 181.82
+      },
+      {
+        "word": " Petro's",
+        "start": 181.82,
+        "end": 182.22
+      },
+      {
+        "word": " on",
+        "start": 182.22,
+        "end": 182.32
+      },
+      {
+        "word": " the",
+        "start": 182.32,
+        "end": 182.46
+      },
+      {
+        "word": " hem",
+        "start": 182.46,
+        "end": 182.56
+      },
+      {
+        "word": " of",
+        "start": 182.56,
+        "end": 182.76
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "start": 182.76,
+    "end": 185,
+    "text": "my tunic before I clonked them on the table.",
+    "words": [
+      {
+        "word": " my",
+        "start": 182.76,
+        "end": 182.96
+      },
+      {
+        "word": " tunic",
+        "start": 182.96,
+        "end": 183.32
+      },
+      {
+        "word": " before",
+        "start": 183.32,
+        "end": 183.74
+      },
+      {
+        "word": " I",
+        "start": 183.74,
+        "end": 184.02
+      },
+      {
+        "word": " clonked",
+        "start": 184.02,
+        "end": 184.16
+      },
+      {
+        "word": " them",
+        "start": 184.16,
+        "end": 184.3
+      },
+      {
+        "word": " on",
+        "start": 184.3,
+        "end": 184.44
+      },
+      {
+        "word": " the",
+        "start": 184.44,
+        "end": 184.64
+      },
+      {
+        "word": " table.",
+        "start": 184.64,
+        "end": 185
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "start": 185.82,
+    "end": 190.9,
+    "text": "In the hole under a floorboard that passed for my wine cellar, I had some smoked Spanish",
+    "words": [
+      {
+        "word": " In",
+        "start": 185.82,
+        "end": 186.34
+      },
+      {
+        "word": " the",
+        "start": 186.34,
+        "end": 186.62
+      },
+      {
+        "word": " hole",
+        "start": 186.62,
+        "end": 186.76
+      },
+      {
+        "word": " under",
+        "start": 186.76,
+        "end": 187
+      },
+      {
+        "word": " a",
+        "start": 187,
+        "end": 187.24
+      },
+      {
+        "word": " floorboard",
+        "start": 187.24,
+        "end": 187.78
+      },
+      {
+        "word": " that",
+        "start": 187.78,
+        "end": 188.06
+      },
+      {
+        "word": " passed",
+        "start": 188.06,
+        "end": 188.3
+      },
+      {
+        "word": " for",
+        "start": 188.3,
+        "end": 188.46
+      },
+      {
+        "word": " my",
+        "start": 188.46,
+        "end": 188.7
+      },
+      {
+        "word": " wine",
+        "start": 188.7,
+        "end": 189
+      },
+      {
+        "word": " cellar,",
+        "start": 189,
+        "end": 189.42
+      },
+      {
+        "word": " I",
+        "start": 189.78,
+        "end": 189.82
+      },
+      {
+        "word": " had",
+        "start": 189.82,
+        "end": 189.98
+      },
+      {
+        "word": " some",
+        "start": 189.98,
+        "end": 190.28
+      },
+      {
+        "word": " smoked",
+        "start": 190.28,
+        "end": 190.5
+      },
+      {
+        "word": " Spanish",
+        "start": 190.5,
+        "end": 190.9
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "start": 190.9,
+    "end": 196.74,
+    "text": "poison that was a gift from a grateful client, some new dusky red that tasted as if it had",
+    "words": [
+      {
+        "word": " poison",
+        "start": 190.9,
+        "end": 191.4
+      },
+      {
+        "word": " that",
+        "start": 191.4,
+        "end": 191.62
+      },
+      {
+        "word": " was",
+        "start": 191.62,
+        "end": 191.86
+      },
+      {
+        "word": " a",
+        "start": 191.86,
+        "end": 191.98
+      },
+      {
+        "word": " gift",
+        "start": 191.98,
+        "end": 192.1
+      },
+      {
+        "word": " from",
+        "start": 192.1,
+        "end": 192.36
+      },
+      {
+        "word": " a",
+        "start": 192.36,
+        "end": 192.48
+      },
+      {
+        "word": " grateful",
+        "start": 192.48,
+        "end": 192.74
+      },
+      {
+        "word": " client,",
+        "start": 192.74,
+        "end": 193.24
+      },
+      {
+        "word": " some",
+        "start": 193.9,
+        "end": 194.1
+      },
+      {
+        "word": " new",
+        "start": 194.1,
+        "end": 194.48
+      },
+      {
+        "word": " dusky",
+        "start": 194.48,
+        "end": 194.92
+      },
+      {
+        "word": " red",
+        "start": 194.92,
+        "end": 195.22
+      },
+      {
+        "word": " that",
+        "start": 195.22,
+        "end": 195.74
+      },
+      {
+        "word": " tasted",
+        "start": 195.74,
+        "end": 196.16
+      },
+      {
+        "word": " as",
+        "start": 196.16,
+        "end": 196.42
+      },
+      {
+        "word": " if",
+        "start": 196.42,
+        "end": 196.46
+      },
+      {
+        "word": " it",
+        "start": 196.46,
+        "end": 196.62
+      },
+      {
+        "word": " had",
+        "start": 196.62,
+        "end": 196.74
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "start": 196.74,
+    "end": 202.04,
+    "text": "been robbed from an Etruscan tomb, and a well-aged amphora of decent white cetinum.",
+    "words": [
+      {
+        "word": " been",
+        "start": 196.74,
+        "end": 197
+      },
+      {
+        "word": " robbed",
+        "start": 197,
+        "end": 197.22
+      },
+      {
+        "word": " from",
+        "start": 197.22,
+        "end": 197.44
+      },
+      {
+        "word": " an",
+        "start": 197.44,
+        "end": 197.62
+      },
+      {
+        "word": " Etruscan",
+        "start": 197.62,
+        "end": 198.08
+      },
+      {
+        "word": " tomb,",
+        "start": 198.08,
+        "end": 198.46
+      },
+      {
+        "word": " and",
+        "start": 198.96,
+        "end": 199.4
+      },
+      {
+        "word": " a",
+        "start": 199.4,
+        "end": 199.54
+      },
+      {
+        "word": " well",
+        "start": 199.54,
+        "end": 199.74
+      },
+      {
+        "word": "-aged",
+        "start": 199.74,
+        "end": 199.96
+      },
+      {
+        "word": " amphora",
+        "start": 199.96,
+        "end": 200.48
+      },
+      {
+        "word": " of",
+        "start": 200.48,
+        "end": 200.86
+      },
+      {
+        "word": " decent",
+        "start": 200.86,
+        "end": 201.24
+      },
+      {
+        "word": " white",
+        "start": 201.24,
+        "end": 201.58
+      },
+      {
+        "word": " cetinum.",
+        "start": 201.58,
+        "end": 202.04
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "start": 203.66,
+    "end": 208.64,
+    "text": "Since Petro's visit was so awkwardly timed, I wavered over acting casual and just serving",
+    "words": [
+      {
+        "word": " Since",
+        "start": 203.66,
+        "end": 204.02
+      },
+      {
+        "word": " Petro's",
+        "start": 204.02,
+        "end": 204.5
+      },
+      {
+        "word": " visit",
+        "start": 204.5,
+        "end": 204.7
+      },
+      {
+        "word": " was",
+        "start": 204.7,
+        "end": 204.92
+      },
+      {
+        "word": " so",
+        "start": 204.92,
+        "end": 205.2
+      },
+      {
+        "word": " awkwardly",
+        "start": 205.2,
+        "end": 205.78
+      },
+      {
+        "word": " timed,",
+        "start": 205.78,
+        "end": 206.02
+      },
+      {
+        "word": " I",
+        "start": 206.46,
+        "end": 206.7
+      },
+      {
+        "word": " wavered",
+        "start": 206.7,
+        "end": 206.98
+      },
+      {
+        "word": " over",
+        "start": 206.98,
+        "end": 207.22
+      },
+      {
+        "word": " acting",
+        "start": 207.22,
+        "end": 207.48
+      },
+      {
+        "word": " casual",
+        "start": 207.48,
+        "end": 208.02
+      },
+      {
+        "word": " and",
+        "start": 208.02,
+        "end": 208.2
+      },
+      {
+        "word": " just",
+        "start": 208.2,
+        "end": 208.42
+      },
+      {
+        "word": " serving",
+        "start": 208.42,
+        "end": 208.64
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "start": 208.64,
+    "end": 209.42,
+    "text": "the Etruscan.",
+    "words": [
+      {
+        "word": " the",
+        "start": 208.64,
+        "end": 208.88
+      },
+      {
+        "word": " Etruscan.",
+        "start": 208.88,
+        "end": 209.42
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "start": 209.9,
+    "end": 213.28,
+    "text": "But in the end I settled for the cetinum because we were old friends.",
+    "words": [
+      {
+        "word": " But",
+        "start": 209.9,
+        "end": 210.18
+      },
+      {
+        "word": " in",
+        "start": 210.18,
+        "end": 210.36
+      },
+      {
+        "word": " the",
+        "start": 210.36,
+        "end": 210.48
+      },
+      {
+        "word": " end",
+        "start": 210.48,
+        "end": 210.64
+      },
+      {
+        "word": " I",
+        "start": 210.64,
+        "end": 210.8
+      },
+      {
+        "word": " settled",
+        "start": 210.8,
+        "end": 211.08
+      },
+      {
+        "word": " for",
+        "start": 211.08,
+        "end": 211.24
+      },
+      {
+        "word": " the",
+        "start": 211.24,
+        "end": 211.48
+      },
+      {
+        "word": " cetinum",
+        "start": 211.48,
+        "end": 211.86
+      },
+      {
+        "word": " because",
+        "start": 211.86,
+        "end": 212.28
+      },
+      {
+        "word": " we",
+        "start": 212.28,
+        "end": 212.46
+      },
+      {
+        "word": " were",
+        "start": 212.46,
+        "end": 212.62
+      },
+      {
+        "word": " old",
+        "start": 212.62,
+        "end": 212.88
+      },
+      {
+        "word": " friends.",
+        "start": 212.88,
+        "end": 213.28
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "start": 213.82,
+    "end": 215.48,
+    "text": "Anyway, I fancied some myself.",
+    "words": [
+      {
+        "word": " Anyway,",
+        "start": 213.82,
+        "end": 214.3
+      },
+      {
+        "word": " I",
+        "start": 214.4,
+        "end": 214.54
+      },
+      {
+        "word": " fancied",
+        "start": 214.54,
+        "end": 214.84
+      },
+      {
+        "word": " some",
+        "start": 214.84,
+        "end": 215
+      },
+      {
+        "word": " myself.",
+        "start": 215,
+        "end": 215.48
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "start": 216.8,
+    "end": 220.14,
+    "text": "As soon as he tasted it, he knew he was being bribed.",
+    "words": [
+      {
+        "word": " As",
+        "start": 216.8,
+        "end": 216.94
+      },
+      {
+        "word": " soon",
+        "start": 216.94,
+        "end": 217.14
+      },
+      {
+        "word": " as",
+        "start": 217.14,
+        "end": 217.26
+      },
+      {
+        "word": " he",
+        "start": 217.26,
+        "end": 217.36
+      },
+      {
+        "word": " tasted",
+        "start": 217.36,
+        "end": 217.68
+      },
+      {
+        "word": " it,",
+        "start": 217.68,
+        "end": 218.1
+      },
+      {
+        "word": " he",
+        "start": 218.28,
+        "end": 218.4
+      },
+      {
+        "word": " knew",
+        "start": 218.4,
+        "end": 218.58
+      },
+      {
+        "word": " he",
+        "start": 218.58,
+        "end": 218.76
+      },
+      {
+        "word": " was",
+        "start": 218.76,
+        "end": 218.88
+      },
+      {
+        "word": " being",
+        "start": 218.88,
+        "end": 219.3
+      },
+      {
+        "word": " bribed.",
+        "start": 219.3,
+        "end": 220.14
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "start": 220.76,
+    "end": 221.7,
+    "text": "He said nothing.",
+    "words": [
+      {
+        "word": " He",
+        "start": 220.76,
+        "end": 221.06
+      },
+      {
+        "word": " said",
+        "start": 221.06,
+        "end": 221.3
+      },
+      {
+        "word": " nothing.",
+        "start": 221.3,
+        "end": 221.7
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "start": 222.62,
+    "end": 224.04,
+    "text": "We drained several cups.",
+    "words": [
+      {
+        "word": " We",
+        "start": 222.62,
+        "end": 222.9
+      },
+      {
+        "word": " drained",
+        "start": 222.9,
+        "end": 223.2
+      },
+      {
+        "word": " several",
+        "start": 223.2,
+        "end": 223.64
+      },
+      {
+        "word": " cups.",
+        "start": 223.64,
+        "end": 224.04
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "start": 224.98,
+    "end": 227.68,
+    "text": "The time came when a chat seemed unavoidable.",
+    "words": [
+      {
+        "word": " The",
+        "start": 224.98,
+        "end": 225.2
+      },
+      {
+        "word": " time",
+        "start": 225.2,
+        "end": 225.4
+      },
+      {
+        "word": " came",
+        "start": 225.4,
+        "end": 225.82
+      },
+      {
+        "word": " when",
+        "start": 225.82,
+        "end": 226.16
+      },
+      {
+        "word": " a",
+        "start": 226.16,
+        "end": 226.4
+      },
+      {
+        "word": " chat",
+        "start": 226.4,
+        "end": 226.56
+      },
+      {
+        "word": " seemed",
+        "start": 226.56,
+        "end": 226.9
+      },
+      {
+        "word": " unavoidable.",
+        "start": 226.9,
+        "end": 227.68
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "start": 229.06,
+    "end": 234.14,
+    "text": "Listen, he broached, there's a hue and cry for a little gold hemmed skirt who was lifted",
+    "words": [
+      {
+        "word": " Listen,",
+        "start": 229.06,
+        "end": 229.54
+      },
+      {
+        "word": " he",
+        "start": 229.9,
+        "end": 230.14
+      },
+      {
+        "word": " broached,",
+        "start": 230.14,
+        "end": 230.5
+      },
+      {
+        "word": " there's",
+        "start": 230.74,
+        "end": 231.08
+      },
+      {
+        "word": " a",
+        "start": 231.08,
+        "end": 231.24
+      },
+      {
+        "word": " hue",
+        "start": 231.24,
+        "end": 231.38
+      },
+      {
+        "word": " and",
+        "start": 231.38,
+        "end": 231.7
+      },
+      {
+        "word": " cry",
+        "start": 231.7,
+        "end": 231.86
+      },
+      {
+        "word": " for",
+        "start": 231.86,
+        "end": 232.06
+      },
+      {
+        "word": " a",
+        "start": 232.06,
+        "end": 232.22
+      },
+      {
+        "word": " little",
+        "start": 232.22,
+        "end": 232.44
+      },
+      {
+        "word": " gold",
+        "start": 232.44,
+        "end": 232.82
+      },
+      {
+        "word": " hemmed",
+        "start": 232.82,
+        "end": 233.3
+      },
+      {
+        "word": " skirt",
+        "start": 233.3,
+        "end": 233.5
+      },
+      {
+        "word": " who",
+        "start": 233.5,
+        "end": 233.7
+      },
+      {
+        "word": " was",
+        "start": 233.7,
+        "end": 233.88
+      },
+      {
+        "word": " lifted",
+        "start": 233.88,
+        "end": 234.14
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "start": 234.14,
+    "end": 235.86,
+    "text": "from a senator's house this morning.",
+    "words": [
+      {
+        "word": " from",
+        "start": 234.14,
+        "end": 234.42
+      },
+      {
+        "word": " a",
+        "start": 234.42,
+        "end": 234.62
+      },
+      {
+        "word": " senator's",
+        "start": 234.62,
+        "end": 235.08
+      },
+      {
+        "word": " house",
+        "start": 235.08,
+        "end": 235.18
+      },
+      {
+        "word": " this",
+        "start": 235.18,
+        "end": 235.48
+      },
+      {
+        "word": " morning.",
+        "start": 235.48,
+        "end": 235.86
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "start": 236.44,
+    "end": 237.74,
+    "text": "Don't ask me why.",
+    "words": [
+      {
+        "word": " Don't",
+        "start": 236.44,
+        "end": 236.74
+      },
+      {
+        "word": " ask",
+        "start": 236.74,
+        "end": 237
+      },
+      {
+        "word": " me",
+        "start": 237,
+        "end": 237.28
+      },
+      {
+        "word": " why.",
+        "start": 237.28,
+        "end": 237.74
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "start": 239.02,
+    "end": 243.26,
+    "text": "Want me to keep an eye out, I suggested, perking up cheerily, though I could see he was not",
+    "words": [
+      {
+        "word": " Want",
+        "start": 239.02,
+        "end": 239.2
+      },
+      {
+        "word": " me",
+        "start": 239.2,
+        "end": 239.34
+      },
+      {
+        "word": " to",
+        "start": 239.34,
+        "end": 239.5
+      },
+      {
+        "word": " keep",
+        "start": 239.5,
+        "end": 239.64
+      },
+      {
+        "word": " an",
+        "start": 239.64,
+        "end": 239.82
+      },
+      {
+        "word": " eye",
+        "start": 239.82,
+        "end": 239.96
+      },
+      {
+        "word": " out,",
+        "start": 239.96,
+        "end": 240.2
+      },
+      {
+        "word": " I",
+        "start": 240.28,
+        "end": 240.5
+      },
+      {
+        "word": " suggested,",
+        "start": 240.5,
+        "end": 240.86
+      },
+      {
+        "word": " perking",
+        "start": 241.04,
+        "end": 241.28
+      },
+      {
+        "word": " up",
+        "start": 241.28,
+        "end": 241.54
+      },
+      {
+        "word": " cheerily,",
+        "start": 241.54,
+        "end": 241.98
+      },
+      {
+        "word": " though",
+        "start": 242.44,
+        "end": 242.64
+      },
+      {
+        "word": " I",
+        "start": 242.64,
+        "end": 242.74
+      },
+      {
+        "word": " could",
+        "start": 242.74,
+        "end": 242.9
+      },
+      {
+        "word": " see",
+        "start": 242.9,
+        "end": 243.06
+      },
+      {
+        "word": " he",
+        "start": 243.06,
+        "end": 243.2
+      },
+      {
+        "word": " was",
+        "start": 243.2,
+        "end": 243.26
+      },
+      {
+        "word": " not",
+        "start": 243.26,
+        "end": 243.26
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "start": 243.26,
+    "end": 243.92,
+    "text": "deceived.",
+    "words": [
+      {
+        "word": " deceived.",
+        "start": 243.26,
+        "end": 243.92
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "start": 245.14,
+    "end": 246.42,
+    "text": "Eris, is she?",
+    "words": [
+      {
+        "word": " Eris,",
+        "start": 245.14,
+        "end": 245.72
+      },
+      {
+        "word": " is",
+        "start": 245.84,
+        "end": 246.1
+      },
+      {
+        "word": " she?",
+        "start": 246.1,
+        "end": 246.42
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "start": 247.08,
+    "end": 248.34,
+    "text": "Shut up, Falco.",
+    "words": [
+      {
+        "word": " Shut",
+        "start": 247.08,
+        "end": 247.54
+      },
+      {
+        "word": " up,",
+        "start": 247.54,
+        "end": 247.8
+      },
+      {
+        "word": " Falco.",
+        "start": 248.06,
+        "end": 248.34
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "start": 249.1,
+    "end": 253.88,
+    "text": "She was spotted later in the clutch of some slavering ghoul whose description uncannily",
+    "words": [
+      {
+        "word": " She",
+        "start": 249.1,
+        "end": 249.4
+      },
+      {
+        "word": " was",
+        "start": 249.4,
+        "end": 249.64
+      },
+      {
+        "word": " spotted",
+        "start": 249.64,
+        "end": 249.94
+      },
+      {
+        "word": " later",
+        "start": 249.94,
+        "end": 250.28
+      },
+      {
+        "word": " in",
+        "start": 250.28,
+        "end": 250.46
+      },
+      {
+        "word": " the",
+        "start": 250.46,
+        "end": 250.64
+      },
+      {
+        "word": " clutch",
+        "start": 250.64,
+        "end": 250.8
+      },
+      {
+        "word": " of",
+        "start": 250.8,
+        "end": 250.96
+      },
+      {
+        "word": " some",
+        "start": 250.96,
+        "end": 251.4
+      },
+      {
+        "word": " slavering",
+        "start": 251.4,
+        "end": 252.02
+      },
+      {
+        "word": " ghoul",
+        "start": 252.02,
+        "end": 252.3
+      },
+      {
+        "word": " whose",
+        "start": 252.3,
+        "end": 252.48
+      },
+      {
+        "word": " description",
+        "start": 252.48,
+        "end": 253.12
+      },
+      {
+        "word": " uncannily",
+        "start": 253.12,
+        "end": 253.88
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "start": 253.88,
+    "end": 254.82,
+    "text": "fits yours.",
+    "words": [
+      {
+        "word": " fits",
+        "start": 253.88,
+        "end": 254.22
+      },
+      {
+        "word": " yours.",
+        "start": 254.22,
+        "end": 254.82
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "start": 255.6,
+    "end": 257.5,
+    "text": "Her name is Sasha Camelina.",
+    "words": [
+      {
+        "word": " Her",
+        "start": 255.6,
+        "end": 255.84
+      },
+      {
+        "word": " name",
+        "start": 255.84,
+        "end": 256.12
+      },
+      {
+        "word": " is",
+        "start": 256.12,
+        "end": 256.44
+      },
+      {
+        "word": " Sasha",
+        "start": 256.44,
+        "end": 256.82
+      },
+      {
+        "word": " Camelina.",
+        "start": 256.82,
+        "end": 257.5
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "start": 257.74,
+    "end": 262.86,
+    "text": "She's strictly off limits, and I want to put back where she came from before we have some",
+    "words": [
+      {
+        "word": " She's",
+        "start": 257.74,
+        "end": 258.14
+      },
+      {
+        "word": " strictly",
+        "start": 258.14,
+        "end": 258.44
+      },
+      {
+        "word": " off",
+        "start": 258.44,
+        "end": 258.76
+      },
+      {
+        "word": " limits,",
+        "start": 258.76,
+        "end": 259.14
+      },
+      {
+        "word": " and",
+        "start": 259.38,
+        "end": 259.6
+      },
+      {
+        "word": " I",
+        "start": 259.6,
+        "end": 259.74
+      },
+      {
+        "word": " want",
+        "start": 259.74,
+        "end": 259.9
+      },
+      {
+        "word": " to",
+        "start": 259.9,
+        "end": 260.1
+      },
+      {
+        "word": " put",
+        "start": 260.1,
+        "end": 260.24
+      },
+      {
+        "word": " back",
+        "start": 260.24,
+        "end": 260.48
+      },
+      {
+        "word": " where",
+        "start": 260.48,
+        "end": 260.68
+      },
+      {
+        "word": " she",
+        "start": 260.68,
+        "end": 260.92
+      },
+      {
+        "word": " came",
+        "start": 260.92,
+        "end": 261.24
+      },
+      {
+        "word": " from",
+        "start": 261.24,
+        "end": 261.72
+      },
+      {
+        "word": " before",
+        "start": 261.72,
+        "end": 262.12
+      },
+      {
+        "word": " we",
+        "start": 262.12,
+        "end": 262.32
+      },
+      {
+        "word": " have",
+        "start": 262.32,
+        "end": 262.48
+      },
+      {
+        "word": " some",
+        "start": 262.48,
+        "end": 262.86
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "start": 262.86,
+    "end": 268.14,
+    "text": "pretas pet helpers crawling all over my patch, passing rude remarks on the way I run the",
+    "words": [
+      {
+        "word": " pretas",
+        "start": 262.86,
+        "end": 263.2
+      },
+      {
+        "word": " pet",
+        "start": 263.2,
+        "end": 263.48
+      },
+      {
+        "word": " helpers",
+        "start": 263.48,
+        "end": 264
+      },
+      {
+        "word": " crawling",
+        "start": 264,
+        "end": 264.38
+      },
+      {
+        "word": " all",
+        "start": 264.38,
+        "end": 264.76
+      },
+      {
+        "word": " over",
+        "start": 264.76,
+        "end": 264.94
+      },
+      {
+        "word": " my",
+        "start": 264.94,
+        "end": 265.34
+      },
+      {
+        "word": " patch,",
+        "start": 265.34,
+        "end": 265.64
+      },
+      {
+        "word": " passing",
+        "start": 266.1,
+        "end": 266.38
+      },
+      {
+        "word": " rude",
+        "start": 266.38,
+        "end": 266.74
+      },
+      {
+        "word": " remarks",
+        "start": 266.74,
+        "end": 267.12
+      },
+      {
+        "word": " on",
+        "start": 267.12,
+        "end": 267.3
+      },
+      {
+        "word": " the",
+        "start": 267.3,
+        "end": 267.44
+      },
+      {
+        "word": " way",
+        "start": 267.44,
+        "end": 267.54
+      },
+      {
+        "word": " I",
+        "start": 267.54,
+        "end": 267.76
+      },
+      {
+        "word": " run",
+        "start": 267.76,
+        "end": 267.9
+      },
+      {
+        "word": " the",
+        "start": 267.9,
+        "end": 268.14
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "start": 268.14,
+    "end": 268.5,
+    "text": "markets.",
+    "words": [
+      {
+        "word": " markets.",
+        "start": 268.14,
+        "end": 268.5
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "start": 269.54,
+    "end": 270.54,
+    "text": "That her in there.",
+    "words": [
+      {
+        "word": " That",
+        "start": 269.54,
+        "end": 269.76
+      },
+      {
+        "word": " her",
+        "start": 269.76,
+        "end": 269.96
+      },
+      {
+        "word": " in",
+        "start": 269.96,
+        "end": 270.16
+      },
+      {
+        "word": " there.",
+        "start": 270.16,
+        "end": 270.54
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "start": 271.24,
+    "end": 273.06,
+    "text": "He nodded at the bedroom doorway.",
+    "words": [
+      {
+        "word": " He",
+        "start": 271.24,
+        "end": 271.76
+      },
+      {
+        "word": " nodded",
+        "start": 271.76,
+        "end": 272.08
+      },
+      {
+        "word": " at",
+        "start": 272.08,
+        "end": 272.18
+      },
+      {
+        "word": " the",
+        "start": 272.18,
+        "end": 272.32
+      },
+      {
+        "word": " bedroom",
+        "start": 272.32,
+        "end": 272.66
+      },
+      {
+        "word": " doorway.",
+        "start": 272.66,
+        "end": 273.06
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "start": 274.16,
+    "end": 275.84,
+    "text": "I owned up meekly.",
+    "words": [
+      {
+        "word": " I",
+        "start": 274.16,
+        "end": 274.68
+      },
+      {
+        "word": " owned",
+        "start": 274.68,
+        "end": 274.9
+      },
+      {
+        "word": " up",
+        "start": 274.9,
+        "end": 275.22
+      },
+      {
+        "word": " meekly.",
+        "start": 275.22,
+        "end": 275.84
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "start": 276.14,
+    "end": 277.32,
+    "text": "Imagine it must be.",
+    "words": [
+      {
+        "word": " Imagine",
+        "start": 276.14,
+        "end": 276.58
+      },
+      {
+        "word": " it",
+        "start": 276.58,
+        "end": 276.72
+      },
+      {
+        "word": " must",
+        "start": 276.72,
+        "end": 276.96
+      },
+      {
+        "word": " be.",
+        "start": 276.96,
+        "end": 277.32
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "start": 278.18,
+    "end": 279.22,
+    "text": "I liked him.",
+    "words": [
+      {
+        "word": " I",
+        "start": 278.18,
+        "end": 278.58
+      },
+      {
+        "word": " liked",
+        "start": 278.58,
+        "end": 278.78
+      },
+      {
+        "word": " him.",
+        "start": 278.78,
+        "end": 279.22
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "start": 279.42,
+    "end": 280.52,
+    "text": "He was good at his job.",
+    "words": [
+      {
+        "word": " He",
+        "start": 279.42,
+        "end": 279.58
+      },
+      {
+        "word": " was",
+        "start": 279.58,
+        "end": 279.74
+      },
+      {
+        "word": " good",
+        "start": 279.74,
+        "end": 279.9
+      },
+      {
+        "word": " at",
+        "start": 279.9,
+        "end": 280.06
+      },
+      {
+        "word": " his",
+        "start": 280.06,
+        "end": 280.28
+      },
+      {
+        "word": " job.",
+        "start": 280.28,
+        "end": 280.52
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "start": 281.18,
+    "end": 283.08,
+    "text": "We both knew he'd found his lost kitten.",
+    "words": [
+      {
+        "word": " We",
+        "start": 281.18,
+        "end": 281.38
+      },
+      {
+        "word": " both",
+        "start": 281.38,
+        "end": 281.62
+      },
+      {
+        "word": " knew",
+        "start": 281.62,
+        "end": 281.82
+      },
+      {
+        "word": " he'd",
+        "start": 281.82,
+        "end": 282.18
+      },
+      {
+        "word": " found",
+        "start": 282.18,
+        "end": 282.38
+      },
+      {
+        "word": " his",
+        "start": 282.38,
+        "end": 282.58
+      },
+      {
+        "word": " lost",
+        "start": 282.58,
+        "end": 282.82
+      },
+      {
+        "word": " kitten.",
+        "start": 282.82,
+        "end": 283.08
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "start": 284.28000000000003,
+    "end": 288.62,
+    "text": "I explained about her in a way that laid a great deal of emphasis on my gallant role",
+    "words": [
+      {
+        "word": " I",
+        "start": 284.28000000000003,
+        "end": 284.8
+      },
+      {
+        "word": " explained",
+        "start": 284.8,
+        "end": 285.12
+      },
+      {
+        "word": " about",
+        "start": 285.12,
+        "end": 285.36
+      },
+      {
+        "word": " her",
+        "start": 285.36,
+        "end": 285.46
+      },
+      {
+        "word": " in",
+        "start": 285.46,
+        "end": 285.58
+      },
+      {
+        "word": " a",
+        "start": 285.58,
+        "end": 285.68
+      },
+      {
+        "word": " way",
+        "start": 285.68,
+        "end": 285.76
+      },
+      {
+        "word": " that",
+        "start": 285.76,
+        "end": 285.98
+      },
+      {
+        "word": " laid",
+        "start": 285.98,
+        "end": 286.12
+      },
+      {
+        "word": " a",
+        "start": 286.12,
+        "end": 286.28
+      },
+      {
+        "word": " great",
+        "start": 286.28,
+        "end": 286.48
+      },
+      {
+        "word": " deal",
+        "start": 286.48,
+        "end": 286.7
+      },
+      {
+        "word": " of",
+        "start": 286.7,
+        "end": 286.92
+      },
+      {
+        "word": " emphasis",
+        "start": 286.92,
+        "end": 287.34
+      },
+      {
+        "word": " on",
+        "start": 287.34,
+        "end": 287.56
+      },
+      {
+        "word": " my",
+        "start": 287.56,
+        "end": 287.9
+      },
+      {
+        "word": " gallant",
+        "start": 287.9,
+        "end": 288.34
+      },
+      {
+        "word": " role",
+        "start": 288.34,
+        "end": 288.62
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "start": 288.62,
+    "end": 294.86,
+    "text": "as rescuer of frantic nobility and, in view of Petro's earlier remark, less on me wrecking",
+    "words": [
+      {
+        "word": " as",
+        "start": 288.62,
+        "end": 288.9
+      },
+      {
+        "word": " rescuer",
+        "start": 288.9,
+        "end": 289.42
+      },
+      {
+        "word": " of",
+        "start": 289.42,
+        "end": 289.7
+      },
+      {
+        "word": " frantic",
+        "start": 289.7,
+        "end": 290
+      },
+      {
+        "word": " nobility",
+        "start": 290,
+        "end": 290.52
+      },
+      {
+        "word": " and,",
+        "start": 290.52,
+        "end": 291.32
+      },
+      {
+        "word": " in",
+        "start": 291.42,
+        "end": 291.68
+      },
+      {
+        "word": " view",
+        "start": 291.68,
+        "end": 291.82
+      },
+      {
+        "word": " of",
+        "start": 291.82,
+        "end": 292
+      },
+      {
+        "word": " Petro's",
+        "start": 292,
+        "end": 292.46
+      },
+      {
+        "word": " earlier",
+        "start": 292.46,
+        "end": 292.68
+      },
+      {
+        "word": " remark,",
+        "start": 292.68,
+        "end": 293
+      },
+      {
+        "word": " less",
+        "start": 293.66,
+        "end": 293.86
+      },
+      {
+        "word": " on",
+        "start": 293.86,
+        "end": 294.1
+      },
+      {
+        "word": " me",
+        "start": 294.1,
+        "end": 294.46
+      },
+      {
+        "word": " wrecking",
+        "start": 294.46,
+        "end": 294.86
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "start": 294.86,
+    "end": 295.66,
+    "text": "market stalls.",
+    "words": [
+      {
+        "word": " market",
+        "start": 294.86,
+        "end": 295.26
+      },
+      {
+        "word": " stalls.",
+        "start": 295.26,
+        "end": 295.66
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "start": 296.21999999999997,
+    "end": 299.66,
+    "text": "It seemed best not to place him in any awkward dilemmas.",
+    "words": [
+      {
+        "word": " It",
+        "start": 296.21999999999997,
+        "end": 296.7
+      },
+      {
+        "word": " seemed",
+        "start": 296.7,
+        "end": 297.04
+      },
+      {
+        "word": " best",
+        "start": 297.04,
+        "end": 297.3
+      },
+      {
+        "word": " not",
+        "start": 297.3,
+        "end": 297.54
+      },
+      {
+        "word": " to",
+        "start": 297.54,
+        "end": 297.74
+      },
+      {
+        "word": " place",
+        "start": 297.74,
+        "end": 297.88
+      },
+      {
+        "word": " him",
+        "start": 297.88,
+        "end": 298.06
+      },
+      {
+        "word": " in",
+        "start": 298.06,
+        "end": 298.14
+      },
+      {
+        "word": " any",
+        "start": 298.14,
+        "end": 298.48
+      },
+      {
+        "word": " awkward",
+        "start": 298.48,
+        "end": 298.86
+      },
+      {
+        "word": " dilemmas.",
+        "start": 298.86,
+        "end": 299.66
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "start": 300.76,
+    "end": 303.08,
+    "text": "I'll have to take her back, Petro said.",
+    "words": [
+      {
+        "word": " I'll",
+        "start": 300.76,
+        "end": 301
+      },
+      {
+        "word": " have",
+        "start": 301,
+        "end": 301.16
+      },
+      {
+        "word": " to",
+        "start": 301.16,
+        "end": 301.44
+      },
+      {
+        "word": " take",
+        "start": 301.44,
+        "end": 301.62
+      },
+      {
+        "word": " her",
+        "start": 301.62,
+        "end": 301.82
+      },
+      {
+        "word": " back,",
+        "start": 301.82,
+        "end": 302.22
+      },
+      {
+        "word": " Petro",
+        "start": 302.62,
+        "end": 302.86
+      },
+      {
+        "word": " said.",
+        "start": 302.86,
+        "end": 303.08
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "start": 304.16,
+    "end": 305.24,
+    "text": "He was nicely drunk.",
+    "words": [
+      {
+        "word": " He",
+        "start": 304.16,
+        "end": 304.26
+      },
+      {
+        "word": " was",
+        "start": 304.26,
+        "end": 304.48
+      },
+      {
+        "word": " nicely",
+        "start": 304.48,
+        "end": 304.86
+      },
+      {
+        "word": " drunk.",
+        "start": 304.86,
+        "end": 305.24
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "start": 306.38,
+    "end": 308.06,
+    "text": "I'll take her, I promised.",
+    "words": [
+      {
+        "word": " I'll",
+        "start": 306.38,
+        "end": 306.84
+      },
+      {
+        "word": " take",
+        "start": 306.84,
+        "end": 307.06
+      },
+      {
+        "word": " her,",
+        "start": 307.06,
+        "end": 307.44
+      },
+      {
+        "word": " I",
+        "start": 307.56,
+        "end": 307.78
+      },
+      {
+        "word": " promised.",
+        "start": 307.78,
+        "end": 308.06
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "start": 309.1,
+    "end": 309.86,
+    "text": "Do me a favour.",
+    "words": [
+      {
+        "word": " Do",
+        "start": 309.1,
+        "end": 309.28
+      },
+      {
+        "word": " me",
+        "start": 309.28,
+        "end": 309.5
+      },
+      {
+        "word": " a",
+        "start": 309.5,
+        "end": 309.62
+      },
+      {
+        "word": " favour.",
+        "start": 309.62,
+        "end": 309.86
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "start": 310.42,
+    "end": 313.14,
+    "text": "If you go, it's thanks for doing your duty, officer.",
+    "words": [
+      {
+        "word": " If",
+        "start": 310.42,
+        "end": 310.58
+      },
+      {
+        "word": " you",
+        "start": 310.58,
+        "end": 310.82
+      },
+      {
+        "word": " go,",
+        "start": 310.82,
+        "end": 310.98
+      },
+      {
+        "word": " it's",
+        "start": 311.12,
+        "end": 311.54
+      },
+      {
+        "word": " thanks",
+        "start": 311.54,
+        "end": 311.86
+      },
+      {
+        "word": " for",
+        "start": 311.86,
+        "end": 312.06
+      },
+      {
+        "word": " doing",
+        "start": 312.06,
+        "end": 312.3
+      },
+      {
+        "word": " your",
+        "start": 312.3,
+        "end": 312.5
+      },
+      {
+        "word": " duty,",
+        "start": 312.5,
+        "end": 312.78
+      },
+      {
+        "word": " officer.",
+        "start": 312.9,
+        "end": 313.14
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "start": 313.36,
+    "end": 315.76,
+    "text": "For me, they may stretch to a small reward.",
+    "words": [
+      {
+        "word": " For",
+        "start": 313.36,
+        "end": 313.5
+      },
+      {
+        "word": " me,",
+        "start": 313.5,
+        "end": 313.98
+      },
+      {
+        "word": " they",
+        "start": 314.22,
+        "end": 314.38
+      },
+      {
+        "word": " may",
+        "start": 314.38,
+        "end": 314.58
+      },
+      {
+        "word": " stretch",
+        "start": 314.58,
+        "end": 314.86
+      },
+      {
+        "word": " to",
+        "start": 314.86,
+        "end": 315.04
+      },
+      {
+        "word": " a",
+        "start": 315.04,
+        "end": 315.14
+      },
+      {
+        "word": " small",
+        "start": 315.14,
+        "end": 315.36
+      },
+      {
+        "word": " reward.",
+        "start": 315.36,
+        "end": 315.76
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "start": 316.68,
+    "end": 317.02,
+    "text": "Split.",
+    "words": [
+      {
+        "word": " Split.",
+        "start": 316.68,
+        "end": 317.02
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "start": 318.66,
+    "end": 322.18,
+    "text": "Lubricated by a good wine, my crony Petronius becomes a gentleman.",
+    "words": [
+      {
+        "word": " Lubricated",
+        "start": 318.66,
+        "end": 319.14
+      },
+      {
+        "word": " by",
+        "start": 319.14,
+        "end": 319.36
+      },
+      {
+        "word": " a",
+        "start": 319.36,
+        "end": 319.5
+      },
+      {
+        "word": " good",
+        "start": 319.5,
+        "end": 319.68
+      },
+      {
+        "word": " wine,",
+        "start": 319.68,
+        "end": 320.04
+      },
+      {
+        "word": " my",
+        "start": 320.4,
+        "end": 320.48
+      },
+      {
+        "word": " crony",
+        "start": 320.48,
+        "end": 320.74
+      },
+      {
+        "word": " Petronius",
+        "start": 320.74,
+        "end": 321.28
+      },
+      {
+        "word": " becomes",
+        "start": 321.28,
+        "end": 321.62
+      },
+      {
+        "word": " a",
+        "start": 321.62,
+        "end": 321.84
+      },
+      {
+        "word": " gentleman.",
+        "start": 321.84,
+        "end": 322.18
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "start": 322.18,
+    "end": 327.64,
+    "text": "Not many men are so considerate of the profit and loss columns of M. Didius Falco's personal",
+    "words": [
+      {
+        "word": " Not",
+        "start": 322.18,
+        "end": 323.04
+      },
+      {
+        "word": " many",
+        "start": 323.04,
+        "end": 323.38
+      },
+      {
+        "word": " men",
+        "start": 323.38,
+        "end": 323.58
+      },
+      {
+        "word": " are",
+        "start": 323.58,
+        "end": 323.74
+      },
+      {
+        "word": " so",
+        "start": 323.74,
+        "end": 323.92
+      },
+      {
+        "word": " considerate",
+        "start": 323.92,
+        "end": 324.4
+      },
+      {
+        "word": " of",
+        "start": 324.4,
+        "end": 324.56
+      },
+      {
+        "word": " the",
+        "start": 324.56,
+        "end": 324.82
+      },
+      {
+        "word": " profit",
+        "start": 324.82,
+        "end": 324.98
+      },
+      {
+        "word": " and",
+        "start": 324.98,
+        "end": 325.12
+      },
+      {
+        "word": " loss",
+        "start": 325.12,
+        "end": 325.4
+      },
+      {
+        "word": " columns",
+        "start": 325.4,
+        "end": 325.72
+      },
+      {
+        "word": " of",
+        "start": 325.72,
+        "end": 326.04
+      },
+      {
+        "word": " M.",
+        "start": 326.04,
+        "end": 326.36
+      },
+      {
+        "word": " Didius",
+        "start": 326.4,
+        "end": 326.74
+      },
+      {
+        "word": " Falco's",
+        "start": 326.74,
+        "end": 327.32
+      },
+      {
+        "word": " personal",
+        "start": 327.32,
+        "end": 327.64
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "start": 327.64,
+    "end": 328.04,
+    "text": "accounts.",
+    "words": [
+      {
+        "word": " accounts.",
+        "start": 327.64,
+        "end": 328.04
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "start": 330.42,
+    "end": 332.74,
+    "text": "Oh, he tipped his cup wryly.",
+    "words": [
+      {
+        "word": " Oh,",
+        "start": 330.42,
+        "end": 330.94
+      },
+      {
+        "word": " he",
+        "start": 330.94,
+        "end": 331.46
+      },
+      {
+        "word": " tipped",
+        "start": 331.46,
+        "end": 331.7
+      },
+      {
+        "word": " his",
+        "start": 331.7,
+        "end": 331.96
+      },
+      {
+        "word": " cup",
+        "start": 331.96,
+        "end": 332.2
+      },
+      {
+        "word": " wryly.",
+        "start": 332.2,
+        "end": 332.74
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "start": 333.34000000000003,
+    "end": 334.36,
+    "text": "This'll do me.",
+    "words": [
+      {
+        "word": " This'll",
+        "start": 333.34000000000003,
+        "end": 333.86
+      },
+      {
+        "word": " do",
+        "start": 333.86,
+        "end": 334
+      },
+      {
+        "word": " me.",
+        "start": 334,
+        "end": 334.36
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "start": 334.98,
+    "end": 335.9,
+    "text": "Give me your word.",
+    "words": [
+      {
+        "word": " Give",
+        "start": 334.98,
+        "end": 335.18
+      },
+      {
+        "word": " me",
+        "start": 335.18,
+        "end": 335.42
+      },
+      {
+        "word": " your",
+        "start": 335.42,
+        "end": 335.64
+      },
+      {
+        "word": " word.",
+        "start": 335.64,
+        "end": 335.9
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "start": 336.84,
+    "end": 339.48,
+    "text": "I gave him my word and the rest of the set in them.",
+    "words": [
+      {
+        "word": " I",
+        "start": 336.84,
+        "end": 337.1
+      },
+      {
+        "word": " gave",
+        "start": 337.1,
+        "end": 337.28
+      },
+      {
+        "word": " him",
+        "start": 337.28,
+        "end": 337.46
+      },
+      {
+        "word": " my",
+        "start": 337.46,
+        "end": 337.68
+      },
+      {
+        "word": " word",
+        "start": 337.68,
+        "end": 338.04
+      },
+      {
+        "word": " and",
+        "start": 338.04,
+        "end": 338.46
+      },
+      {
+        "word": " the",
+        "start": 338.46,
+        "end": 338.54
+      },
+      {
+        "word": " rest",
+        "start": 338.54,
+        "end": 338.7
+      },
+      {
+        "word": " of",
+        "start": 338.7,
+        "end": 338.88
+      },
+      {
+        "word": " the",
+        "start": 338.88,
+        "end": 339.02
+      },
+      {
+        "word": " set",
+        "start": 339.02,
+        "end": 339.18
+      },
+      {
+        "word": " in",
+        "start": 339.18,
+        "end": 339.24
+      },
+      {
+        "word": " them.",
+        "start": 339.24,
+        "end": 339.48
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "start": 339.76,
+    "end": 340.82,
+    "text": "Then he went away happy.",
+    "words": [
+      {
+        "word": " Then",
+        "start": 339.76,
+        "end": 339.96
+      },
+      {
+        "word": " he",
+        "start": 339.96,
+        "end": 340.04
+      },
+      {
+        "word": " went",
+        "start": 340.04,
+        "end": 340.2
+      },
+      {
+        "word": " away",
+        "start": 340.2,
+        "end": 340.46
+      },
+      {
+        "word": " happy.",
+        "start": 340.46,
+        "end": 340.82
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "start": 341.76,
+    "end": 344.68,
+    "text": "I had no real intention of giving her back.",
+    "words": [
+      {
+        "word": " I",
+        "start": 341.76,
+        "end": 342.28
+      },
+      {
+        "word": " had",
+        "start": 342.28,
+        "end": 342.48
+      },
+      {
+        "word": " no",
+        "start": 342.48,
+        "end": 342.78
+      },
+      {
+        "word": " real",
+        "start": 342.78,
+        "end": 343.04
+      },
+      {
+        "word": " intention",
+        "start": 343.04,
+        "end": 343.58
+      },
+      {
+        "word": " of",
+        "start": 343.58,
+        "end": 343.82
+      },
+      {
+        "word": " giving",
+        "start": 343.82,
+        "end": 344.04
+      },
+      {
+        "word": " her",
+        "start": 344.04,
+        "end": 344.28
+      },
+      {
+        "word": " back.",
+        "start": 344.28,
+        "end": 344.68
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "start": 345.08,
+    "end": 346.6,
+    "text": "Well, not yet.",
+    "words": [
+      {
+        "word": " Well,",
+        "start": 345.08,
+        "end": 345.52
+      },
+      {
+        "word": " not",
+        "start": 345.92,
+        "end": 346.18
+      },
+      {
+        "word": " yet.",
+        "start": 346.18,
+        "end": 346.6
+      }
+    ]
+  }
+]

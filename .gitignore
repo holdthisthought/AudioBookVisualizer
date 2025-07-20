@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+app.log
+transcribe_log.txt
+
+# Development files
+*test*
+*check*
+*fix*
+*setup*
+*rebuild*
+*restart*
+*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AI workspace - keep directory but ignore contents
+whisper-service/ai-workspace/*
+!whisper-service/ai-workspace/.gitkeep

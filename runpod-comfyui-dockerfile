@@ -1,0 +1,43 @@
+FROM nvidia/cuda:12.1.0-base-ubuntu22.04
+
+# Install Python and dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    git \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /workspace
+
+# Clone ComfyUI
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git
+
+WORKDIR /workspace/ComfyUI
+
+# Install Python dependencies
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+RUN pip3 install -r requirements.txt
+
+# Install custom nodes for FLUX
+RUN cd custom_nodes && \
+    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git && \
+    cd ComfyUI-Flux-Kontext && \
+    pip3 install -r requirements.txt
+
+# Create models directories
+RUN mkdir -p models/unet models/clip models/vae
+
+# Download models (optional - you can also mount them as volumes)
+# Note: You'll need to add commands to download your specific models
+# or mount them as volumes when creating the endpoint
+
+# RunPod handler script
+COPY handler.py /workspace/handler.py
+
+# Expose ComfyUI port
+EXPOSE 8188
+
+# RunPod serverless entrypoint
+CMD ["python3", "/workspace/handler.py"]

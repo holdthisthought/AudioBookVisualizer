@@ -1,0 +1,97 @@
+/* System Monitor Footer Styles */
+.system-monitor {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
+    background: #0a0a0a;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 999; /* Just below the terminal */
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* Adjust when terminal is open */
+body.terminal-open .system-monitor {
+    bottom: 300px;
+}
+
+/* Adjust when terminal is collapsed */
+.ai-terminal.collapsed ~ .system-monitor {
+    bottom: 40px;
+}
+
+.monitor-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 140px;
+}
+
+.monitor-label {
+    color: #888;
+    font-weight: 500;
+}
+
+.monitor-value {
+    color: #fff;
+    font-family: monospace;
+    min-width: 35px;
+    text-align: right;
+    font-weight: 600;
+}
+
+.monitor-bar {
+    width: 60px;
+    height: 8px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.monitor-bar-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Remove color coding - bars will use their gradient colors */
+
+/* Memory bar color */
+#memory-bar {
+    background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+}
+
+/* CPU bar color */
+#cpu-bar {
+    background: linear-gradient(90deg, #2196f3 0%, #03a9f4 100%);
+}
+
+/* GPU bar color */
+#gpu-bar {
+    background: linear-gradient(90deg, #ff5722 0%, #ff7043 100%);
+}
+
+/* VRAM bar color */
+#vram-bar {
+    background: linear-gradient(90deg, #9c27b0 0%, #ba68c8 100%);
+}
+
+/* Adjust main container to account for system monitor */
+body #container {
+    padding-bottom: 35px;
+}
+
+body.terminal-open #container {
+    padding-bottom: 335px; /* Terminal (300px) + System Monitor (35px) */
+}
+
+body.terminal-open.terminal-collapsed #container {
+    padding-bottom: 75px; /* Terminal collapsed (40px) + System Monitor (35px) */
+}

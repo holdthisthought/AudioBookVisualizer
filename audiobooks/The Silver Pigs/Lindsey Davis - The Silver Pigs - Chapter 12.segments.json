@@ -1,0 +1,2637 @@
+[
+  {
+    "id": 0,
+    "start": 0,
+    "end": 4.66,
+    "text": "Chapter 12 It was an ingot of lead.",
+    "words": [
+      {
+        "word": " Chapter",
+        "start": 0,
+        "end": 0.8
+      },
+      {
+        "word": " 12",
+        "start": 0.8,
+        "end": 1.82
+      },
+      {
+        "word": " It",
+        "start": 1.82,
+        "end": 2.96
+      },
+      {
+        "word": " was",
+        "start": 2.96,
+        "end": 3.2
+      },
+      {
+        "word": " an",
+        "start": 3.2,
+        "end": 3.42
+      },
+      {
+        "word": " ingot",
+        "start": 3.42,
+        "end": 3.84
+      },
+      {
+        "word": " of",
+        "start": 3.84,
+        "end": 4.28
+      },
+      {
+        "word": " lead.",
+        "start": 4.28,
+        "end": 4.66
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "start": 5.72,
+    "end": 7.84,
+    "text": "It weighed two hundred Roman pounds.",
+    "words": [
+      {
+        "word": " It",
+        "start": 5.72,
+        "end": 5.8
+      },
+      {
+        "word": " weighed",
+        "start": 5.8,
+        "end": 6.18
+      },
+      {
+        "word": " two",
+        "start": 6.18,
+        "end": 6.64
+      },
+      {
+        "word": " hundred",
+        "start": 6.64,
+        "end": 7
+      },
+      {
+        "word": " Roman",
+        "start": 7,
+        "end": 7.38
+      },
+      {
+        "word": " pounds.",
+        "start": 7.38,
+        "end": 7.84
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "start": 9.02,
+    "end": 12.74,
+    "text": "I tried to explain once to a woman I knew how heavy that was.",
+    "words": [
+      {
+        "word": " I",
+        "start": 9.02,
+        "end": 9.24
+      },
+      {
+        "word": " tried",
+        "start": 9.24,
+        "end": 9.48
+      },
+      {
+        "word": " to",
+        "start": 9.48,
+        "end": 9.68
+      },
+      {
+        "word": " explain",
+        "start": 9.68,
+        "end": 10.02
+      },
+      {
+        "word": " once",
+        "start": 10.02,
+        "end": 10.26
+      },
+      {
+        "word": " to",
+        "start": 10.26,
+        "end": 10.44
+      },
+      {
+        "word": " a",
+        "start": 10.44,
+        "end": 10.58
+      },
+      {
+        "word": " woman",
+        "start": 10.58,
+        "end": 10.76
+      },
+      {
+        "word": " I",
+        "start": 10.76,
+        "end": 10.98
+      },
+      {
+        "word": " knew",
+        "start": 10.98,
+        "end": 11.22
+      },
+      {
+        "word": " how",
+        "start": 11.22,
+        "end": 11.64
+      },
+      {
+        "word": " heavy",
+        "start": 11.64,
+        "end": 11.92
+      },
+      {
+        "word": " that",
+        "start": 11.92,
+        "end": 12.2
+      },
+      {
+        "word": " was.",
+        "start": 12.2,
+        "end": 12.74
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "start": 13.52,
+    "end": 14.94,
+    "text": "Not a lot heavier than you.",
+    "words": [
+      {
+        "word": " Not",
+        "start": 13.52,
+        "end": 13.84
+      },
+      {
+        "word": " a",
+        "start": 13.84,
+        "end": 13.96
+      },
+      {
+        "word": " lot",
+        "start": 13.96,
+        "end": 14.08
+      },
+      {
+        "word": " heavier",
+        "start": 14.08,
+        "end": 14.36
+      },
+      {
+        "word": " than",
+        "start": 14.36,
+        "end": 14.56
+      },
+      {
+        "word": " you.",
+        "start": 14.56,
+        "end": 14.94
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "start": 15.3,
+    "end": 17.54,
+    "text": "You're a tall girl, quite a solid piece.",
+    "words": [
+      {
+        "word": " You're",
+        "start": 15.3,
+        "end": 15.6
+      },
+      {
+        "word": " a",
+        "start": 15.6,
+        "end": 15.76
+      },
+      {
+        "word": " tall",
+        "start": 15.76,
+        "end": 15.94
+      },
+      {
+        "word": " girl,",
+        "start": 15.94,
+        "end": 16.22
+      },
+      {
+        "word": " quite",
+        "start": 16.5,
+        "end": 16.76
+      },
+      {
+        "word": " a",
+        "start": 16.76,
+        "end": 17.02
+      },
+      {
+        "word": " solid",
+        "start": 17.02,
+        "end": 17.22
+      },
+      {
+        "word": " piece.",
+        "start": 17.22,
+        "end": 17.54
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "start": 17.94,
+    "end": 22.26,
+    "text": "A bridegroom could just about heave you over his threshold and not lose his silly smile.",
+    "words": [
+      {
+        "word": " A",
+        "start": 17.94,
+        "end": 18.18
+      },
+      {
+        "word": " bridegroom",
+        "start": 18.18,
+        "end": 18.64
+      },
+      {
+        "word": " could",
+        "start": 18.64,
+        "end": 18.88
+      },
+      {
+        "word": " just",
+        "start": 18.88,
+        "end": 19.12
+      },
+      {
+        "word": " about",
+        "start": 19.12,
+        "end": 19.48
+      },
+      {
+        "word": " heave",
+        "start": 19.48,
+        "end": 19.74
+      },
+      {
+        "word": " you",
+        "start": 19.74,
+        "end": 19.88
+      },
+      {
+        "word": " over",
+        "start": 19.88,
+        "end": 20.1
+      },
+      {
+        "word": " his",
+        "start": 20.1,
+        "end": 20.44
+      },
+      {
+        "word": " threshold",
+        "start": 20.44,
+        "end": 20.78
+      },
+      {
+        "word": " and",
+        "start": 20.78,
+        "end": 21
+      },
+      {
+        "word": " not",
+        "start": 21,
+        "end": 21.16
+      },
+      {
+        "word": " lose",
+        "start": 21.16,
+        "end": 21.36
+      },
+      {
+        "word": " his",
+        "start": 21.36,
+        "end": 21.56
+      },
+      {
+        "word": " silly",
+        "start": 21.56,
+        "end": 21.88
+      },
+      {
+        "word": " smile.",
+        "start": 21.88,
+        "end": 22.26
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "start": 23.54,
+    "end": 28.62,
+    "text": "The winch I was insulting happened to be a substantial armful, though by no means overweight.",
+    "words": [
+      {
+        "word": " The",
+        "start": 23.54,
+        "end": 23.72
+      },
+      {
+        "word": " winch",
+        "start": 23.72,
+        "end": 23.98
+      },
+      {
+        "word": " I",
+        "start": 23.98,
+        "end": 24
+      },
+      {
+        "word": " was",
+        "start": 24,
+        "end": 24.22
+      },
+      {
+        "word": " insulting",
+        "start": 24.22,
+        "end": 24.64
+      },
+      {
+        "word": " happened",
+        "start": 24.64,
+        "end": 25.24
+      },
+      {
+        "word": " to",
+        "start": 25.24,
+        "end": 25.42
+      },
+      {
+        "word": " be",
+        "start": 25.42,
+        "end": 25.54
+      },
+      {
+        "word": " a",
+        "start": 25.54,
+        "end": 25.66
+      },
+      {
+        "word": " substantial",
+        "start": 25.66,
+        "end": 26.32
+      },
+      {
+        "word": " armful,",
+        "start": 26.32,
+        "end": 26.9
+      },
+      {
+        "word": " though",
+        "start": 27.02,
+        "end": 27.22
+      },
+      {
+        "word": " by",
+        "start": 27.22,
+        "end": 27.46
+      },
+      {
+        "word": " no",
+        "start": 27.46,
+        "end": 27.66
+      },
+      {
+        "word": " means",
+        "start": 27.66,
+        "end": 28.1
+      },
+      {
+        "word": " overweight.",
+        "start": 28.1,
+        "end": 28.62
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "start": 29.42,
+    "end": 33.18,
+    "text": "It sounds unkind, but if you've ever tried picking up a well-fed young lady,",
+    "words": [
+      {
+        "word": " It",
+        "start": 29.279999999999998,
+        "end": 29.54
+      },
+      {
+        "word": " sounds",
+        "start": 29.54,
+        "end": 30.02
+      },
+      {
+        "word": " unkind,",
+        "start": 30.02,
+        "end": 30.54
+      },
+      {
+        "word": " but",
+        "start": 30.54,
+        "end": 30.74
+      },
+      {
+        "word": " if",
+        "start": 30.74,
+        "end": 31
+      },
+      {
+        "word": " you've",
+        "start": 31,
+        "end": 31.14
+      },
+      {
+        "word": " ever",
+        "start": 31.14,
+        "end": 31.34
+      },
+      {
+        "word": " tried",
+        "start": 31.34,
+        "end": 31.58
+      },
+      {
+        "word": " picking",
+        "start": 31.58,
+        "end": 31.84
+      },
+      {
+        "word": " up",
+        "start": 31.84,
+        "end": 32.08
+      },
+      {
+        "word": " a",
+        "start": 32.08,
+        "end": 32.18
+      },
+      {
+        "word": " well",
+        "start": 32.18,
+        "end": 32.46
+      },
+      {
+        "word": "-fed",
+        "start": 32.46,
+        "end": 32.6
+      },
+      {
+        "word": " young",
+        "start": 32.6,
+        "end": 32.84
+      },
+      {
+        "word": " lady,",
+        "start": 32.84,
+        "end": 33.18
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "start": 33.32,
+    "end": 35.68,
+    "text": "you'll appreciate the comparison was fairly exact.",
+    "words": [
+      {
+        "word": " you'll",
+        "start": 33.32,
+        "end": 33.6
+      },
+      {
+        "word": " appreciate",
+        "start": 33.6,
+        "end": 34.04
+      },
+      {
+        "word": " the",
+        "start": 34.04,
+        "end": 34.32
+      },
+      {
+        "word": " comparison",
+        "start": 34.32,
+        "end": 34.76
+      },
+      {
+        "word": " was",
+        "start": 34.76,
+        "end": 34.98
+      },
+      {
+        "word": " fairly",
+        "start": 34.98,
+        "end": 35.24
+      },
+      {
+        "word": " exact.",
+        "start": 35.24,
+        "end": 35.68
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "start": 36.2,
+    "end": 42.14,
+    "text": "In fact, lifting this dense grey slab before we knew what we were doing had left two of us with",
+    "words": [
+      {
+        "word": " In",
+        "start": 36.2,
+        "end": 36.4
+      },
+      {
+        "word": " fact,",
+        "start": 36.4,
+        "end": 36.72
+      },
+      {
+        "word": " lifting",
+        "start": 37.08,
+        "end": 37.46
+      },
+      {
+        "word": " this",
+        "start": 37.46,
+        "end": 37.84
+      },
+      {
+        "word": " dense",
+        "start": 37.84,
+        "end": 38.28
+      },
+      {
+        "word": " grey",
+        "start": 38.28,
+        "end": 38.68
+      },
+      {
+        "word": " slab",
+        "start": 38.68,
+        "end": 39.1
+      },
+      {
+        "word": " before",
+        "start": 39.1,
+        "end": 39.46
+      },
+      {
+        "word": " we",
+        "start": 39.46,
+        "end": 39.68
+      },
+      {
+        "word": " knew",
+        "start": 39.68,
+        "end": 39.8
+      },
+      {
+        "word": " what",
+        "start": 39.8,
+        "end": 40
+      },
+      {
+        "word": " we",
+        "start": 40,
+        "end": 40.18
+      },
+      {
+        "word": " were",
+        "start": 40.18,
+        "end": 40.32
+      },
+      {
+        "word": " doing",
+        "start": 40.32,
+        "end": 40.64
+      },
+      {
+        "word": " had",
+        "start": 40.64,
+        "end": 41.16
+      },
+      {
+        "word": " left",
+        "start": 41.16,
+        "end": 41.38
+      },
+      {
+        "word": " two",
+        "start": 41.38,
+        "end": 41.62
+      },
+      {
+        "word": " of",
+        "start": 41.62,
+        "end": 41.74
+      },
+      {
+        "word": " us",
+        "start": 41.74,
+        "end": 41.88
+      },
+      {
+        "word": " with",
+        "start": 41.88,
+        "end": 42.14
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "start": 42.14,
+    "end": 49.3,
+    "text": "bad backs. Petronius and I gazed at the silver pig like an old and not entirely convenient friend.",
+    "words": [
+      {
+        "word": " bad",
+        "start": 42.14,
+        "end": 42.4
+      },
+      {
+        "word": " backs.",
+        "start": 42.4,
+        "end": 42.82
+      },
+      {
+        "word": " Petronius",
+        "start": 44.02,
+        "end": 44.54
+      },
+      {
+        "word": " and",
+        "start": 44.54,
+        "end": 44.7
+      },
+      {
+        "word": " I",
+        "start": 44.7,
+        "end": 44.88
+      },
+      {
+        "word": " gazed",
+        "start": 44.88,
+        "end": 45.18
+      },
+      {
+        "word": " at",
+        "start": 45.18,
+        "end": 45.36
+      },
+      {
+        "word": " the",
+        "start": 45.36,
+        "end": 45.54
+      },
+      {
+        "word": " silver",
+        "start": 45.54,
+        "end": 45.86
+      },
+      {
+        "word": " pig",
+        "start": 45.86,
+        "end": 46.06
+      },
+      {
+        "word": " like",
+        "start": 46.06,
+        "end": 46.24
+      },
+      {
+        "word": " an",
+        "start": 46.24,
+        "end": 46.4
+      },
+      {
+        "word": " old",
+        "start": 46.4,
+        "end": 46.82
+      },
+      {
+        "word": " and",
+        "start": 46.82,
+        "end": 47.34
+      },
+      {
+        "word": " not",
+        "start": 47.34,
+        "end": 47.6
+      },
+      {
+        "word": " entirely",
+        "start": 47.6,
+        "end": 48.12
+      },
+      {
+        "word": " convenient",
+        "start": 48.12,
+        "end": 48.8
+      },
+      {
+        "word": " friend.",
+        "start": 48.8,
+        "end": 49.3
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "start": 50.6,
+    "end": 52.08,
+    "text": "Whatever is it?",
+    "words": [
+      {
+        "word": " Whatever",
+        "start": 50.6,
+        "end": 51.24
+      },
+      {
+        "word": " is",
+        "start": 51.24,
+        "end": 51.68
+      },
+      {
+        "word": " it?",
+        "start": 51.68,
+        "end": 52.08
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "start": 52.3,
+    "end": 54.72,
+    "text": "Sasha demanded. I told her.",
+    "words": [
+      {
+        "word": " Sasha",
+        "start": 52.3,
+        "end": 52.58
+      },
+      {
+        "word": " demanded.",
+        "start": 52.58,
+        "end": 53.1
+      },
+      {
+        "word": " I",
+        "start": 53.98,
+        "end": 54.1
+      },
+      {
+        "word": " told",
+        "start": 54.1,
+        "end": 54.36
+      },
+      {
+        "word": " her.",
+        "start": 54.36,
+        "end": 54.72
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "start": 55.68,
+    "end": 57.4,
+    "text": "Why do you call them pigs?",
+    "words": [
+      {
+        "word": " Why",
+        "start": 55.68,
+        "end": 55.88
+      },
+      {
+        "word": " do",
+        "start": 55.88,
+        "end": 56.16
+      },
+      {
+        "word": " you",
+        "start": 56.16,
+        "end": 56.16
+      },
+      {
+        "word": " call",
+        "start": 56.16,
+        "end": 56.32
+      },
+      {
+        "word": " them",
+        "start": 56.32,
+        "end": 56.82
+      },
+      {
+        "word": " pigs?",
+        "start": 56.82,
+        "end": 57.4
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "start": 58.86,
+    "end": 63.72,
+    "text": "I explained that when pressure saw is being refined, molten metal runs away from the",
+    "words": [
+      {
+        "word": " I",
+        "start": 58.86,
+        "end": 59.06
+      },
+      {
+        "word": " explained",
+        "start": 59.06,
+        "end": 59.44
+      },
+      {
+        "word": " that",
+        "start": 59.44,
+        "end": 59.6
+      },
+      {
+        "word": " when",
+        "start": 59.6,
+        "end": 60
+      },
+      {
+        "word": " pressure",
+        "start": 60,
+        "end": 60.32
+      },
+      {
+        "word": " saw",
+        "start": 60.32,
+        "end": 60.56
+      },
+      {
+        "word": " is",
+        "start": 60.56,
+        "end": 60.74
+      },
+      {
+        "word": " being",
+        "start": 60.74,
+        "end": 61.06
+      },
+      {
+        "word": " refined,",
+        "start": 61.06,
+        "end": 61.76
+      },
+      {
+        "word": " molten",
+        "start": 62.16,
+        "end": 62.36
+      },
+      {
+        "word": " metal",
+        "start": 62.36,
+        "end": 62.68
+      },
+      {
+        "word": " runs",
+        "start": 62.68,
+        "end": 62.98
+      },
+      {
+        "word": " away",
+        "start": 62.98,
+        "end": 63.3
+      },
+      {
+        "word": " from",
+        "start": 63.3,
+        "end": 63.48
+      },
+      {
+        "word": " the",
+        "start": 63.48,
+        "end": 63.72
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "start": 63.72,
+    "end": 69.24,
+    "text": "furnaces into a long channel where moulds for the ingots lead off down each side,",
+    "words": [
+      {
+        "word": " furnaces",
+        "start": 63.72,
+        "end": 64.26
+      },
+      {
+        "word": " into",
+        "start": 64.26,
+        "end": 64.74
+      },
+      {
+        "word": " a",
+        "start": 64.74,
+        "end": 64.96
+      },
+      {
+        "word": " long",
+        "start": 64.96,
+        "end": 65.2
+      },
+      {
+        "word": " channel",
+        "start": 65.2,
+        "end": 65.68
+      },
+      {
+        "word": " where",
+        "start": 65.68,
+        "end": 66.3
+      },
+      {
+        "word": " moulds",
+        "start": 66.3,
+        "end": 66.76
+      },
+      {
+        "word": " for",
+        "start": 66.76,
+        "end": 66.9
+      },
+      {
+        "word": " the",
+        "start": 66.9,
+        "end": 67.1
+      },
+      {
+        "word": " ingots",
+        "start": 67.1,
+        "end": 67.48
+      },
+      {
+        "word": " lead",
+        "start": 67.48,
+        "end": 68
+      },
+      {
+        "word": " off",
+        "start": 68,
+        "end": 68.3
+      },
+      {
+        "word": " down",
+        "start": 68.3,
+        "end": 68.54
+      },
+      {
+        "word": " each",
+        "start": 68.54,
+        "end": 68.82
+      },
+      {
+        "word": " side,",
+        "start": 68.82,
+        "end": 69.24
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "start": 69.68,
+    "end": 72.54,
+    "text": "like sucking piglets beside their mother sow.",
+    "words": [
+      {
+        "word": " like",
+        "start": 69.68,
+        "end": 70.2
+      },
+      {
+        "word": " sucking",
+        "start": 70.2,
+        "end": 70.78
+      },
+      {
+        "word": " piglets",
+        "start": 70.78,
+        "end": 71.32
+      },
+      {
+        "word": " beside",
+        "start": 71.32,
+        "end": 71.78
+      },
+      {
+        "word": " their",
+        "start": 71.78,
+        "end": 71.98
+      },
+      {
+        "word": " mother",
+        "start": 71.98,
+        "end": 72.22
+      },
+      {
+        "word": " sow.",
+        "start": 72.22,
+        "end": 72.54
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "start": 74.04,
+    "end": 76.25999999999999,
+    "text": "Petronius stared at me sceptically while I said this.",
+    "words": [
+      {
+        "word": " Petronius",
+        "start": 74.04,
+        "end": 74.52
+      },
+      {
+        "word": " stared",
+        "start": 74.52,
+        "end": 74.8
+      },
+      {
+        "word": " at",
+        "start": 74.8,
+        "end": 75
+      },
+      {
+        "word": " me",
+        "start": 75,
+        "end": 75.16
+      },
+      {
+        "word": " sceptically",
+        "start": 75.16,
+        "end": 75.6
+      },
+      {
+        "word": " while",
+        "start": 75.6,
+        "end": 75.8
+      },
+      {
+        "word": " I",
+        "start": 75.8,
+        "end": 75.98
+      },
+      {
+        "word": " said",
+        "start": 75.98,
+        "end": 76.12
+      },
+      {
+        "word": " this.",
+        "start": 76.12,
+        "end": 76.44
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "start": 77.24,
+    "end": 80.06,
+    "text": "Sometimes Petro seems amazed by the things I claim to know.",
+    "words": [
+      {
+        "word": " Sometimes",
+        "start": 77.24,
+        "end": 77.82
+      },
+      {
+        "word": " Petro",
+        "start": 77.82,
+        "end": 78.18
+      },
+      {
+        "word": " seems",
+        "start": 78.18,
+        "end": 78.4
+      },
+      {
+        "word": " amazed",
+        "start": 78.4,
+        "end": 78.78
+      },
+      {
+        "word": " by",
+        "start": 78.78,
+        "end": 78.98
+      },
+      {
+        "word": " the",
+        "start": 78.98,
+        "end": 79.16
+      },
+      {
+        "word": " things",
+        "start": 79.16,
+        "end": 79.28
+      },
+      {
+        "word": " I",
+        "start": 79.28,
+        "end": 79.48
+      },
+      {
+        "word": " claim",
+        "start": 79.48,
+        "end": 79.62
+      },
+      {
+        "word": " to",
+        "start": 79.62,
+        "end": 79.8
+      },
+      {
+        "word": " know.",
+        "start": 79.8,
+        "end": 80.06
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "start": 81.4,
+    "end": 87.86,
+    "text": "This valuable porker was a long, dull block of metal, about 20 inches long by five wide",
+    "words": [
+      {
+        "word": " This",
+        "start": 81.4,
+        "end": 81.72
+      },
+      {
+        "word": " valuable",
+        "start": 81.72,
+        "end": 82.32
+      },
+      {
+        "word": " porker",
+        "start": 82.32,
+        "end": 82.86
+      },
+      {
+        "word": " was",
+        "start": 82.86,
+        "end": 83.16
+      },
+      {
+        "word": " a",
+        "start": 83.16,
+        "end": 83.32
+      },
+      {
+        "word": " long,",
+        "start": 83.32,
+        "end": 83.68
+      },
+      {
+        "word": " dull",
+        "start": 83.9,
+        "end": 84.1
+      },
+      {
+        "word": " block",
+        "start": 84.1,
+        "end": 84.36
+      },
+      {
+        "word": " of",
+        "start": 84.36,
+        "end": 84.62
+      },
+      {
+        "word": " metal,",
+        "start": 84.62,
+        "end": 84.98
+      },
+      {
+        "word": " about",
+        "start": 85.18,
+        "end": 85.44
+      },
+      {
+        "word": " 20",
+        "start": 85.44,
+        "end": 85.82
+      },
+      {
+        "word": " inches",
+        "start": 85.82,
+        "end": 86.1
+      },
+      {
+        "word": " long",
+        "start": 86.1,
+        "end": 86.54
+      },
+      {
+        "word": " by",
+        "start": 86.54,
+        "end": 87
+      },
+      {
+        "word": " five",
+        "start": 87,
+        "end": 87.42
+      },
+      {
+        "word": " wide",
+        "start": 87.42,
+        "end": 87.86
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "start": 87.86,
+    "end": 94.74,
+    "text": "and four deep, slightly bevelled at the sides, with the emperor's name and the date on one long edge.",
+    "words": [
+      {
+        "word": " and",
+        "start": 87.86,
+        "end": 88.24
+      },
+      {
+        "word": " four",
+        "start": 88.24,
+        "end": 88.6
+      },
+      {
+        "word": " deep,",
+        "start": 88.6,
+        "end": 89
+      },
+      {
+        "word": " slightly",
+        "start": 89.46,
+        "end": 89.8
+      },
+      {
+        "word": " bevelled",
+        "start": 89.8,
+        "end": 90.14
+      },
+      {
+        "word": " at",
+        "start": 90.14,
+        "end": 90.34
+      },
+      {
+        "word": " the",
+        "start": 90.34,
+        "end": 90.54
+      },
+      {
+        "word": " sides,",
+        "start": 90.54,
+        "end": 90.9
+      },
+      {
+        "word": " with",
+        "start": 91.42,
+        "end": 91.6
+      },
+      {
+        "word": " the",
+        "start": 91.6,
+        "end": 91.78
+      },
+      {
+        "word": " emperor's",
+        "start": 91.78,
+        "end": 92.08
+      },
+      {
+        "word": " name",
+        "start": 92.08,
+        "end": 92.44
+      },
+      {
+        "word": " and",
+        "start": 92.44,
+        "end": 92.92
+      },
+      {
+        "word": " the",
+        "start": 92.92,
+        "end": 93.16
+      },
+      {
+        "word": " date",
+        "start": 93.16,
+        "end": 93.44
+      },
+      {
+        "word": " on",
+        "start": 93.44,
+        "end": 93.86
+      },
+      {
+        "word": " one",
+        "start": 93.86,
+        "end": 94.1
+      },
+      {
+        "word": " long",
+        "start": 94.1,
+        "end": 94.34
+      },
+      {
+        "word": " edge.",
+        "start": 94.34,
+        "end": 94.74
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "start": 96.14,
+    "end": 100.86,
+    "text": "It looked nothing, but a man who tried to carry it would soon find himself bent double.",
+    "words": [
+      {
+        "word": " It",
+        "start": 96.14,
+        "end": 96.42
+      },
+      {
+        "word": " looked",
+        "start": 96.42,
+        "end": 96.6
+      },
+      {
+        "word": " nothing,",
+        "start": 96.6,
+        "end": 97
+      },
+      {
+        "word": " but",
+        "start": 97.46,
+        "end": 97.68
+      },
+      {
+        "word": " a",
+        "start": 97.68,
+        "end": 97.82
+      },
+      {
+        "word": " man",
+        "start": 97.82,
+        "end": 97.96
+      },
+      {
+        "word": " who",
+        "start": 97.96,
+        "end": 98.18
+      },
+      {
+        "word": " tried",
+        "start": 98.18,
+        "end": 98.32
+      },
+      {
+        "word": " to",
+        "start": 98.32,
+        "end": 98.6
+      },
+      {
+        "word": " carry",
+        "start": 98.6,
+        "end": 98.76
+      },
+      {
+        "word": " it",
+        "start": 98.76,
+        "end": 99.08
+      },
+      {
+        "word": " would",
+        "start": 99.08,
+        "end": 99.28
+      },
+      {
+        "word": " soon",
+        "start": 99.28,
+        "end": 99.52
+      },
+      {
+        "word": " find",
+        "start": 99.52,
+        "end": 99.74
+      },
+      {
+        "word": " himself",
+        "start": 99.74,
+        "end": 100.12
+      },
+      {
+        "word": " bent",
+        "start": 100.12,
+        "end": 100.44
+      },
+      {
+        "word": " double.",
+        "start": 100.44,
+        "end": 100.86
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "start": 101.76,
+    "end": 108.1,
+    "text": "24 ladles of molten ore to each standard mould, not quite too heavy to handle,",
+    "words": [
+      {
+        "word": " 24",
+        "start": 101.76,
+        "end": 102.4
+      },
+      {
+        "word": " ladles",
+        "start": 102.4,
+        "end": 103.04
+      },
+      {
+        "word": " of",
+        "start": 103.04,
+        "end": 103.36
+      },
+      {
+        "word": " molten",
+        "start": 103.36,
+        "end": 103.74
+      },
+      {
+        "word": " ore",
+        "start": 103.74,
+        "end": 104.1
+      },
+      {
+        "word": " to",
+        "start": 104.1,
+        "end": 104.48
+      },
+      {
+        "word": " each",
+        "start": 104.48,
+        "end": 104.92
+      },
+      {
+        "word": " standard",
+        "start": 104.92,
+        "end": 105.42
+      },
+      {
+        "word": " mould,",
+        "start": 105.42,
+        "end": 105.74
+      },
+      {
+        "word": " not",
+        "start": 106.3,
+        "end": 106.6
+      },
+      {
+        "word": " quite",
+        "start": 106.6,
+        "end": 107.18
+      },
+      {
+        "word": " too",
+        "start": 107.18,
+        "end": 107.38
+      },
+      {
+        "word": " heavy",
+        "start": 107.38,
+        "end": 107.54
+      },
+      {
+        "word": " to",
+        "start": 107.54,
+        "end": 107.84
+      },
+      {
+        "word": " handle,",
+        "start": 107.84,
+        "end": 108.1
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "start": 108.36,
+    "end": 112.1,
+    "text": "but difficult to steal. Worth it though, if you could.",
+    "words": [
+      {
+        "word": " but",
+        "start": 108.36,
+        "end": 108.62
+      },
+      {
+        "word": " difficult",
+        "start": 108.62,
+        "end": 108.96
+      },
+      {
+        "word": " to",
+        "start": 108.96,
+        "end": 109.32
+      },
+      {
+        "word": " steal.",
+        "start": 109.32,
+        "end": 109.68
+      },
+      {
+        "word": " Worth",
+        "start": 110.58,
+        "end": 110.82
+      },
+      {
+        "word": " it",
+        "start": 110.82,
+        "end": 111.04
+      },
+      {
+        "word": " though,",
+        "start": 111.04,
+        "end": 111.38
+      },
+      {
+        "word": " if",
+        "start": 111.44,
+        "end": 111.64
+      },
+      {
+        "word": " you",
+        "start": 111.64,
+        "end": 111.84
+      },
+      {
+        "word": " could.",
+        "start": 111.84,
+        "end": 112.1
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "start": 113.44,
+    "end": 120.06,
+    "text": "The silver yield from Mendip's ore is remarkably high, on average 130 ounces to the tonne.",
+    "words": [
+      {
+        "word": " The",
+        "start": 113.44,
+        "end": 113.68
+      },
+      {
+        "word": " silver",
+        "start": 113.68,
+        "end": 114.06
+      },
+      {
+        "word": " yield",
+        "start": 114.06,
+        "end": 114.4
+      },
+      {
+        "word": " from",
+        "start": 114.4,
+        "end": 114.72
+      },
+      {
+        "word": " Mendip's",
+        "start": 114.72,
+        "end": 115.26
+      },
+      {
+        "word": " ore",
+        "start": 115.26,
+        "end": 115.48
+      },
+      {
+        "word": " is",
+        "start": 115.48,
+        "end": 115.84
+      },
+      {
+        "word": " remarkably",
+        "start": 115.84,
+        "end": 116.44
+      },
+      {
+        "word": " high,",
+        "start": 116.44,
+        "end": 117.02
+      },
+      {
+        "word": " on",
+        "start": 117.44,
+        "end": 117.7
+      },
+      {
+        "word": " average",
+        "start": 117.7,
+        "end": 118.06
+      },
+      {
+        "word": " 130",
+        "start": 118.06,
+        "end": 119.04
+      },
+      {
+        "word": " ounces",
+        "start": 119.04,
+        "end": 119.56
+      },
+      {
+        "word": " to",
+        "start": 119.56,
+        "end": 119.78
+      },
+      {
+        "word": " the",
+        "start": 119.78,
+        "end": 119.98
+      },
+      {
+        "word": " tonne.",
+        "start": 119.98,
+        "end": 120.30000000000001
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "start": 121.26,
+    "end": 125.46,
+    "text": "I wondered whether the silver had already been extracted from the bauble on the table.",
+    "words": [
+      {
+        "word": " I",
+        "start": 121.26,
+        "end": 121.58
+      },
+      {
+        "word": " wondered",
+        "start": 121.58,
+        "end": 121.74
+      },
+      {
+        "word": " whether",
+        "start": 121.74,
+        "end": 122
+      },
+      {
+        "word": " the",
+        "start": 122,
+        "end": 122.28
+      },
+      {
+        "word": " silver",
+        "start": 122.28,
+        "end": 122.54
+      },
+      {
+        "word": " had",
+        "start": 122.54,
+        "end": 122.72
+      },
+      {
+        "word": " already",
+        "start": 122.72,
+        "end": 123.12
+      },
+      {
+        "word": " been",
+        "start": 123.12,
+        "end": 123.48
+      },
+      {
+        "word": " extracted",
+        "start": 123.48,
+        "end": 123.96
+      },
+      {
+        "word": " from",
+        "start": 123.96,
+        "end": 124.28
+      },
+      {
+        "word": " the",
+        "start": 124.28,
+        "end": 124.52
+      },
+      {
+        "word": " bauble",
+        "start": 124.52,
+        "end": 124.76
+      },
+      {
+        "word": " on",
+        "start": 124.76,
+        "end": 124.98
+      },
+      {
+        "word": " the",
+        "start": 124.98,
+        "end": 125.16
+      },
+      {
+        "word": " table.",
+        "start": 125.16,
+        "end": 125.46
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "start": 126.68,
+    "end": 129.2,
+    "text": "The government claims a monopoly of precious ore.",
+    "words": [
+      {
+        "word": " The",
+        "start": 126.68,
+        "end": 126.96
+      },
+      {
+        "word": " government",
+        "start": 126.96,
+        "end": 127.36
+      },
+      {
+        "word": " claims",
+        "start": 127.36,
+        "end": 127.68
+      },
+      {
+        "word": " a",
+        "start": 127.68,
+        "end": 127.88
+      },
+      {
+        "word": " monopoly",
+        "start": 127.88,
+        "end": 128.26
+      },
+      {
+        "word": " of",
+        "start": 128.26,
+        "end": 128.58
+      },
+      {
+        "word": " precious",
+        "start": 128.58,
+        "end": 128.84
+      },
+      {
+        "word": " ore.",
+        "start": 128.84,
+        "end": 129.2
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "start": 129.76,
+    "end": 132.5,
+    "text": "Wherever it came from, this belonged in the mint.",
+    "words": [
+      {
+        "word": " Wherever",
+        "start": 129.76,
+        "end": 130.24
+      },
+      {
+        "word": " it",
+        "start": 130.24,
+        "end": 130.44
+      },
+      {
+        "word": " came",
+        "start": 130.44,
+        "end": 130.72
+      },
+      {
+        "word": " from,",
+        "start": 130.72,
+        "end": 131.16
+      },
+      {
+        "word": " this",
+        "start": 131.32,
+        "end": 131.6
+      },
+      {
+        "word": " belonged",
+        "start": 131.6,
+        "end": 131.9
+      },
+      {
+        "word": " in",
+        "start": 131.9,
+        "end": 132.1
+      },
+      {
+        "word": " the",
+        "start": 132.1,
+        "end": 132.26
+      },
+      {
+        "word": " mint.",
+        "start": 132.26,
+        "end": 132.5
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "start": 133.56,
+    "end": 137.96,
+    "text": "We rolled it over and banged it topside up, looking for an official stamp.",
+    "words": [
+      {
+        "word": " We",
+        "start": 133.56,
+        "end": 133.78
+      },
+      {
+        "word": " rolled",
+        "start": 133.78,
+        "end": 134
+      },
+      {
+        "word": " it",
+        "start": 134,
+        "end": 134.26
+      },
+      {
+        "word": " over",
+        "start": 134.26,
+        "end": 134.54
+      },
+      {
+        "word": " and",
+        "start": 134.54,
+        "end": 134.94
+      },
+      {
+        "word": " banged",
+        "start": 134.94,
+        "end": 135.34
+      },
+      {
+        "word": " it",
+        "start": 135.34,
+        "end": 135.56
+      },
+      {
+        "word": " topside",
+        "start": 135.56,
+        "end": 136
+      },
+      {
+        "word": " up,",
+        "start": 136,
+        "end": 136.36
+      },
+      {
+        "word": " looking",
+        "start": 136.54,
+        "end": 136.78
+      },
+      {
+        "word": " for",
+        "start": 136.78,
+        "end": 136.98
+      },
+      {
+        "word": " an",
+        "start": 136.98,
+        "end": 137.18
+      },
+      {
+        "word": " official",
+        "start": 137.18,
+        "end": 137.56
+      },
+      {
+        "word": " stamp.",
+        "start": 137.56,
+        "end": 137.96
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "start": 139.1,
+    "end": 149.22,
+    "text": "It was stamped all right. T-C-L-T-R-I-F. Some new piece of nonsense. Not once, but four times, then.",
+    "words": [
+      {
+        "word": " It",
+        "start": 139.1,
+        "end": 139.46
+      },
+      {
+        "word": " was",
+        "start": 139.46,
+        "end": 139.78
+      },
+      {
+        "word": " stamped",
+        "start": 139.78,
+        "end": 140.04
+      },
+      {
+        "word": " all",
+        "start": 140.04,
+        "end": 140.32
+      },
+      {
+        "word": " right.",
+        "start": 140.32,
+        "end": 140.9
+      },
+      {
+        "word": " T",
+        "start": 141.46,
+        "end": 141.92
+      },
+      {
+        "word": "-C",
+        "start": 141.92,
+        "end": 142.64
+      },
+      {
+        "word": "-L",
+        "start": 142.64,
+        "end": 143.5
+      },
+      {
+        "word": "-T",
+        "start": 143.5,
+        "end": 143.94
+      },
+      {
+        "word": "-R",
+        "start": 143.94,
+        "end": 144.18
+      },
+      {
+        "word": "-I",
+        "start": 144.18,
+        "end": 144.36
+      },
+      {
+        "word": "-F.",
+        "start": 144.36,
+        "end": 144.76
+      },
+      {
+        "word": " Some",
+        "start": 145.26,
+        "end": 145.48
+      },
+      {
+        "word": " new",
+        "start": 145.48,
+        "end": 145.74
+      },
+      {
+        "word": " piece",
+        "start": 145.74,
+        "end": 145.96
+      },
+      {
+        "word": " of",
+        "start": 145.96,
+        "end": 146.18
+      },
+      {
+        "word": " nonsense.",
+        "start": 146.18,
+        "end": 146.56
+      },
+      {
+        "word": " Not",
+        "start": 146.98,
+        "end": 147.26
+      },
+      {
+        "word": " once,",
+        "start": 147.26,
+        "end": 147.6
+      },
+      {
+        "word": " but",
+        "start": 147.6,
+        "end": 148.02
+      },
+      {
+        "word": " four",
+        "start": 148.02,
+        "end": 148.38
+      },
+      {
+        "word": " times,",
+        "start": 148.38,
+        "end": 148.82
+      },
+      {
+        "word": " then.",
+        "start": 148.9,
+        "end": 149.22
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "start": 149.98,
+    "end": 159.18,
+    "text": "E-X-A-R-G-B-R-I-T. The old familiar mark we half hoped and half dreaded to find.",
+    "words": [
+      {
+        "word": " E",
+        "start": 149.98,
+        "end": 150.32
+      },
+      {
+        "word": "-X",
+        "start": 150.32,
+        "end": 150.68
+      },
+      {
+        "word": "-A",
+        "start": 150.68,
+        "end": 151.5
+      },
+      {
+        "word": "-R",
+        "start": 151.5,
+        "end": 151.74
+      },
+      {
+        "word": "-G",
+        "start": 151.74,
+        "end": 152.54
+      },
+      {
+        "word": "-B",
+        "start": 152.54,
+        "end": 153.12
+      },
+      {
+        "word": "-R",
+        "start": 153.12,
+        "end": 153.34
+      },
+      {
+        "word": "-I",
+        "start": 153.34,
+        "end": 153.56
+      },
+      {
+        "word": "-T.",
+        "start": 153.56,
+        "end": 153.88
+      },
+      {
+        "word": " The",
+        "start": 155.06,
+        "end": 155.24
+      },
+      {
+        "word": " old",
+        "start": 155.24,
+        "end": 155.7
+      },
+      {
+        "word": " familiar",
+        "start": 155.7,
+        "end": 156.22
+      },
+      {
+        "word": " mark",
+        "start": 156.22,
+        "end": 156.56
+      },
+      {
+        "word": " we",
+        "start": 156.56,
+        "end": 156.82
+      },
+      {
+        "word": " half",
+        "start": 156.82,
+        "end": 157.16
+      },
+      {
+        "word": " hoped",
+        "start": 157.16,
+        "end": 157.4
+      },
+      {
+        "word": " and",
+        "start": 157.4,
+        "end": 157.84
+      },
+      {
+        "word": " half",
+        "start": 157.84,
+        "end": 158.22
+      },
+      {
+        "word": " dreaded",
+        "start": 158.22,
+        "end": 158.66
+      },
+      {
+        "word": " to",
+        "start": 158.66,
+        "end": 158.92
+      },
+      {
+        "word": " find.",
+        "start": 158.92,
+        "end": 159.18
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "start": 161.38000000000002,
+    "end": 162.78,
+    "text": "Petronius groaned.",
+    "words": [
+      {
+        "word": " Petronius",
+        "start": 161.38000000000002,
+        "end": 162.08
+      },
+      {
+        "word": " groaned.",
+        "start": 162.08,
+        "end": 162.78
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "start": 162.98,
+    "end": 167.36,
+    "text": "Britain, a perfect signature. Someone must be sweating.",
+    "words": [
+      {
+        "word": " Britain,",
+        "start": 162.98,
+        "end": 163.42
+      },
+      {
+        "word": " a",
+        "start": 164,
+        "end": 164.12
+      },
+      {
+        "word": " perfect",
+        "start": 164.12,
+        "end": 164.64
+      },
+      {
+        "word": " signature.",
+        "start": 164.64,
+        "end": 165.26
+      },
+      {
+        "word": " Someone",
+        "start": 166.06,
+        "end": 166.42
+      },
+      {
+        "word": " must",
+        "start": 166.42,
+        "end": 166.7
+      },
+      {
+        "word": " be",
+        "start": 166.7,
+        "end": 167.02
+      },
+      {
+        "word": " sweating.",
+        "start": 167.02,
+        "end": 167.36
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "start": 169.16,
+    "end": 172.24,
+    "text": "An uncomfortable feeling struck us both at the same time.",
+    "words": [
+      {
+        "word": " An",
+        "start": 169.16,
+        "end": 169.42
+      },
+      {
+        "word": " uncomfortable",
+        "start": 169.42,
+        "end": 169.96
+      },
+      {
+        "word": " feeling",
+        "start": 169.96,
+        "end": 170.46
+      },
+      {
+        "word": " struck",
+        "start": 170.46,
+        "end": 170.78
+      },
+      {
+        "word": " us",
+        "start": 170.78,
+        "end": 171.02
+      },
+      {
+        "word": " both",
+        "start": 171.02,
+        "end": 171.14
+      },
+      {
+        "word": " at",
+        "start": 171.14,
+        "end": 171.34
+      },
+      {
+        "word": " the",
+        "start": 171.34,
+        "end": 171.48
+      },
+      {
+        "word": " same",
+        "start": 171.48,
+        "end": 171.76
+      },
+      {
+        "word": " time.",
+        "start": 171.76,
+        "end": 172.24
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "start": 173.26,
+    "end": 180.54,
+    "text": "Better move, Petro suggested. Shall I tidy this away? Our usual place? You take the girl?",
+    "words": [
+      {
+        "word": " Better",
+        "start": 173.26,
+        "end": 173.58
+      },
+      {
+        "word": " move,",
+        "start": 173.58,
+        "end": 174.08
+      },
+      {
+        "word": " Petro",
+        "start": 174.48,
+        "end": 174.76
+      },
+      {
+        "word": " suggested.",
+        "start": 174.76,
+        "end": 175.28
+      },
+      {
+        "word": " Shall",
+        "start": 175.96,
+        "end": 176.14
+      },
+      {
+        "word": " I",
+        "start": 176.14,
+        "end": 176.46
+      },
+      {
+        "word": " tidy",
+        "start": 176.46,
+        "end": 176.68
+      },
+      {
+        "word": " this",
+        "start": 176.68,
+        "end": 176.98
+      },
+      {
+        "word": " away?",
+        "start": 176.98,
+        "end": 177.32
+      },
+      {
+        "word": " Our",
+        "start": 178.16,
+        "end": 178.36
+      },
+      {
+        "word": " usual",
+        "start": 178.36,
+        "end": 178.72
+      },
+      {
+        "word": " place?",
+        "start": 178.72,
+        "end": 179.18
+      },
+      {
+        "word": " You",
+        "start": 179.64,
+        "end": 179.92
+      },
+      {
+        "word": " take",
+        "start": 179.92,
+        "end": 180.1
+      },
+      {
+        "word": " the",
+        "start": 180.1,
+        "end": 180.34
+      },
+      {
+        "word": " girl?",
+        "start": 180.34,
+        "end": 180.54
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "start": 181.84,
+    "end": 182.78,
+    "text": "I nodded.",
+    "words": [
+      {
+        "word": " I",
+        "start": 181.84,
+        "end": 182.08
+      },
+      {
+        "word": " nodded.",
+        "start": 182.08,
+        "end": 182.78
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "start": 183.46,
+    "end": 185.16,
+    "text": "Falco, what's happening?",
+    "words": [
+      {
+        "word": " Falco,",
+        "start": 183.46,
+        "end": 184
+      },
+      {
+        "word": " what's",
+        "start": 184.52,
+        "end": 184.86
+      },
+      {
+        "word": " happening?",
+        "start": 184.86,
+        "end": 185.16
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "start": 185.16,
+    "end": 187.12,
+    "text": "Sasha demanded excitedly.",
+    "words": [
+      {
+        "word": " Sasha",
+        "start": 185.16,
+        "end": 185.74
+      },
+      {
+        "word": " demanded",
+        "start": 185.74,
+        "end": 186.26
+      },
+      {
+        "word": " excitedly.",
+        "start": 186.26,
+        "end": 187.12
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "start": 188,
+    "end": 192.68,
+    "text": "He's putting the silver pig somewhere smelly, where felons shall be too sensitive to look,",
+    "words": [
+      {
+        "word": " He's",
+        "start": 188,
+        "end": 188.42
+      },
+      {
+        "word": " putting",
+        "start": 188.42,
+        "end": 188.64
+      },
+      {
+        "word": " the",
+        "start": 188.64,
+        "end": 188.86
+      },
+      {
+        "word": " silver",
+        "start": 188.86,
+        "end": 189.16
+      },
+      {
+        "word": " pig",
+        "start": 189.16,
+        "end": 189.34
+      },
+      {
+        "word": " somewhere",
+        "start": 189.34,
+        "end": 189.68
+      },
+      {
+        "word": " smelly,",
+        "start": 189.68,
+        "end": 190.3
+      },
+      {
+        "word": " where",
+        "start": 190.46,
+        "end": 190.68
+      },
+      {
+        "word": " felons",
+        "start": 190.68,
+        "end": 191.22
+      },
+      {
+        "word": " shall",
+        "start": 191.22,
+        "end": 191.36
+      },
+      {
+        "word": " be",
+        "start": 191.36,
+        "end": 191.54
+      },
+      {
+        "word": " too",
+        "start": 191.54,
+        "end": 191.8
+      },
+      {
+        "word": " sensitive",
+        "start": 191.8,
+        "end": 192.2
+      },
+      {
+        "word": " to",
+        "start": 192.2,
+        "end": 192.48
+      },
+      {
+        "word": " look,",
+        "start": 192.48,
+        "end": 192.68
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "start": 192.9,
+    "end": 198.74,
+    "text": "I said. You're going home. And I need an urgent chat with your uncle Decimus.",
+    "words": [
+      {
+        "word": " I",
+        "start": 192.9,
+        "end": 193.06
+      },
+      {
+        "word": " said.",
+        "start": 193.06,
+        "end": 193.24
+      },
+      {
+        "word": " You're",
+        "start": 194.1,
+        "end": 194.4
+      },
+      {
+        "word": " going",
+        "start": 194.4,
+        "end": 194.6
+      },
+      {
+        "word": " home.",
+        "start": 194.6,
+        "end": 195.1
+      },
+      {
+        "word": " And",
+        "start": 195.54,
+        "end": 196.02
+      },
+      {
+        "word": " I",
+        "start": 196.02,
+        "end": 196.24
+      },
+      {
+        "word": " need",
+        "start": 196.24,
+        "end": 196.4
+      },
+      {
+        "word": " an",
+        "start": 196.4,
+        "end": 196.62
+      },
+      {
+        "word": " urgent",
+        "start": 196.62,
+        "end": 196.96
+      },
+      {
+        "word": " chat",
+        "start": 196.96,
+        "end": 197.3
+      },
+      {
+        "word": " with",
+        "start": 197.3,
+        "end": 197.5
+      },
+      {
+        "word": " your",
+        "start": 197.5,
+        "end": 197.68
+      },
+      {
+        "word": " uncle",
+        "start": 197.68,
+        "end": 198.06
+      },
+      {
+        "word": " Decimus.",
+        "start": 198.06,
+        "end": 198.74
+      }
+    ]
+  }
+]

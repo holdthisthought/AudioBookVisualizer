@@ -1,0 +1,457 @@
+[
+  {
+    "name": "Marcus Didius Falco",
+    "parameters": {
+      "identity": {
+        "role": "Private Informer",
+        "age": "29",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "average 5'9\"",
+        "build": "lean, athletic from military service",
+        "posture": "casual but alert, military training evident"
+      },
+      "facialFeatures": {
+        "skinTone": "Mediterranean olive, sun-weathered",
+        "faceShape": "angular with strong jaw",
+        "eyes": "dark brown, observant and cynical",
+        "hair": "dark brown, short Roman style",
+        "facialHair": "clean-shaven for visit to senator",
+        "distinctiveFeatures": "attractive face he was once proud of, bruised cheekbone and nearly broken nose after beating"
+      },
+      "attire": {
+        "headwear": "none",
+        "upperBody": "worn white toga with holes folded out of sight over short clean tunic",
+        "lowerBody": "tunic extends to mid-thigh under toga folds",
+        "footwear": "brown leather boots, worn but maintained",
+        "accessories": "best belt with Celtic buckle, bronze signet ring",
+        "clothingStyle": "respectable but worn, lower-class trying to appear presentable",
+        "clothingColors": "white toga, natural linen tunic, brown leather"
+      },
+      "personality": {
+        "demeanor": "sardonic, witty, protective of women",
+        "traits": "Republican, cynical about authority, resourceful, former soldier"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, primarily Aventine district",
+    "photo": "character_profile_images\\marcus_didius_falco_1752848604940.png",
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Sosia Camillina",
+    "parameters": {
+      "identity": {
+        "role": "Noble young woman, adopted daughter",
+        "age": "16",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "slight, petite 5'2\"",
+        "build": "slim, delicate",
+        "posture": "refined, well-bred carriage"
+      },
+      "facialFeatures": {
+        "skinTone": "fair, flushed from heat",
+        "faceShape": "delicate oval",
+        "eyes": "large brown, set wide apart, sweetly without guile",
+        "hair": "blonde (dyed), three soft fat ringlets tied with ribbon at nape",
+        "facialHair": "none",
+        "distinctiveFeatures": "painted face with subtle makeup, one eye slightly smudged from running"
+      },
+      "attire": {
+        "headwear": "none, hair ribbon only",
+        "upperBody": "fine white undertunic with blue enamel clasps on sleeves, sleeveless overdress with patent embroidery",
+        "lowerBody": "overdress so long it's bunched over girdle of woven gold threads",
+        "footwear": "delicate sandals with wet soles from sweat",
+        "accessories": "wire hoops with glass beads in ears, two chain necklaces, three bracelets left arm, four right, various finger rings",
+        "clothingStyle": "overdressed noble girl, multiple layers despite heat",
+        "clothingColors": "white with blue clasps, gold threads, multicolored embroidery"
+      },
+      "personality": {
+        "demeanor": "frightened but brave, mischievous when safe",
+        "traits": "sheltered, intelligent, good manners, resourceful"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Senator's house in Capena Gate sector",
+    "photo": "character_profile_images\\sosia_camillina_1752848567968.png",
+    "chapters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      10
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Petronius Longus",
+    "parameters": {
+      "identity": {
+        "role": "Watch Captain, Aventine district",
+        "age": "29",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "tall 6'0\", big",
+        "build": "placid, solid, strong",
+        "posture": "relaxed but authoritative"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman olive, weathered",
+        "faceShape": "broad, trustworthy",
+        "eyes": "sleepy-looking but observant",
+        "hair": "short dark Roman military cut",
+        "facialHair": "clean-shaven",
+        "distinctiveFeatures": "face that gives little away"
+      },
+      "attire": {
+        "headwear": "bronze watch captain's helmet when on duty",
+        "upperBody": "dark wool tunic with leather reinforcement, watch insignia",
+        "lowerBody": "dark wool bracae (trousers) tucked into boots",
+        "footwear": "sturdy leather military boots with hobnails",
+        "accessories": "wide leather belt with bronze buckle, watch captain's wooden staff",
+        "clothingStyle": "practical military/watch uniform",
+        "clothingColors": "dark brown and black, bronze fittings"
+      },
+      "personality": {
+        "demeanor": "easy-going, professional, good-natured",
+        "traits": "loyal friend, devoted family man, competent officer"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Aventine district",
+    "photo": "character_profile_images/petronius_longus_1752848912657.png",
+    "chapters": [
+      4,
+      9,
+      10
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Decimus Camillus Verus",
+    "parameters": {
+      "identity": {
+        "role": "Roman Senator",
+        "age": "50s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "average 5'8\"",
+        "build": "moderate, dignified bearing",
+        "posture": "upright senatorial bearing"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman patrician, indoor pallor",
+        "faceShape": "pleasant, intelligent",
+        "eyes": "decently spaced, direct gaze under heavy eyebrows",
+        "hair": "bristles straight up even though not short, graying",
+        "facialHair": "clean-shaven in patrician style",
+        "distinctiveFeatures": "cheerful boyish look despite age"
+      },
+      "attire": {
+        "headwear": "none indoors",
+        "upperBody": "white toga with broad purple stripe (toga praetexta)",
+        "lowerBody": "white tunic underneath extending to knees",
+        "footwear": "indoor leather slippers, soft sole",
+        "accessories": "gold senatorial ring, writing stylus",
+        "clothingStyle": "formal senatorial dress",
+        "clothingColors": "white with purple stripe"
+      },
+      "personality": {
+        "demeanor": "diffident, polite, cautious",
+        "traits": "intelligent, protective of family, worried"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Capena Gate sector",
+    "photo": "character_profile_images/decimus_camillus_verus_1752849016617.png",
+    "chapters": [
+      6
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Publius Camillus Meto",
+    "parameters": {
+      "identity": {
+        "role": "Merchant, Sosia's father",
+        "age": "late 40s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "average 5'8\"",
+        "build": "thin, austere",
+        "posture": "formal, reserved"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman olive, pale from indoor work",
+        "faceShape": "lean, angular",
+        "eyes": "observant, calculating",
+        "hair": "balding, close-cropped sides",
+        "facialHair": "clean-shaven",
+        "distinctiveFeatures": "thin-lipped, sad tolerant smile"
+      },
+      "attire": {
+        "headwear": "none",
+        "upperBody": "plain dark tunic without purple stripe, well-made",
+        "lowerBody": "matching dark cloth to ankles",
+        "footwear": "quality leather shoes, merchant style",
+        "accessories": "several rings indicating wealth, no senatorial insignia",
+        "clothingStyle": "wealthy merchant, deliberately non-senatorial",
+        "clothingColors": "dark browns and grays"
+      },
+      "personality": {
+        "demeanor": "protective, angry when threatened",
+        "traits": "successful merchant, devoted father, formal"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Capena Gate sector",
+    "photo": "character_profile_images/Publius_Camillus_Meto_v1.png",
+    "chapters": [
+      8,
+      9
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Gnaeus Atius Pertinax",
+    "parameters": {
+      "identity": {
+        "role": "Aedile (junior magistrate)",
+        "age": "late 20s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "short 5'6\"",
+        "build": "slight, tense",
+        "posture": "stiff, aggressive despite small stature"
+      },
+      "facialFeatures": {
+        "skinTone": "pale, washed-out",
+        "faceShape": "pinched, constipated expression",
+        "eyes": "light colored, hard",
+        "hair": "short-cropped pale hair",
+        "facialHair": "clean-shaven",
+        "distinctiveFeatures": "pointy nose, grey appearance"
+      },
+      "attire": {
+        "headwear": "none",
+        "upperBody": "white toga with narrow purple stripe (toga angusticlavia)",
+        "lowerBody": "white tunic beneath",
+        "footwear": "expensive red leather shoes, pointed toes",
+        "accessories": "gold rings, official seal",
+        "clothingStyle": "formal magisterial dress",
+        "clothingColors": "white with purple, red shoes"
+      },
+      "personality": {
+        "demeanor": "arrogant, violent, ambitious",
+        "traits": "typical young politician, brutal, climbing ladder"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome",
+    "photo": "character_profile_images/Gnaeus_Atius_Pertinax_v1.png",
+    "chapters": [
+      8,
+      9
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Lenia",
+    "parameters": {
+      "identity": {
+        "role": "Laundry proprietress",
+        "age": "appears 40, actually younger",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "average 5'5\"",
+        "build": "gaunt face, slack stomach",
+        "posture": "working woman's stoop"
+      },
+      "facialFeatures": {
+        "skinTone": "pale from indoor work, reddened hands",
+        "faceShape": "gaunt, prematurely aged",
+        "eyes": "watery, shrewd",
+        "hair": "frizzled wisps escaping colorless ribbon",
+        "facialHair": "none",
+        "distinctiveFeatures": "deceptively strong from wringing heavy togas"
+      },
+      "attire": {
+        "headwear": "colorless ribbon around head",
+        "upperBody": "stained working tunic, sleeves rolled up",
+        "lowerBody": "practical ankle-length tunic, tied up for work",
+        "footwear": "worn leather sandals, practical flat soles",
+        "accessories": "none, working woman",
+        "clothingStyle": "practical working clothes",
+        "clothingColors": "faded browns, water-stained"
+      },
+      "personality": {
+        "demeanor": "sharp-tongued, protective, businesslike",
+        "traits": "independent, shrewd businesswoman, kind beneath rough exterior"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Aventine district",
+    "photo": "character_profile_images/Lenia_v1.png",
+    "chapters": [
+      1,
+      2,
+      8,
+      9
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Falco's Mother",
+    "parameters": {
+      "identity": {
+        "role": "Matriarch, apartment dweller",
+        "age": "50s",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "short 5'2\"",
+        "build": "sturdy, energetic",
+        "posture": "bustling, always active"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman olive, work-worn",
+        "faceShape": "round, expressive",
+        "eyes": "sharp, miss nothing",
+        "hair": "graying, pulled back practically",
+        "facialHair": "none",
+        "distinctiveFeatures": "pursed lips when disapproving"
+      },
+      "attire": {
+        "headwear": "simple cloth head covering for cooking",
+        "upperBody": "practical brown working stola",
+        "lowerBody": "ankle-length stola with apron",
+        "footwear": "worn house slippers, soft leather",
+        "accessories": "wedding ring still worn",
+        "clothingStyle": "respectable working-class matron",
+        "clothingColors": "practical browns and grays"
+      },
+      "personality": {
+        "demeanor": "no-nonsense, protective, hospitable",
+        "traits": "interfering, loving, excellent cook, sharp-tongued"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, near Aventine",
+    "photo": "character_profile_images/Falco_s_Mother_v1.png",
+    "chapters": [
+      10
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Victorina",
+    "parameters": {
+      "identity": {
+        "role": "Falco's sister, plasterer's wife",
+        "age": "early 30s",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "average 5'4\"",
+        "build": "solid, maternal figure",
+        "posture": "confident, slightly tired from motherhood"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman olive like her brother",
+        "faceShape": "similar to Falco but softer",
+        "eyes": "dark, knowing",
+        "hair": "dark brown, tied back practically",
+        "facialHair": "none",
+        "distinctiveFeatures": "tired look of young motherhood"
+      },
+      "attire": {
+        "headwear": "none, hair pinned up",
+        "upperBody": "simple stola, practical for childcare",
+        "lowerBody": "ankle-length stola, slightly stained",
+        "footwear": "flat leather sandals, comfortable",
+        "accessories": "wedding band, no finery",
+        "clothingStyle": "practical young matron",
+        "clothingColors": "muted blues and browns"
+      },
+      "personality": {
+        "demeanor": "formerly formidable, now tired but sharp",
+        "traits": "protective, teasing, maternal"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome",
+    "photo": "character_profile_images/Victorina_v1.png",
+    "chapters": [
+      10
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Smaractus",
+    "parameters": {
+      "identity": {
+        "role": "Landlord, property owner",
+        "age": "middle-aged 40s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "average but imposing",
+        "build": "heavy-set, well-fed",
+        "posture": "aggressive, bullying"
+      },
+      "facialFeatures": {
+        "skinTone": "florid, unhealthy",
+        "faceShape": "jowly, greedy",
+        "eyes": "small, calculating",
+        "hair": "thinning, oiled",
+        "facialHair": "none, too vain",
+        "distinctiveFeatures": "described as parasitic appearance"
+      },
+      "attire": {
+        "headwear": "none",
+        "upperBody": "expensive tunic showing wealth",
+        "lowerBody": "quality fabric toga when visiting",
+        "footwear": "expensive leather boots",
+        "accessories": "multiple gold rings, purse at belt",
+        "clothingStyle": "ostentatiously wealthy",
+        "clothingColors": "expensive purples and gold trim"
+      },
+      "personality": {
+        "demeanor": "bullying, greedy, threatening",
+        "traits": "parasitic landlord, violent, exploitative"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Aventine district",
+    "photo": "character_profile_images/smaractus_1752848954995.png",
+    "chapters": [
+      2,
+      7
+    ],
+    "subCharacteristics": []
+  }
+]

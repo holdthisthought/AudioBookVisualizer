@@ -40,12 +40,13 @@ RUN pip install --no-cache-dir \
 WORKDIR /workspace/ComfyUI/custom_nodes
 
 # Install ComfyUI-Manager (optional but useful)
-RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git
+RUN git clone --depth 1 https://github.com/ltdrdata/ComfyUI-Manager.git || echo "ComfyUI-Manager clone failed, continuing..."
 
 # Install FLUX Kontext custom nodes
-RUN git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git \
-    && cd ComfyUI-Flux-Kontext \
-    && pip install --no-cache-dir -r requirements.txt
+RUN git config --global http.postBuffer 524288000 && \
+    git clone --depth 1 https://github.com/melMass/ComfyUI-Flux-Kontext.git && \
+    cd ComfyUI-Flux-Kontext && \
+    (pip install --no-cache-dir -r requirements.txt || echo "No requirements.txt found or install failed, continuing...")
 
 # Create model directories
 RUN mkdir -p /workspace/ComfyUI/models/unet \

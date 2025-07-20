@@ -25,7 +25,7 @@ sys.path.append('/workspace/ComfyUI')
 comfyui_process = None
 COMFYUI_URL = "http://127.0.0.1:8188"
 
-def download_model_if_needed(model_name: str, model_path: str, download_url: str) -> bool:
+def download_model_if_needed(model_name: str, model_path: str, download_url: str, hf_token: Optional[str] = None) -> bool:
     """Download a model if it doesn't exist."""
     if os.path.exists(model_path):
         logger.info(f"Model {model_name} already exists at {model_path}")
@@ -36,8 +36,12 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
         # Create directory if needed
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
         
-        # Download with wget for better progress tracking
-        cmd = f"wget -O {model_path} {download_url}"
+        # Build wget command with optional auth header
+        cmd = f"wget -O {model_path}"
+        if hf_token:
+            cmd += f" --header='Authorization: Bearer {hf_token}'"
+        cmd += f" {download_url}"
+        
         result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
         
         if result.returncode == 0:
@@ -54,33 +58,41 @@ def ensure_models():
     """Ensure all required models are downloaded."""
     models_base = "/workspace/ComfyUI/models"
     
+    # Get Hugging Face token from environment if available
+    hf_token = os.environ.get('HF_TOKEN', os.environ.get('HUGGING_FACE_TOKEN', None))
+    
     # Define required models
     required_models = [
         {
             "name": "flux1-kontext-dev.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/flux1-kontext-dev.safetensors"
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/flux1-kontext-dev.safetensors",
+            "requires_auth": False
         },
         {
             "name": "t5xxl_fp8_e4m3fn.safetensors",
             "path": f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
-            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors",
+            "requires_auth": False
         },
         {
             "name": "clip_l.safetensors",
             "path": f"{models_base}/clip/clip_l.safetensors",
-            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors",
+            "requires_auth": False
         },
         {
             "name": "ae.safetensors",
             "path": f"{models_base}/vae/ae.safetensors",
-            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/ae.safetensors"
+            "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors",
+            "requires_auth": True
         }
     ]
     
     # Download models if needed
     for model in required_models:
-        if not download_model_if_needed(model["name"], model["path"], model["url"]):
+        token_to_use = hf_token if model.get('requires_auth', False) else None
+        if not download_model_if_needed(model["name"], model["path"], model["url"], token_to_use):
             logger.warning(f"Failed to download {model['name']}, continuing anyway...")
 
 def start_comfyui():

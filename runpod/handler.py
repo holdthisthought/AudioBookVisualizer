@@ -74,7 +74,7 @@ def ensure_models():
         {
             "name": "ae.safetensors",
             "path": f"{models_base}/vae/ae.safetensors",
-            "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
+            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/ae.safetensors"
         }
     ]
     
@@ -134,9 +134,12 @@ def queue_prompt(prompt: Dict[str, Any]) -> Optional[str]:
         
         if response.status_code == 200:
             data = response.json()
-            return data.get("prompt_id")
+            prompt_id = data.get("prompt_id")
+            if prompt_id:
+                logger.info(f"Successfully queued prompt: {prompt_id}")
+            return prompt_id
         else:
-            logger.error(f"Failed to queue prompt: {response.text}")
+            logger.error(f"Failed to queue prompt: Status {response.status_code}, Response: {response.text}")
             return None
     except Exception as e:
         logger.error(f"Error queuing prompt: {str(e)}")

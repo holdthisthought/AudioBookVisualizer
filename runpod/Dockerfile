@@ -39,17 +39,20 @@ RUN pip install --no-cache-dir \
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes
 
-# Install git and ensure certificates are up to date
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+# Install unzip if not available
+RUN apt-get update && apt-get install -y unzip wget
 
-# Install ComfyUI-Manager (optional but useful)
-RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git || true
+# Download and install ComfyUI-Manager (optional)
+RUN wget -q https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/heads/main.zip -O manager.zip && \
+    unzip -q manager.zip && \
+    rm manager.zip && \
+    mv ComfyUI-Manager-main ComfyUI-Manager || true
 
-# Install FLUX Kontext custom nodes with retry logic
-RUN for i in 1 2 3; do \
-        git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git && break || \
-        (echo "Retry $i/3 failed, waiting..." && sleep 5); \
-    done && \
+# Download and install FLUX Kontext custom nodes
+RUN wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O kontext.zip && \
+    unzip -q kontext.zip && \
+    rm kontext.zip && \
+    mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext && \
     cd ComfyUI-Flux-Kontext && \
     if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt || true; fi
 

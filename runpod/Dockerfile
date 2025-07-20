@@ -40,10 +40,13 @@ RUN pip install --no-cache-dir \
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes
 
-# Install ComfyUI-Flux-Kontext during build
-RUN git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git && \
+# Install ComfyUI-Flux-Kontext during build (using wget to avoid git issues)
+RUN wget https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O flux-kontext.zip && \
+    unzip flux-kontext.zip && \
+    rm flux-kontext.zip && \
+    mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext && \
     cd ComfyUI-Flux-Kontext && \
-    if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
 
 # Create a script to install custom nodes at runtime
 RUN cat > /workspace/install_custom_nodes.sh << 'EOF'

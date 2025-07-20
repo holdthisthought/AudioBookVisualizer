@@ -37,6 +37,12 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
         # Create directory if needed
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
         
+        # Check available space
+        import shutil
+        disk_usage = shutil.disk_usage(os.path.dirname(model_path))
+        free_gb = disk_usage.free / (1024**3)
+        logger.info(f"Free space before downloading {model_name}: {free_gb:.1f} GB")
+        
         # Build wget command with optional auth header
         cmd = f"wget -O {model_path}"
         if hf_token:
@@ -71,6 +77,18 @@ def ensure_models(hf_token=None):
         models_base = "/workspace/ComfyUI/models"
         logger.info(f"Using local storage for models: {models_base}")
         logger.warning("Network Volume not detected - may run out of disk space!")
+    
+    # Check and clean up corrupted FLUX model before downloading
+    flux_path = f"{models_base}/unet/flux1-kontext-dev.safetensors"
+    if os.path.exists(flux_path):
+        size_mb = os.path.getsize(flux_path) / (1024 * 1024)
+        if size_mb < 20000:  # Should be ~24GB
+            logger.warning(f"Found corrupted FLUX model ({size_mb:.1f} MB), deleting...")
+            try:
+                os.remove(flux_path)
+                logger.info("Deleted corrupted FLUX model")
+            except Exception as e:
+                logger.error(f"Failed to delete corrupted model: {e}")
     
     # Get Hugging Face token from environment if not provided
     if not hf_token:

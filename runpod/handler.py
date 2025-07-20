@@ -59,7 +59,13 @@ def ensure_models(hf_token=None):
     """Ensure all required models are downloaded."""
     global models_checked
     
-    models_base = "/workspace/ComfyUI/models"
+    # Check if Network Volume is mounted (RunPod mounts at /runpod-volume)
+    if os.path.exists("/runpod-volume"):
+        models_base = "/runpod-volume/models"
+        logger.info(f"Using Network Volume for models: {models_base}")
+    else:
+        models_base = "/workspace/ComfyUI/models"
+        logger.info(f"Using local storage for models: {models_base}")
     
     # Get Hugging Face token from environment if not provided
     if not hf_token:
@@ -113,6 +119,24 @@ def start_comfyui():
     global comfyui_process
     
     logger.info("Starting ComfyUI server...")
+    
+    # If Network Volume is available, symlink models
+    if os.path.exists("/runpod-volume"):
+        logger.info("Setting up Network Volume symlinks...")
+        
+        # Create models directory structure in Network Volume if needed
+        volume_models = "/runpod-volume/models"
+        for subdir in ["unet", "clip", "vae", "checkpoints"]:
+            os.makedirs(f"{volume_models}/{subdir}", exist_ok=True)
+        
+        # Remove existing models directory and create symlink
+        comfyui_models = "/workspace/ComfyUI/models"
+        if os.path.exists(comfyui_models) and not os.path.islink(comfyui_models):
+            subprocess.run(f"rm -rf {comfyui_models}", shell=True)
+        
+        if not os.path.exists(comfyui_models):
+            os.symlink(volume_models, comfyui_models)
+            logger.info(f"Created symlink: {comfyui_models} -> {volume_models}")
     
     # Kill any existing ComfyUI process
     subprocess.run("pkill -f 'python.*main.py'", shell=True)
@@ -217,7 +241,11 @@ def handler(job):
         hf_token = job_input.get('hf_token', None)
         
         # Check if any critical models are missing
-        models_base = "/workspace/ComfyUI/models"
+        # Use Network Volume if available
+        if os.path.exists("/runpod-volume"):
+            models_base = "/runpod-volume/models"
+        else:
+            models_base = "/workspace/ComfyUI/models"
         critical_models = [
             f"{models_base}/unet/flux1-kontext-dev.safetensors",
             f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",

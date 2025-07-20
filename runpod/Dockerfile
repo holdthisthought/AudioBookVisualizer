@@ -63,11 +63,12 @@ EOF
 
 RUN chmod +x /workspace/install_custom_nodes.sh
 
-# Create model directories
+# Create model directories and Network Volume mount point
 RUN mkdir -p /workspace/ComfyUI/models/unet \
     /workspace/ComfyUI/models/clip \
     /workspace/ComfyUI/models/vae \
-    /workspace/ComfyUI/models/checkpoints
+    /workspace/ComfyUI/models/checkpoints \
+    /runpod-volume
 
 # Copy scripts from current directory
 COPY download_models.py /workspace/download_models.py

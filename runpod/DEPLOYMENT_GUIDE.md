@@ -58,17 +58,32 @@ No Docker installation or building required!
 
 6. Copy the **Endpoint ID** (you'll need this for the app)
 
-## Step 3: Configure Volume (Recommended)
+## Step 3: Configure Network Volume (REQUIRED)
 
-To avoid downloading models on every cold start:
+To store models persistently and avoid disk space issues:
 
-1. In your endpoint settings, click **Edit**
+1. Go to RunPod **Storage** → **Network Volumes**
 
-2. Under **Container Configuration**, add a volume:
-   - Volume Mount Path: `/workspace/ComfyUI/models`
-   - Volume Size: 50GB
+2. Create a new Network Volume:
+   - Region: Same as your endpoint
+   - Size: 50GB (minimum)
+   - Name: `flux-models`
 
-3. On first run, models will be downloaded to this volume
+3. In your endpoint settings:
+   - Click **Edit**
+   - Under **Volume**, select your network volume
+   - Mount Path: `/runpod-volume`
+   - Click **Update**
+
+4. The handler will automatically:
+   - Detect the Network Volume
+   - Store models in `/runpod-volume/models`
+   - Create symlinks for ComfyUI compatibility
+
+5. Benefits:
+   - Models persist between container restarts
+   - No "disk full" errors
+   - Faster cold starts after first download
 
 ## Step 4: Test the Endpoint
 

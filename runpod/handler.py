@@ -303,8 +303,14 @@ def handler(job):
 # Initialize on container start
 logger.info("Initializing ComfyUI for RunPod...")
 
-# Skip model download on startup - will download when job arrives with HF token
-logger.info("Skipping initial model download - will download on first job")
+# Try to download models on startup if HF token is in environment
+logger.info("Checking for required models...")
+hf_token_env = os.environ.get('HF_TOKEN', os.environ.get('HUGGING_FACE_TOKEN', None))
+if hf_token_env:
+    logger.info("Found HF token in environment, downloading models...")
+    ensure_models(hf_token_env)
+else:
+    logger.info("No HF token in environment, will download on first job")
 
 # Start ComfyUI
 if not start_comfyui():

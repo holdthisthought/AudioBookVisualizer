@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     vim \
+    unzip \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
@@ -39,22 +40,25 @@ RUN pip install --no-cache-dir \
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes
 
-# Install unzip if not available
-RUN apt-get update && apt-get install -y unzip wget
+# Create placeholder directories for custom nodes
+# These will be populated at runtime if needed
+RUN mkdir -p ComfyUI-Manager ComfyUI-Flux-Kontext
 
-# Download and install ComfyUI-Manager (optional)
-RUN wget -q https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/heads/main.zip -O manager.zip && \
-    unzip -q manager.zip && \
-    rm manager.zip && \
-    mv ComfyUI-Manager-main ComfyUI-Manager || true
-
-# Download and install FLUX Kontext custom nodes
-RUN wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O kontext.zip && \
-    unzip -q kontext.zip && \
-    rm kontext.zip && \
-    mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext && \
-    cd ComfyUI-Flux-Kontext && \
-    if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt || true; fi
+# Create a script to install custom nodes at runtime
+RUN echo '#!/bin/bash\n\
+echo "Checking for custom nodes..."\n\
+cd /workspace/ComfyUI/custom_nodes\n\
+if [ ! -f ComfyUI-Flux-Kontext/.installed ]; then\n\
+    echo "Installing ComfyUI-Flux-Kontext..."\n\
+    rm -rf ComfyUI-Flux-Kontext\n\
+    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>/dev/null || \\\n\
+    wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \\\n\
+    unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext\n\
+    cd ComfyUI-Flux-Kontext && touch .installed\n\
+    if [ -f requirements.txt ]; then pip install -q -r requirements.txt 2>/dev/null || true; fi\n\
+fi\n\
+echo "Custom nodes ready"' > /workspace/install_custom_nodes.sh && \
+    chmod +x /workspace/install_custom_nodes.sh
 
 # Create model directories
 RUN mkdir -p /workspace/ComfyUI/models/unet \
@@ -80,6 +84,8 @@ RUN echo '#!/bin/bash\n\
 echo "Starting RunPod ComfyUI worker..."\n\
 export PYTHONUNBUFFERED=1\n\
 export COMFYUI_PATH=/workspace/ComfyUI\n\
+# Install custom nodes if needed\n\
+/workspace/install_custom_nodes.sh\n\
 cd /workspace\n\
 python handler.py' > /workspace/start.sh && chmod +x /workspace/start.sh
 

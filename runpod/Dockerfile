@@ -40,23 +40,30 @@ RUN pip install --no-cache-dir \
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes
 
-# Create placeholder directories for custom nodes
-# These will be populated at runtime if needed
-RUN mkdir -p ComfyUI-Manager ComfyUI-Flux-Kontext
+# Install ComfyUI-Flux-Kontext during build
+RUN git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git && \
+    cd ComfyUI-Flux-Kontext && \
+    if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Create a script to install custom nodes at runtime
 RUN cat > /workspace/install_custom_nodes.sh << 'EOF'
 #!/bin/bash
 echo "Checking for custom nodes..."
 cd /workspace/ComfyUI/custom_nodes
-if [ ! -f ComfyUI-Flux-Kontext/.installed ]; then
+if [ -d ComfyUI-Flux-Kontext ]; then
+    echo "ComfyUI-Flux-Kontext already installed"
+else
     echo "Installing ComfyUI-Flux-Kontext..."
-    rm -rf ComfyUI-Flux-Kontext
-    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git 2>/dev/null || \
-    (wget -q https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \
-     unzip -q k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext)
-    cd ComfyUI-Flux-Kontext && touch .installed
-    if [ -f requirements.txt ]; then pip install -q -r requirements.txt 2>/dev/null || true; fi
+    git clone https://github.com/melMass/ComfyUI-Flux-Kontext.git || \
+    (wget https://github.com/melMass/ComfyUI-Flux-Kontext/archive/refs/heads/main.zip -O k.zip && \
+     unzip k.zip && rm k.zip && mv ComfyUI-Flux-Kontext-main ComfyUI-Flux-Kontext)
+    if [ -d ComfyUI-Flux-Kontext ]; then
+        cd ComfyUI-Flux-Kontext
+        if [ -f requirements.txt ]; then pip install -r requirements.txt || true; fi
+        echo "ComfyUI-Flux-Kontext installed successfully"
+    else
+        echo "Failed to install ComfyUI-Flux-Kontext"
+    fi
 fi
 echo "Custom nodes ready"
 EOF

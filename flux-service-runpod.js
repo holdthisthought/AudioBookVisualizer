@@ -233,7 +233,7 @@ class FluxServiceRunPod {
         const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
         // Use the exact model names available on the RunPod endpoint
         // Based on the error logs, these are the available models:
-        const modelName = 'flux1-schnell.safetensors'; // Only this version is available
+        const modelName = 'flux1-kontext-dev.safetensors'; // Kontext Dev model
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors'; // Without '_scaled' suffix
 
         return {

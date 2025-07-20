@@ -282,10 +282,31 @@ def handler(job):
             # Wait a moment for filesystem to sync
             time.sleep(2)
             
-            # Verify all models were downloaded
-            still_missing = [m for m in critical_models if not os.path.exists(m)]
+            # Verify all models were downloaded and check sizes
+            still_missing = []
+            for model_path in critical_models:
+                if not os.path.exists(model_path):
+                    still_missing.append(model_path)
+                else:
+                    size_mb = os.path.getsize(model_path) / (1024 * 1024)
+                    model_name = os.path.basename(model_path)
+                    
+                    # Check for corrupted downloads (files that are too small)
+                    if model_name == "flux1-kontext-dev.safetensors" and size_mb < 20000:  # Should be ~24GB
+                        logger.error(f"FLUX model is corrupted! Only {size_mb:.1f} MB, should be ~24,000 MB")
+                        # Delete the corrupted file so it can be re-downloaded
+                        os.remove(model_path)
+                        still_missing.append(model_path)
+            
             if still_missing:
-                return {"error": f"Failed to download models: {[os.path.basename(m) for m in still_missing]}"}
+                logger.info(f"Need to download: {[os.path.basename(m) for m in still_missing]}")
+                # Re-run ensure_models to download missing/corrupted files
+                ensure_models(hf_token)
+                
+                # Check again
+                final_missing = [m for m in still_missing if not os.path.exists(m)]
+                if final_missing:
+                    return {"error": f"Failed to download models: {[os.path.basename(m) for m in final_missing]}"}
         
         # Parse workflow from input
         if "workflow" not in job_input:

@@ -10,12 +10,113 @@ import time
 import base64
 import tempfile
 import json
+import requests
 from typing import Dict, Any, List, Optional
 from faster_whisper import WhisperModel
 import numpy as np
 
 # Model cache to avoid reloading
 MODEL_CACHE = {}
+
+# Model download URLs - Using Hugging Face direct download links
+MODEL_URLS = {
+    "tiny": "https://huggingface.co/Systran/faster-whisper-tiny/resolve/main/model.bin",
+    "tiny.en": "https://huggingface.co/Systran/faster-whisper-tiny.en/resolve/main/model.bin",
+    "base": "https://huggingface.co/Systran/faster-whisper-base/resolve/main/model.bin",
+    "base.en": "https://huggingface.co/Systran/faster-whisper-base.en/resolve/main/model.bin",
+    "small": "https://huggingface.co/Systran/faster-whisper-small/resolve/main/model.bin",
+    "small.en": "https://huggingface.co/Systran/faster-whisper-small.en/resolve/main/model.bin",
+    "medium": "https://huggingface.co/Systran/faster-whisper-medium/resolve/main/model.bin",
+    "medium.en": "https://huggingface.co/Systran/faster-whisper-medium.en/resolve/main/model.bin",
+    "large-v1": "https://huggingface.co/Systran/faster-whisper-large-v1/resolve/main/model.bin",
+    "large-v2": "https://huggingface.co/Systran/faster-whisper-large-v2/resolve/main/model.bin",
+    "large-v3": "https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/model.bin",
+    "large": "https://huggingface.co/Systran/faster-whisper-large-v3/resolve/main/model.bin"  # Alias for v3
+}
+
+# Config files needed for each model
+CONFIG_FILES = [
+    "config.json",
+    "tokenizer.json",
+    "vocabulary.txt",
+    "preprocessor_config.json"
+]
+
+def download_model_files(model_size: str) -> str:
+    """Download model files if not already present"""
+    models_dir = os.environ.get('WHISPER_MODELS_DIR', '/models/whisper')
+    model_dir = os.path.join(models_dir, model_size)
+    
+    # Check if model already exists
+    model_bin_path = os.path.join(model_dir, "model.bin")
+    if os.path.exists(model_bin_path):
+        print(f"Model {model_size} already downloaded")
+        return model_dir
+    
+    # Create model directory
+    os.makedirs(model_dir, exist_ok=True)
+    
+    # Get base URL for the model
+    model_name_map = {
+        "tiny": "tiny",
+        "base": "base",
+        "small": "small",
+        "medium": "medium",
+        "large": "large-v3",
+        "large-v3": "large-v3"
+    }
+    
+    mapped_name = model_name_map.get(model_size, model_size)
+    base_url = f"https://huggingface.co/Systran/faster-whisper-{mapped_name}/resolve/main"
+    
+    # Download model.bin
+    print(f"Downloading {model_size} model from {base_url}...")
+    model_url = f"{base_url}/model.bin"
+    
+    try:
+        response = requests.get(model_url, stream=True)
+        response.raise_for_status()
+        
+        total_size = int(response.headers.get('content-length', 0))
+        downloaded = 0
+        
+        with open(model_bin_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+                    downloaded += len(chunk)
+                    if total_size > 0:
+                        progress = (downloaded / total_size) * 100
+                        print(f"Downloading model.bin: {progress:.1f}%", end='\r')
+        
+        print(f"\nModel binary downloaded successfully")
+        
+        # Download config files
+        for config_file in CONFIG_FILES:
+            config_url = f"{base_url}/{config_file}"
+            config_path = os.path.join(model_dir, config_file)
+            
+            try:
+                print(f"Downloading {config_file}...")
+                response = requests.get(config_url)
+                response.raise_for_status()
+                
+                with open(config_path, 'w') as f:
+                    f.write(response.text)
+                    
+            except requests.exceptions.HTTPError as e:
+                # Some config files might not exist for all models
+                print(f"Warning: Could not download {config_file}: {e}")
+        
+        print(f"Model {model_size} downloaded successfully")
+        return model_dir
+        
+    except Exception as e:
+        print(f"Error downloading model: {e}")
+        # Clean up partial download
+        if os.path.exists(model_bin_path):
+            os.remove(model_bin_path)
+        raise
 
 def get_model(model_size: str = "base", device: str = "cuda", compute_type: str = "float16") -> WhisperModel:
     """Get or create a Whisper model instance"""
@@ -26,12 +127,15 @@ def get_model(model_size: str = "base", device: str = "cuda", compute_type: str 
         start_time = time.time()
         
         try:
+            # Download model if needed
+            model_path = download_model_files(model_size)
+            
+            # Load model from downloaded path
             model = WhisperModel(
-                model_size,
+                model_path,
                 device=device,
                 compute_type=compute_type,
-                download_root="/models/whisper",
-                local_files_only=False  # Allow downloading if not present
+                local_files_only=True  # Use only local files
             )
             
             MODEL_CACHE[cache_key] = model
@@ -41,12 +145,12 @@ def get_model(model_size: str = "base", device: str = "cuda", compute_type: str 
             # Try with CPU and int8 as fallback
             if device == "cuda":
                 print("Falling back to CPU with int8...")
+                model_path = download_model_files(model_size)
                 model = WhisperModel(
-                    model_size,
+                    model_path,
                     device="cpu",
                     compute_type="int8",
-                    download_root="/models/whisper",
-                    local_files_only=False
+                    local_files_only=True
                 )
                 MODEL_CACHE[cache_key] = model
             else:
@@ -207,9 +311,8 @@ def handler(job: Dict[str, Any]) -> Dict[str, Any]:
             "traceback": traceback.format_exc()
         }
 
-# Preload a model for faster cold starts
+# Start RunPod handler
 if __name__ == "__main__":
-    print("Preloading base model for faster cold starts...")
-    get_model("base", "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu")
-    print("Starting RunPod handler...")
+    print("Starting RunPod Whisper handler...")
+    print("Models will be downloaded on first use")
     runpod.serverless.start({"handler": handler})

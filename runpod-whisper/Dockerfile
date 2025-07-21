@@ -37,16 +37,8 @@ RUN pip install --no-cache-dir \
 # Create model directory
 RUN mkdir -p /models/whisper
 
-# Set environment for model downloads
-ENV HF_HOME=/models
-ENV WHISPER_CACHE=/models/whisper
-
-# Pre-download only the smaller models to save space during build
-# Larger models will be downloaded on first use
-RUN echo "Pre-downloading essential Whisper models..." && \
-    python -c "from faster_whisper import WhisperModel; m = WhisperModel('tiny', device='cpu', compute_type='int8'); del m; print('tiny ✓')" && \
-    python -c "from faster_whisper import WhisperModel; m = WhisperModel('base', device='cpu', compute_type='int8'); del m; print('base ✓')" && \
-    echo "Essential models downloaded. Larger models will download on first use."
+# Set environment for model storage
+ENV WHISPER_MODELS_DIR=/models/whisper
 
 # Copy handler
 COPY handler.py /app/handler.py

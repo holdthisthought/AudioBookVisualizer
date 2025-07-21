@@ -37,25 +37,18 @@ RUN pip install --no-cache-dir \
 # Create model directory
 RUN mkdir -p /models/whisper
 
-# Download all Whisper models during build
-RUN python -c "\
-from faster_whisper import WhisperModel; \
-import os; \
-os.environ['HF_HOME'] = '/models'; \
-print('Downloading Whisper models...'); \
-for size in ['tiny', 'base', 'small', 'medium', 'large-v3']: \
-    try: \
-        print(f'Downloading {size} model...'); \
-        model = WhisperModel(size, device='cpu', compute_type='int8', download_root='/models/whisper'); \
-        del model; \
-        print(f'{size} model downloaded successfully'); \
-    except Exception as e: \
-        print(f'Warning: Failed to download {size} model: {e}'); \
-print('Model download complete!');"
-
-# Set environment variable for model cache
+# Set environment for model downloads
 ENV HF_HOME=/models
 ENV WHISPER_CACHE=/models/whisper
+
+# Download each Whisper model separately for better reliability
+RUN echo "Downloading Whisper models..." && \
+    python -c "from faster_whisper import WhisperModel; m = WhisperModel('tiny', device='cpu', compute_type='int8'); del m; print('tiny ✓')" && \
+    python -c "from faster_whisper import WhisperModel; m = WhisperModel('base', device='cpu', compute_type='int8'); del m; print('base ✓')" && \
+    python -c "from faster_whisper import WhisperModel; m = WhisperModel('small', device='cpu', compute_type='int8'); del m; print('small ✓')" && \
+    python -c "from faster_whisper import WhisperModel; m = WhisperModel('medium', device='cpu', compute_type='int8'); del m; print('medium ✓')" && \
+    python -c "from faster_whisper import WhisperModel; m = WhisperModel('large-v3', device='cpu', compute_type='int8'); del m; print('large-v3 ✓')" && \
+    echo "All Whisper models downloaded successfully!"
 
 # Copy handler
 COPY handler.py /app/handler.py

@@ -25,15 +25,32 @@ def get_model(model_size: str = "base", device: str = "cuda", compute_type: str 
         print(f"Loading Whisper {model_size} model...")
         start_time = time.time()
         
-        model = WhisperModel(
-            model_size,
-            device=device,
-            compute_type=compute_type,
-            download_root="/models/whisper"
-        )
-        
-        MODEL_CACHE[cache_key] = model
-        print(f"Model loaded in {time.time() - start_time:.2f} seconds")
+        try:
+            model = WhisperModel(
+                model_size,
+                device=device,
+                compute_type=compute_type,
+                download_root="/models/whisper",
+                local_files_only=False  # Allow downloading if not present
+            )
+            
+            MODEL_CACHE[cache_key] = model
+            print(f"Model loaded in {time.time() - start_time:.2f} seconds")
+        except Exception as e:
+            print(f"Error loading model {model_size}: {e}")
+            # Try with CPU and int8 as fallback
+            if device == "cuda":
+                print("Falling back to CPU with int8...")
+                model = WhisperModel(
+                    model_size,
+                    device="cpu",
+                    compute_type="int8",
+                    download_root="/models/whisper",
+                    local_files_only=False
+                )
+                MODEL_CACHE[cache_key] = model
+            else:
+                raise
     
     return MODEL_CACHE[cache_key]
 

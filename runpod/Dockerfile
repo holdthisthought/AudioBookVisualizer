@@ -28,8 +28,10 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /workspace
 
-# Clone ComfyUI
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
+# Clone ComfyUI - get the latest version
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI && \
+    cd /workspace/ComfyUI && \
+    git log -1 --format="%H %ci" > /workspace/comfyui_version.txt
 
 # Install ComfyUI requirements
 WORKDIR /workspace/ComfyUI
@@ -46,7 +48,9 @@ RUN mkdir -p ComfyUI-Flux-Kontext
 # Create a script to install custom nodes at runtime
 RUN cat > /workspace/install_custom_nodes.sh << 'EOF'
 #!/bin/bash
-echo "Custom nodes check skipped - using standard ComfyUI nodes"
+echo "ComfyUI version:" && cat /workspace/comfyui_version.txt
+echo "Checking for ReferenceLatent node..."
+python -c "import sys; sys.path.append('/workspace/ComfyUI'); from nodes import NODE_CLASS_MAPPINGS; print('ReferenceLatent available:', 'ReferenceLatent' in NODE_CLASS_MAPPINGS)" || echo "Could not check nodes"
 EOF
 
 RUN chmod +x /workspace/install_custom_nodes.sh

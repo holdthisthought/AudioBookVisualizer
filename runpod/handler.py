@@ -482,6 +482,13 @@ def handler(job):
 # Initialize on container start
 logger.info("Initializing ComfyUI for RunPod...")
 
+# Log ComfyUI version
+try:
+    with open('/workspace/comfyui_version.txt', 'r') as f:
+        logger.info(f"ComfyUI version: {f.read().strip()}")
+except:
+    logger.info("ComfyUI version file not found")
+
 # Check disk space
 try:
     import shutil
@@ -519,6 +526,11 @@ try:
         node_types = list(response.json().keys())
         flux_nodes = [n for n in node_types if 'flux' in n.lower() or 'FLUX' in n]
         logger.info(f"Available FLUX-related nodes: {flux_nodes}")
+        # Check for specific nodes we need
+        reference_nodes = [n for n in node_types if 'reference' in n.lower() or 'Reference' in n]
+        logger.info(f"Available Reference nodes: {reference_nodes}")
+        logger.info(f"ReferenceLatent available: {'ReferenceLatent' in node_types}")
+        logger.info(f"Total nodes available: {len(node_types)}")
 except Exception as e:
     logger.warning(f"Could not get node info: {e}")
 

@@ -108,7 +108,7 @@ def ensure_models(hf_token=None, weight_dtype="fp8"):
         {
             "name": "ae.safetensors",
             "path": f"{models_base}/vae/ae.safetensors",
-            "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors",
+            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/ae.safetensors",
             "requires_auth": True
         }
     ]
@@ -126,7 +126,7 @@ def ensure_models(hf_token=None, weight_dtype="fp8"):
         required_models.append({
             "name": "flux1-kontext-dev-fp8.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev-fp8.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/flux1-kontext-dev-fp8_e4m3fn.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-dev-kontext_fp8_scaled.safetensors",
             "requires_auth": False
         })
     

@@ -32,7 +32,7 @@ def main():
     models = [
         {
             "name": "FLUX.1 Kontext Dev FP8",
-            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-kontext-dev-fp8_e4m3fn.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-dev-kontext_fp8_scaled.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev.safetensors"
         },
         {
@@ -47,7 +47,7 @@ def main():
         },
         {
             "name": "VAE",
-            "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors",
+            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/ae.safetensors",
             "path": f"{models_base}/vae/ae.safetensors"
         }
     ]

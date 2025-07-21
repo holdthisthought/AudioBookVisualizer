@@ -108,8 +108,8 @@ def ensure_models(hf_token=None):
         {
             "name": "flux1-kontext-dev.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/flux1-kontext-dev.safetensors",
-            "requires_auth": False
+            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/flux1-kontext-dev.safetensors",
+            "requires_auth": True
         },
         {
             "name": "t5xxl_fp8_e4m3fn.safetensors",

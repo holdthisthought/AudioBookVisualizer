@@ -53,9 +53,18 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
         
         if result.returncode == 0:
             logger.info(f"Successfully downloaded {model_name}")
+            # Verify file size
+            if os.path.exists(model_path):
+                size_mb = os.path.getsize(model_path) / (1024 * 1024)
+                logger.info(f"{model_name} size: {size_mb:.1f} MB")
             return True
         else:
-            logger.error(f"Failed to download {model_name}: {result.stderr}")
+            logger.error(f"Failed to download {model_name}: Exit code {result.returncode}")
+            logger.error(f"STDOUT: {result.stdout}")
+            logger.error(f"STDERR: {result.stderr}")
+            # Clean up partial download
+            if os.path.exists(model_path):
+                os.remove(model_path)
             return False
     except Exception as e:
         logger.error(f"Error downloading {model_name}: {str(e)}")

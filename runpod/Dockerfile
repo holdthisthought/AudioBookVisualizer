@@ -29,15 +29,20 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 
 # Clone ComfyUI - get the latest version
+# ReferenceLatent requires ComfyUI v0.3.41 or later
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI && \
     cd /workspace/ComfyUI && \
-    git log -1 --format="%H %ci" > /workspace/comfyui_version.txt
+    git fetch --tags && \
+    git log -1 --format="%H %ci" > /workspace/comfyui_version.txt && \
+    echo "ComfyUI commit: $(git rev-parse HEAD)" && \
+    echo "Latest tag: $(git describe --tags --abbrev=0 2>/dev/null || echo 'no tags')"
 
 # Install ComfyUI requirements
 WORKDIR /workspace/ComfyUI
 RUN pip install --no-cache-dir \
     torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir --upgrade transformers accelerate
 
 # Install custom nodes for FLUX Kontext
 WORKDIR /workspace/ComfyUI/custom_nodes

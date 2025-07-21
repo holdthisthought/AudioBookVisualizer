@@ -897,7 +897,7 @@ ipcMain.handle('flux-generate-kontext', async (event, { prompt, character_image_
         
         // Use RunPod if selected
         if (currentGenerationService === 'runpod') {
-            console.log('[FLUX] Using RunPod service for Kontext generation');
+            // Using RunPod service for Kontext generation
             
             if (!RUNPOD_API_KEY) {
                 throw new Error('RunPod API key not configured');
@@ -989,7 +989,7 @@ ipcMain.handle('flux-generate-kontext-single', async (event, { prompt, character
         
         // Use RunPod if selected
         if (currentGenerationService === 'runpod') {
-            console.log('[FLUX] Using RunPod service for single Kontext generation');
+            // Using RunPod service for single Kontext generation
             
             if (!RUNPOD_API_KEY) {
                 throw new Error('RunPod API key not configured');
@@ -1077,9 +1077,7 @@ ipcMain.handle('flux-generate-image', async (event, { prompt, settings }) => {
         
         // Use RunPod if selected
         if (currentGenerationService === 'runpod') {
-            console.log('[FLUX] Using RunPod service for generation');
-            console.log('[FLUX] RunPod configured:', fluxServiceRunPod.isConfigured);
-            console.log('[FLUX] Endpoint ID:', RUNPOD_ENDPOINT_ID);
+            // Using RunPod service for generation
             
             if (!RUNPOD_API_KEY) {
                 throw new Error('RunPod API key not configured');
@@ -1087,7 +1085,7 @@ ipcMain.handle('flux-generate-image', async (event, { prompt, settings }) => {
             
             // Initialize RunPod service if needed
             if (!fluxServiceRunPod.isConfigured) {
-                console.log('[FLUX] Initializing RunPod service...');
+                // Initialize RunPod service if needed
                 await fluxServiceRunPod.initialize({
                     runpodApiKey: RUNPOD_API_KEY,
                     runpodEndpointId: RUNPOD_ENDPOINT_ID,
@@ -1096,7 +1094,7 @@ ipcMain.handle('flux-generate-image', async (event, { prompt, settings }) => {
                 });
             }
             
-            console.log('[FLUX] Submitting job to RunPod...');
+            // Submit job to RunPod
             const jobId = await fluxServiceRunPod.generateImage(params);
             return { jobId, service: 'runpod' };
         }

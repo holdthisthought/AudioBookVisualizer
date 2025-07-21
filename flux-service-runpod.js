@@ -114,15 +114,13 @@ class FluxServiceRunPod {
             }
         };
 
-        console.log('Workflow type:', typeof workflow);
-        console.log('Workflow keys:', Object.keys(workflow));
-        console.log('Full workflow:', JSON.stringify(workflow, null, 2));
-        console.log('Payload being sent:', JSON.stringify(payload, null, 2));
+        // Log basic info for debugging if needed
+        // console.log('Submitting workflow with', Object.keys(workflow).length, 'nodes');
 
         try {
             // RunPod uses direct endpoint URLs
             const endpointUrl = `https://api.runpod.ai/v2/${this.endpointId}/run`;
-            console.log(`Submitting job to: ${endpointUrl}`);
+            // Submit job to endpoint
             
             const response = await axios.post(
                 endpointUrl,
@@ -150,7 +148,7 @@ class FluxServiceRunPod {
     async getJobStatus(jobId) {
         if (!this.activeJobs.has(jobId)) {
             // Still check the status even if not in active jobs
-            console.log(`Job ${jobId} not in active jobs list, checking anyway`);
+            // Job not in active jobs list, but still check status
         }
 
         try {
@@ -197,7 +195,6 @@ class FluxServiceRunPod {
                     };
                 }
                 
-                console.error('Unexpected output format:', data.output);
                 throw new Error('No image data in completed job');
             } else if (data.status === 'FAILED') {
                 this.activeJobs.delete(jobId);
@@ -629,7 +626,7 @@ class FluxServiceRunPod {
             });
             
             const endpoints = response.data || [];
-            console.log('Endpoints found:', endpoints);
+            // Successfully listed endpoints
             
             // Check if our endpoint is in the list
             if (this.endpointId && Array.isArray(endpoints)) {
@@ -655,37 +652,23 @@ class FluxServiceRunPod {
         try {
             // If we have an endpoint ID, test it directly
             if (this.endpointId) {
-                console.log(`Testing endpoint: ${this.endpointId}`);
-                
-                // Try different URL formats that RunPod might use
-                const urlsToTry = [
-                    `https://api.runpod.ai/v2/${this.endpointId}/health`,
-                    `https://api.runpod.ai/v2/${this.endpointId}`,
-                    `${this.baseUrl}/endpoint/${this.endpointId}`,
-                    `${this.baseUrl}/endpoints/${this.endpointId}`
-                ];
-                
-                for (const url of urlsToTry) {
-                    console.log(`Trying URL: ${url}`);
-                    try {
-                        const response = await axios.get(url, {
+                // Try to verify the endpoint is accessible
+                try {
+                    const response = await axios.get(
+                        `https://api.runpod.ai/v2/${this.endpointId}/health`,
+                        {
                             headers: {
                                 'Authorization': `Bearer ${this.apiKey}`,
                                 'Content-Type': 'application/json'
                             },
                             timeout: 5000
-                        });
-                        
-                        console.log(`Success with URL: ${url}`);
-                        return { success: true, message: `Endpoint is accessible at: ${url}` };
-                    } catch (err) {
-                        console.log(`Failed with ${url}: ${err.response?.status || err.message}`);
-                    }
+                        }
+                    );
+                    return { success: true, message: 'Endpoint is accessible' };
+                } catch (err) {
+                    // If endpoint check fails, verify API key
+                    return await this.verifyApiKey();
                 }
-                
-                // If none work, just verify the API key
-                console.log('Endpoint-specific tests failed, verifying API key...');
-                return await this.verifyApiKey();
             }
             
             // Otherwise, just verify the API key works by listing endpoints
@@ -703,8 +686,7 @@ class FluxServiceRunPod {
                 endpoints: endpoints
             };
         } catch (error) {
-            console.error('RunPod API test failed:', error.response?.data || error.message);
-            console.error('Full error:', error.response);
+            // console.error('RunPod API test failed:', error.response?.data || error.message);
             
             if (error.response?.status === 401) {
                 return { success: false, error: 'Invalid API key' };

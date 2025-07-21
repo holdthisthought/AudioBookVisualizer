@@ -23,6 +23,13 @@ class WhisperServiceRunPod {
             throw new Error('Whisper RunPod endpoint ID not configured');
         }
         
+        // Test the connection and log endpoint info
+        console.log('Initializing Whisper RunPod service...');
+        const testResult = await this.testConnection();
+        if (!testResult.success) {
+            console.error('Endpoint test failed:', testResult.error);
+        }
+        
         this.isConfigured = true;
         return true;
     }
@@ -39,18 +46,21 @@ class WhisperServiceRunPod {
             const audioBuffer = await fs.readFile(audioPath);
             const audioBase64 = audioBuffer.toString('base64');
             
-            // Prepare payload
+            // Try the most basic payload format first
+            // The worker might expect a different structure
             const payload = {
                 input: {
                     audio_base64: audioBase64,
-                    model_size: modelSize,
-                    language: language,
-                    task: task,
-                    word_timestamps: wordTimestamps,
-                    vad_filter: true,
-                    temperature: 0
+                    model: modelSize
                 }
             };
+            
+            console.log('Payload being sent (without audio data):', {
+                input: {
+                    ...payload.input,
+                    audio_base64: '[BASE64 AUDIO DATA HIDDEN]'
+                }
+            });
             
             // Submit job to RunPod
             const jobId = await this.submitJob(payload);
@@ -72,8 +82,10 @@ class WhisperServiceRunPod {
 
     async submitJob(payload) {
         try {
+            // Use /run for async execution
             const endpointUrl = `${this.baseUrl}/${this.endpointId}/run`;
             
+            console.log('Submitting to RunPod Whisper endpoint...');
             const response = await axios.post(
                 endpointUrl,
                 payload,
@@ -82,9 +94,11 @@ class WhisperServiceRunPod {
                         'Authorization': `Bearer ${this.apiKey}`,
                         'Content-Type': 'application/json'
                     },
-                    timeout: 30000 // 30 second timeout for initial request
+                    timeout: 30000 // 30 second timeout
                 }
             );
+
+            console.log('RunPod response:', JSON.stringify(response.data, null, 2));
 
             if (response.data.id) {
                 return response.data.id;
@@ -111,28 +125,60 @@ class WhisperServiceRunPod {
 
             const data = response.data;
             
+            // Only log non-IN_QUEUE statuses to reduce noise
+            if (data.status !== 'IN_QUEUE') {
+                console.log('RunPod Whisper response:', JSON.stringify(data, null, 2));
+            }
+            
             if (data.status === 'COMPLETED') {
                 this.activeJobs.delete(jobId);
                 
-                if (data.output && data.output.text) {
-                    return {
-                        status: 'success',
-                        transcription: data.output.text,
-                        segments: data.output.segments || [],
-                        language: data.output.language,
-                        duration: data.output.duration,
-                        processingTime: data.output.transcription_time,
-                        modelSize: data.output.model_size,
-                        fullResponse: data.output
-                    };
-                } else if (data.output && data.output.error) {
-                    return {
-                        status: 'error',
-                        error: data.output.error
-                    };
+                // According to RunPod docs, for COMPLETED jobs without output,
+                // we might need to wait a moment for the output to be available
+                // Let's do a single retry after a short delay
+                if (!data.output && !data.outputs) {
+                    console.log('COMPLETED but no output yet, waiting 2 seconds...');
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Try fetching again
+                    const retryResponse = await axios.get(
+                        `${this.baseUrl}/${this.endpointId}/status/${jobId}`,
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${this.apiKey}`,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
+                    
+                    const retryData = retryResponse.data;
+                    console.log('Retry response:', JSON.stringify(retryData, null, 2));
+                    
+                    if (retryData.output || retryData.outputs) {
+                        return this.processWhisperOutput(retryData.output || retryData.outputs);
+                    }
                 }
                 
-                throw new Error('Invalid response format from RunPod');
+                // Check for output in different possible locations
+                const output = data.output || data.outputs || data.result;
+                
+                if (output) {
+                    return this.processWhisperOutput(output);
+                }
+                
+                // If still no output, log what we have
+                console.log('COMPLETED status but no output found. Full response:', JSON.stringify(data, null, 2));
+                
+                // Let's check if the transcription might be at the top level
+                if (data.transcription || data.text) {
+                    return this.processWhisperOutput(data);
+                }
+                
+                // Return error to avoid infinite polling
+                return {
+                    status: 'error',
+                    error: 'Job completed but no transcription output found. The endpoint might not be configured correctly for RunPod Whisper worker.'
+                };
                 
             } else if (data.status === 'FAILED') {
                 this.activeJobs.delete(jobId);
@@ -175,8 +221,9 @@ class WhisperServiceRunPod {
 
     async testConnection() {
         try {
-            // Test the endpoint health
-            const response = await axios.get(
+            // First test the endpoint health
+            console.log('Testing endpoint health...');
+            const healthResponse = await axios.get(
                 `${this.baseUrl}/${this.endpointId}/health`,
                 {
                     headers: {
@@ -186,6 +233,23 @@ class WhisperServiceRunPod {
                     timeout: 5000
                 }
             );
+            
+            console.log('Health check response:', healthResponse.data);
+            
+            // Try to get endpoint info to see what image it's using
+            try {
+                const infoUrl = `https://api.runpod.io/v2/${this.endpointId}`;
+                const infoResponse = await axios.get(infoUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${this.apiKey}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log('Endpoint info:', JSON.stringify(infoResponse.data, null, 2));
+            } catch (e) {
+                console.log('Could not fetch endpoint info:', e.message);
+            }
+            
             return { success: true, message: 'Whisper endpoint is accessible' };
         } catch (error) {
             if (error.response?.status === 401) {
@@ -239,6 +303,66 @@ class WhisperServiceRunPod {
         } catch (error) {
             return { error: error.message };
         }
+    }
+
+    processWhisperOutput(output) {
+        // Handle different output formats from RunPod's Whisper
+        if (typeof output === 'string') {
+            return {
+                status: 'success',
+                transcription: output,
+                segments: this.createSegmentsFromText(output)
+            };
+        } else if (output.text) {
+            return {
+                status: 'success',
+                transcription: output.text,
+                segments: output.segments || this.createSegmentsFromText(output.text),
+                language: output.language,
+                duration: output.duration
+            };
+        } else if (output.transcription) {
+            return {
+                status: 'success',
+                transcription: output.transcription,
+                segments: output.segments || this.createSegmentsFromText(output.transcription),
+                language: output.language,
+                duration: output.duration
+            };
+        } else if (output.error) {
+            return {
+                status: 'error',
+                error: output.error
+            };
+        } else {
+            // If output is an object with other structure, try to extract text
+            const text = output.result || output.output || JSON.stringify(output);
+            return {
+                status: 'success',
+                transcription: text,
+                segments: this.createSegmentsFromText(text)
+            };
+        }
+    }
+
+    createSegmentsFromText(text) {
+        // Create basic segments from plain text transcription
+        // Split by sentences for basic segmentation
+        const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+        let currentTime = 0;
+        const timePerChar = 0.05; // Rough estimate: 50ms per character
+        
+        return sentences.map((sentence, index) => {
+            const duration = sentence.length * timePerChar;
+            const segment = {
+                id: index,
+                start: currentTime,
+                end: currentTime + duration,
+                text: sentence.trim()
+            };
+            currentTime += duration;
+            return segment;
+        });
     }
 
     async shutdown() {

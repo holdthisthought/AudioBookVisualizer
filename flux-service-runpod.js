@@ -304,19 +304,10 @@ class FluxServiceRunPod {
             },
             "33": {
                 "inputs": {
-                    "guidance": guidance,
-                    "conditioning": ["34", 0]
+                    "text": prompt,
+                    "clip": ["30", 0]
                 },
-                "class_type": "FluxGuidance"
-            },
-            "34": {
-                "inputs": {
-                    "clip": ["30", 0],
-                    "clip_l": prompt,
-                    "t5xxl": prompt,
-                    "guidance": guidance
-                },
-                "class_type": "CLIPTextEncodeFlux"
+                "class_type": "CLIPTextEncode"
             }
         };
     }
@@ -406,7 +397,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": "default"
+                    "weight_dtype": this.modelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
                 }
             },
             "11": {
@@ -533,7 +524,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": "default"
+                    "weight_dtype": this.modelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
                 }
             },
             "8": {

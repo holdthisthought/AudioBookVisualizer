@@ -70,7 +70,7 @@ def download_model_if_needed(model_name: str, model_path: str, download_url: str
         logger.error(f"Error downloading {model_name}: {str(e)}")
         return False
 
-def ensure_models(hf_token=None):
+def ensure_models(hf_token=None, weight_dtype="fp8"):
     """Ensure all required models are downloaded."""
     global models_checked
     
@@ -87,30 +87,12 @@ def ensure_models(hf_token=None):
         logger.info(f"Using local storage for models: {models_base}")
         logger.warning("Network Volume not detected - may run out of disk space!")
     
-    # Check and clean up corrupted FLUX model before downloading
-    flux_path = f"{models_base}/unet/flux1-kontext-dev.safetensors"
-    if os.path.exists(flux_path):
-        size_mb = os.path.getsize(flux_path) / (1024 * 1024)
-        if size_mb < 10000:  # Should be ~12GB for FP8
-            logger.warning(f"Found corrupted FLUX model ({size_mb:.1f} MB), deleting...")
-            try:
-                os.remove(flux_path)
-                logger.info("Deleted corrupted FLUX model")
-            except Exception as e:
-                logger.error(f"Failed to delete corrupted model: {e}")
-    
     # Get Hugging Face token from environment if not provided
     if not hf_token:
         hf_token = os.environ.get('HF_TOKEN', os.environ.get('HUGGING_FACE_TOKEN', None))
     
-    # Define required models
+    # Define required models including FLUX model based on precision
     required_models = [
-        {
-            "name": "flux1-kontext-dev.safetensors",
-            "path": f"{models_base}/unet/flux1-kontext-dev.safetensors",
-            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-kontext-dev-fp8_e4m3fn.safetensors",
-            "requires_auth": False
-        },
         {
             "name": "t5xxl_fp8_e4m3fn.safetensors",
             "path": f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
@@ -130,6 +112,23 @@ def ensure_models(hf_token=None):
             "requires_auth": True
         }
     ]
+    
+    # Add the appropriate FLUX model based on requested precision
+    if weight_dtype == "fp16":
+        required_models.append({
+            "name": "flux1-kontext-dev-fp16.safetensors",
+            "path": f"{models_base}/unet/flux1-kontext-dev-fp16.safetensors",
+            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/flux1-kontext-dev.safetensors",
+            "requires_auth": True
+        })
+    else:
+        # Default to FP8
+        required_models.append({
+            "name": "flux1-kontext-dev-fp8.safetensors",
+            "path": f"{models_base}/unet/flux1-kontext-dev-fp8.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/flux1-kontext-dev-fp8_e4m3fn.safetensors",
+            "requires_auth": False
+        })
     
     # Download models if needed
     all_success = True
@@ -272,6 +271,25 @@ def handler(job):
         # Extract HF token if provided
         hf_token = job_input.get('hf_token', None)
         
+        # Parse workflow first to determine which models we need
+        if "workflow" not in job_input:
+            return {"error": "No workflow provided"}
+        
+        workflow = job_input["workflow"]
+        if isinstance(workflow, str):
+            workflow = json.loads(workflow)
+        
+        # Check workflow to determine which FLUX model precision is needed
+        weight_dtype = "fp16"  # default
+        for node in workflow.values():
+            if node.get("class_type") == "UNETLoader":
+                weight_dtype = node.get("inputs", {}).get("weight_dtype", "fp16")
+                logger.info(f"Workflow requests {weight_dtype} precision")
+                break
+        
+        # Map precision to model filename
+        flux_model_name = "flux1-kontext-dev-fp16.safetensors" if weight_dtype == "fp16" else "flux1-kontext-dev-fp8.safetensors"
+        
         # Check if any critical models are missing
         # Use Network Volume if available
         if os.path.exists("/runpod-volume"):
@@ -279,7 +297,7 @@ def handler(job):
         else:
             models_base = "/workspace/ComfyUI/models"
         critical_models = [
-            f"{models_base}/unet/flux1-kontext-dev.safetensors",
+            f"{models_base}/unet/{flux_model_name}",
             f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
             f"{models_base}/clip/clip_l.safetensors",
             f"{models_base}/vae/ae.safetensors"
@@ -295,8 +313,8 @@ def handler(job):
                 # Set it in environment
                 os.environ['HF_TOKEN'] = hf_token
             
-            logger.info("Downloading missing models...")
-            ensure_models(hf_token)
+            logger.info(f"Downloading missing models for {weight_dtype} precision...")
+            ensure_models(hf_token, weight_dtype)
             
             # Log model sizes after download attempt
             for model_path in critical_models:
@@ -319,8 +337,8 @@ def handler(job):
                     model_name = os.path.basename(model_path)
                     
                     # Check for corrupted downloads (files that are too small)
-                    if model_name == "flux1-kontext-dev.safetensors" and size_mb < 10000:  # Should be ~12GB for FP8
-                        logger.error(f"FLUX model is corrupted! Only {size_mb:.1f} MB, should be ~12,000 MB")
+                    if model_name.startswith("flux1-kontext-dev") and size_mb < 1000:  # Should be much larger
+                        logger.error(f"FLUX model is corrupted! Only {size_mb:.1f} MB")
                         # Delete the corrupted file so it can be re-downloaded
                         os.remove(model_path)
                         still_missing.append(model_path)
@@ -328,7 +346,7 @@ def handler(job):
             if still_missing:
                 logger.info(f"Need to download: {[os.path.basename(m) for m in still_missing]}")
                 # Re-run ensure_models to download missing/corrupted files
-                ensure_models(hf_token)
+                ensure_models(hf_token, weight_dtype)
                 
                 # Check again
                 final_missing = [m for m in still_missing if not os.path.exists(m)]

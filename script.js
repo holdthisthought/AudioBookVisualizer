@@ -2894,6 +2894,15 @@ settingsBtn.addEventListener('click', async () => {
         runpodApiKeyInput.placeholder = 'API key is configured (hidden for security)';
         showRunpodStatus('RunPod API key is configured.', 'success');
     }
+    
+    // Load RunPod endpoint IDs
+    const fluxSettings = await ipcRenderer.invoke('get-flux-settings');
+    if (fluxSettings.runpodEndpointId) {
+        runpodEndpointIdInput.placeholder = 'FLUX Endpoint ID is configured';
+    }
+    if (fluxSettings.whisperRunpodEndpointId) {
+        whisperRunpodEndpointIdInput.placeholder = 'Whisper Endpoint ID is configured';
+    }
 });
 
 // Close settings modal
@@ -3038,6 +3047,7 @@ const runpodServiceSettings = document.getElementById('runpod-service-settings')
 // RunPod elements
 const runpodApiKeyInput = document.getElementById('runpod-api-key-input');
 const runpodEndpointIdInput = document.getElementById('runpod-endpoint-id-input');
+const whisperRunpodEndpointIdInput = document.getElementById('whisper-runpod-endpoint-id-input');
 const toggleRunpodKeyVisibility = document.getElementById('toggle-runpod-key-visibility');
 const testRunpodBtn = document.getElementById('test-runpod-btn');
 const saveRunpodKeyBtn = document.getElementById('save-runpod-key-btn');
@@ -3197,6 +3207,7 @@ testRunpodBtn.addEventListener('click', async () => {
 saveRunpodKeyBtn.addEventListener('click', async () => {
     const apiKey = runpodApiKeyInput.value.trim();
     const endpointId = runpodEndpointIdInput.value.trim();
+    const whisperEndpointId = whisperRunpodEndpointIdInput.value.trim();
     
     if (!apiKey) {
         showRunpodStatus('Please enter an API key to save.', 'error');
@@ -3209,11 +3220,19 @@ saveRunpodKeyBtn.addEventListener('click', async () => {
     try {
         const result = await ipcRenderer.invoke('save-runpod-key', { apiKey, endpointId });
         if (result.success) {
+            // Save Whisper endpoint ID separately if provided
+            if (whisperEndpointId) {
+                await ipcRenderer.invoke('save-whisper-endpoint-id', whisperEndpointId);
+            }
+            
             showRunpodStatus('✅ RunPod configuration saved successfully!', 'success');
             runpodApiKeyInput.value = '';
             runpodApiKeyInput.placeholder = 'API key is configured (hidden for security)';
             if (endpointId) {
-                runpodEndpointIdInput.placeholder = 'Endpoint ID is configured';
+                runpodEndpointIdInput.placeholder = 'FLUX Endpoint ID is configured';
+            }
+            if (whisperEndpointId) {
+                whisperRunpodEndpointIdInput.placeholder = 'Whisper Endpoint ID is configured';
             }
         } else {
             showRunpodStatus(`❌ Failed to save configuration: ${result.error}`, 'error');

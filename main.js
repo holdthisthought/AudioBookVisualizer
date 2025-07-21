@@ -274,6 +274,17 @@ ipcMain.handle('get-runpod-status', async () => {
     };
 });
 
+ipcMain.handle('get-flux-settings', async () => {
+    return {
+        runpodApiKey: RUNPOD_API_KEY,
+        runpodEndpointId: RUNPOD_ENDPOINT_ID,
+        whisperRunpodEndpointId: WHISPER_RUNPOD_ENDPOINT_ID,
+        huggingfaceToken: HUGGINGFACE_TOKEN,
+        generationService: currentGenerationService,
+        whisperService: currentWhisperService
+    };
+});
+
 ipcMain.handle('test-runpod-connection', async (event, { apiKey, endpointId }) => {
     try {
         const testService = new FluxServiceRunPod();

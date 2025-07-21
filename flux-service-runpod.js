@@ -303,7 +303,7 @@ class FluxServiceRunPod {
             "32": {
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
                 },
                 "class_type": "UNETLoader"
             },

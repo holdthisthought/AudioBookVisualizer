@@ -377,14 +377,6 @@ class FluxServiceRunPod {
                     "vae": ["5", 0]
                 }
             },
-            "7": {
-                "class_type": "EmptySD3LatentImage",
-                "inputs": {
-                    "width": width,
-                    "height": height,
-                    "batch_size": 1
-                }
-            },
             "8": {
                 "class_type": "DualCLIPLoader",
                 "inputs": {
@@ -420,8 +412,8 @@ class FluxServiceRunPod {
                     "model": ["10", 0],
                     "max_shift": 1.15,
                     "base_shift": 0.5,
-                    "width": width,
-                    "height": height
+                    "width": 1024,
+                    "height": 1024
                 }
             },
             "13": {
@@ -436,7 +428,7 @@ class FluxServiceRunPod {
                     "model": ["12", 0],
                     "positive": ["14", 0],
                     "negative": ["9", 0],
-                    "latent_image": ["7", 0]
+                    "latent_image": ["6", 0]
                 }
             },
             "14": {
@@ -504,14 +496,6 @@ class FluxServiceRunPod {
                     "vae": ["3", 0]
                 }
             },
-            "4b": {
-                "class_type": "EmptySD3LatentImage",
-                "inputs": {
-                    "width": width,
-                    "height": height,
-                    "batch_size": 1
-                }
-            },
             "5": {
                 "class_type": "DualCLIPLoader",
                 "inputs": {
@@ -547,8 +531,8 @@ class FluxServiceRunPod {
                     "model": ["7", 0],
                     "max_shift": 1.15,
                     "base_shift": 0.5,
-                    "width": width,
-                    "height": height
+                    "width": 1024,
+                    "height": 1024
                 }
             },
             "10": {
@@ -563,7 +547,7 @@ class FluxServiceRunPod {
                     "model": ["9", 0],
                     "positive": ["11", 0],
                     "negative": ["6", 0],
-                    "latent_image": ["4b", 0]
+                    "latent_image": ["4", 0]
                 }
             },
             "11": {
@@ -603,6 +587,167 @@ class FluxServiceRunPod {
         // RunPod typically handles base64 images directly in the workflow
         // But if needed, this could upload to RunPod's storage
         return base64Image;
+    }
+
+    async editImage(params) {
+        if (!this.isConfigured) {
+            throw new Error('RunPod service not initialized');
+        }
+
+        const { prompt, image, width, height, steps, guidance, seed, sampler, scheduler, modelPrecision } = params;
+        
+        // Use the model precision from params, falling back to the initialized value
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
+        
+        // Create the edit workflow using Kontext single image
+        const workflow = this.createEditImageWorkflow({
+            ...params,
+            modelPrecision: actualModelPrecision
+        }, image);
+
+        // Submit job to RunPod
+        const jobId = await this.submitJob(workflow);
+        
+        // Store job info for tracking
+        this.activeJobs.set(jobId, {
+            startTime: Date.now(),
+            params: params,
+            type: 'edit'
+        });
+
+        return { jobId, service: 'runpod' };
+    }
+
+    createEditImageWorkflow(params, base64Image) {
+        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, modelPrecision } = params;
+        
+        // Model names for RunPod deployment
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
+        const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
+        const t5ModelName = actualModelPrecision === 'fp16' ? 't5xxl_fp16.safetensors' : 't5xxl_fp8_e4m3fn.safetensors';
+        
+        const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
+
+        return {
+            "1": {
+                "class_type": "LoadImage",
+                "inputs": {
+                    "image": base64Image,
+                    "upload": "image"
+                }
+            },
+            "2": {
+                "class_type": "VAELoader",
+                "inputs": {
+                    "vae_name": "ae.safetensors"
+                }
+            },
+            "3": {
+                "class_type": "VAEEncode",
+                "inputs": {
+                    "pixels": ["1", 0],
+                    "vae": ["2", 0]
+                }
+            },
+            "4": {
+                "class_type": "DualCLIPLoader",
+                "inputs": {
+                    "clip_name1": "clip_l.safetensors",
+                    "clip_name2": t5ModelName,
+                    "type": "flux"
+                }
+            },
+            "5": {
+                "class_type": "CLIPTextEncode",
+                "inputs": {
+                    "text": prompt,
+                    "clip": ["4", 0]
+                }
+            },
+            "6": {
+                "class_type": "UNETLoader",
+                "inputs": {
+                    "unet_name": modelName,
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "default" : "fp8_e4m3fn"
+                }
+            },
+            "7": {
+                "class_type": "ModelSamplingFlux",
+                "inputs": {
+                    "model": ["6", 0],
+                    "max_shift": 1.19,
+                    "base_shift": 0.5,
+                    "width": width || 1024,
+                    "height": height || 1024
+                }
+            },
+            "8": {
+                "class_type": "ReferenceLatent",
+                "inputs": {
+                    "conditioning": ["5", 0],
+                    "latent": ["3", 0]
+                }
+            },
+            "9": {
+                "class_type": "FluxGuidance",
+                "inputs": {
+                    "conditioning": ["8", 0],
+                    "guidance": guidance || 3.5
+                }
+            },
+            "10": {
+                "class_type": "RandomNoise",
+                "inputs": {
+                    "noise_seed": actualSeed
+                }
+            },
+            "11": {
+                "class_type": "KSamplerSelect",
+                "inputs": {
+                    "sampler_name": sampler || "euler"
+                }
+            },
+            "12": {
+                "class_type": "BasicScheduler",
+                "inputs": {
+                    "scheduler": scheduler || "simple",
+                    "steps": steps || 20,
+                    "denoise": 1.0,
+                    "model": ["7", 0]
+                }
+            },
+            "13": {
+                "class_type": "SamplerCustomAdvanced",
+                "inputs": {
+                    "noise": ["10", 0],
+                    "guider": ["14", 0],
+                    "sampler": ["11", 0],
+                    "sigmas": ["12", 0],
+                    "latent_image": ["3", 0]
+                }
+            },
+            "14": {
+                "class_type": "BasicGuider",
+                "inputs": {
+                    "model": ["7", 0],
+                    "conditioning": ["9", 0]
+                }
+            },
+            "15": {
+                "class_type": "VAEDecode",
+                "inputs": {
+                    "samples": ["13", 0],
+                    "vae": ["2", 0]
+                }
+            },
+            "16": {
+                "class_type": "SaveImage",
+                "inputs": {
+                    "images": ["15", 0],
+                    "filename_prefix": "kontext_edit"
+                }
+            }
+        };
     }
 
     async shutdown() {

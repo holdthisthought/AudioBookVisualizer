@@ -13,6 +13,7 @@ const ComfyUIManager = require('./comfyui-manager');
 const FluxServiceLocal = require('./flux-service-local');
 const FluxServiceRunPod = require('./flux-service-runpod');
 const WhisperLocal = require('./whisper-local');
+const WhisperServiceRunPod = require('./whisper-service-runpod');
 const characterExtractionCLI = require('./characterExtractionCLI');
 const DockerManager = require('./docker-manager');
 // Use platform-specific terminal implementation
@@ -45,8 +46,10 @@ let GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 let HUGGINGFACE_TOKEN = process.env.HUGGINGFACE_TOKEN || '';
 let RUNPOD_API_KEY = process.env.RUNPOD_API_KEY || '';
 let RUNPOD_ENDPOINT_ID = '';
+let WHISPER_RUNPOD_ENDPOINT_ID = '';
 let genAI = null;
 let currentGenerationService = 'local'; // 'local' or 'runpod'
+let currentWhisperService = 'local'; // 'local' or 'runpod'
 
 // Load API keys and tokens from secure storage
 function loadApiKey() {
@@ -66,8 +69,14 @@ function loadApiKey() {
             if (config.runpodEndpointId) {
                 RUNPOD_ENDPOINT_ID = config.runpodEndpointId;
             }
+            if (config.whisperRunpodEndpointId) {
+                WHISPER_RUNPOD_ENDPOINT_ID = config.whisperRunpodEndpointId;
+            }
             if (config.generationService) {
                 currentGenerationService = config.generationService;
+            }
+            if (config.whisperService) {
+                currentWhisperService = config.whisperService;
             }
         }
         if (GEMINI_API_KEY) {
@@ -90,6 +99,9 @@ const fluxServiceRunPod = new FluxServiceRunPod();
 
 // Initialize local Whisper
 const whisperLocal = new WhisperLocal();
+
+// Initialize RunPod Whisper service
+const whisperServiceRunPod = new WhisperServiceRunPod();
 
 // Initialize local terminal server
 const terminalServer = new LocalTerminalServer();
@@ -301,6 +313,55 @@ ipcMain.handle('set-generation-service', async (event, service) => {
 
 ipcMain.handle('get-generation-service', async () => {
     return currentGenerationService;
+});
+
+ipcMain.handle('get-whisper-service', async () => {
+    return currentWhisperService;
+});
+
+ipcMain.handle('set-whisper-service', async (event, service) => {
+    currentWhisperService = service;
+    // Save to config
+    try {
+        const config = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile, 'utf8')) : {};
+        config.whisperService = service;
+        fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+    } catch (error) {
+        console.error('Error saving whisper service preference:', error);
+    }
+    return { success: true };
+});
+
+ipcMain.handle('save-whisper-endpoint-id', async (event, endpointId) => {
+    try {
+        // Read existing config
+        let config = {};
+        if (fs.existsSync(configFile)) {
+            config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
+        }
+        
+        // Save whisper endpoint ID
+        config.whisperRunpodEndpointId = endpointId;
+        
+        // Save config
+        fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+        
+        // Update runtime variable
+        WHISPER_RUNPOD_ENDPOINT_ID = endpointId;
+        
+        // Re-initialize whisper service if using RunPod
+        if (currentWhisperService === 'runpod' && RUNPOD_API_KEY) {
+            await whisperServiceRunPod.initialize({
+                runpodApiKey: RUNPOD_API_KEY,
+                whisperEndpointId: endpointId
+            });
+        }
+        
+        return { success: true };
+    } catch (error) {
+        console.error('Error saving whisper endpoint ID:', error);
+        return { success: false, error: error.message };
+    }
 });
 
 // Prompt Settings IPC Handlers
@@ -838,6 +899,34 @@ ipcMain.handle('flux-download-model', async (event, { modelKey, hfToken }) => {
 
 ipcMain.handle('flux-edit-image', async (event, { prompt, image, settings }) => {
     try {
+        // Check current generation service
+        if (currentGenerationService === 'runpod') {
+            // Using RunPod service for editing
+            const config = {
+                runpodApiKey: RUNPOD_API_KEY,
+                runpodEndpointId: RUNPOD_ENDPOINT_ID,
+                modelPrecision: settings.modelPrecision || 'fp8',
+                huggingfaceToken: HUGGINGFACE_TOKEN
+            };
+            
+            if (!fluxServiceRunPod.isConfigured) {
+                await fluxServiceRunPod.initialize(config);
+            }
+            
+            return await fluxServiceRunPod.editImage({
+                prompt,
+                image,
+                modelPrecision: settings.modelPrecision || 'fp8',
+                width: settings.width || 1024,
+                height: settings.height || 1024,
+                steps: settings.steps || 20,
+                guidance: settings.guidance || 3.5,
+                seed: settings.seed,
+                sampler: settings.sampler || 'euler',
+                scheduler: settings.scheduler || 'simple'
+            });
+        }
+        
         // Check if ComfyUI is configured
         const comfyStatus = await comfyUIManager.getStatus();
         if (comfyStatus.pathSet && comfyStatus.running) {
@@ -1298,11 +1387,35 @@ ipcMain.handle('whisper-download-model', async (event, modelName) => {
 
 ipcMain.handle('whisper-transcribe', async (event, { audioPath, modelName, language }) => {
     try {
-        const result = await whisperLocal.transcribe(audioPath, {
-            modelName: modelName || 'base',
-            language: language || 'en'
-        });
-        return result;
+        // Check if we should use RunPod for transcription
+        if (currentWhisperService === 'runpod') {
+            // Initialize RunPod whisper if needed
+            if (!whisperServiceRunPod.isConfigured) {
+                const config = {
+                    runpodApiKey: RUNPOD_API_KEY,
+                    whisperEndpointId: WHISPER_RUNPOD_ENDPOINT_ID
+                };
+                await whisperServiceRunPod.initialize(config);
+            }
+            
+            // Submit transcription job to RunPod
+            const result = await whisperServiceRunPod.transcribeAudio({
+                audioPath,
+                modelSize: modelName || 'base',
+                language: language || null,
+                task: 'transcribe',
+                wordTimestamps: true
+            });
+            
+            return result; // Returns { jobId, service: 'runpod' }
+        } else {
+            // Use local whisper
+            const result = await whisperLocal.transcribe(audioPath, {
+                modelName: modelName || 'base',
+                language: language || 'en'
+            });
+            return result;
+        }
     } catch (error) {
         console.error('Error calling Whisper service:', error);
         return { error: error.message };
@@ -1357,21 +1470,29 @@ ipcMain.handle('whisper-transcribe-base64', async (event, { audioData, filename,
     }
 });
 
-ipcMain.handle('whisper-get-job-status', async (event, jobId) => {
+// Whisper job status handler
+ipcMain.handle('whisper-get-job-status', async (event, { jobId, service }) => {
     try {
+        // Check if this is a RunPod job
+        if (service === 'runpod' || jobId.startsWith('runpod_')) {
+            return await whisperServiceRunPod.getJobStatus(jobId);
+        }
+        
+        // Otherwise it's a local job
         global.whisperJobs = global.whisperJobs || {};
         const job = global.whisperJobs[jobId];
         
         if (!job) {
-            return { status: 'not_found' };
+            return { status: 'error', error: 'Job not found' };
         }
         
-        return { status: job.status, error: job.error };
+        return job;
     } catch (error) {
-        console.error('Error getting job status:', error);
-        return { error: error.message };
+        console.error('Error getting whisper job status:', error);
+        return { status: 'error', error: error.message };
     }
 });
+
 
 ipcMain.handle('whisper-get-job-result', async (event, jobId) => {
     try {

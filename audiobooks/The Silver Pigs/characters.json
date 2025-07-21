@@ -47,7 +47,15 @@
       7,
       8,
       9,
-      10
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
     ],
     "subCharacteristics": []
   },
@@ -98,9 +106,63 @@
       6,
       8,
       9,
-      10
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
     ],
-    "subCharacteristics": []
+    "subCharacteristics": [
+      {
+        "id": "sosia_dead",
+        "name": "Sosia Camillina (deceased)",
+        "parameters": {
+          "identity": {
+            "role": "Murder victim",
+            "age": "16",
+            "gender": "female"
+          },
+          "physicalBuild": {
+            "height": "slight, petite 5'2\"",
+            "build": "slim, lifeless",
+            "posture": "limp, head lolling backwards"
+          },
+          "facialFeatures": {
+            "skinTone": "stone-white alabaster, drained of blood",
+            "faceShape": "delicate oval, motionless",
+            "eyes": "closed by Petronius",
+            "hair": "blonde, disheveled",
+            "facialHair": "none",
+            "distinctiveFeatures": "face still bright with makeup, eggshell-white beneath"
+          },
+          "attire": {
+            "headwear": "none",
+            "upperBody": "white dress hanging like wool, stained with lamp black ink around wound",
+            "lowerBody": "dress extending to ankles",
+            "footwear": "footwear not visible",
+            "accessories": "likely still wearing jewelry",
+            "clothingStyle": "fine white dress, now stained",
+            "clothingColors": "white with black ink stain"
+          },
+          "personality": {
+            "demeanor": "none - deceased",
+            "traits": "victim of violence"
+          }
+        },
+        "timePeriod": "Ancient Rome, AD 70",
+        "location": "Knapp Lane warehouse, Rome",
+        "chapters": [
+          17,
+          18
+        ],
+        "triggerEvent": "Found murdered",
+        "photo": "placeholder.png"
+      }
+    ]
   },
   {
     "name": "Petronius Longus",
@@ -143,7 +205,14 @@
     "chapters": [
       4,
       9,
-      10
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      17,
+      18
     ],
     "subCharacteristics": []
   },
@@ -186,7 +255,9 @@
     "location": "Rome, Capena Gate sector",
     "photo": "character_profile_images/decimus_camillus_verus_1752849016617.png",
     "chapters": [
-      6
+      6,
+      13,
+      16
     ],
     "subCharacteristics": []
   },
@@ -230,7 +301,8 @@
     "photo": "character_profile_images/Publius_Camillus_Meto_v1.png",
     "chapters": [
       8,
-      9
+      9,
+      13
     ],
     "subCharacteristics": []
   },
@@ -274,7 +346,9 @@
     "photo": "character_profile_images/Gnaeus_Atius_Pertinax_v1.png",
     "chapters": [
       8,
-      9
+      9,
+      13,
+      14
     ],
     "subCharacteristics": []
   },
@@ -320,7 +394,9 @@
       1,
       2,
       8,
-      9
+      9,
+      13,
+      17
     ],
     "subCharacteristics": []
   },
@@ -363,7 +439,8 @@
     "location": "Rome, near Aventine",
     "photo": "character_profile_images/Falco_s_Mother_v1.png",
     "chapters": [
-      10
+      10,
+      17
     ],
     "subCharacteristics": []
   },
@@ -406,7 +483,8 @@
     "location": "Rome",
     "photo": "character_profile_images/Victorina_v1.png",
     "chapters": [
-      10
+      10,
+      11
     ],
     "subCharacteristics": []
   },
@@ -450,7 +528,356 @@
     "photo": "character_profile_images/smaractus_1752848954995.png",
     "chapters": [
       2,
-      7
+      7,
+      17
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Julius Frontinus",
+    "parameters": {
+      "identity": {
+        "role": "Praetorian Guard Captain",
+        "age": "early 30s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "tall 6'1\"",
+        "build": "well-padded, strong military physique",
+        "posture": "erect military bearing"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman olive, weathered from outdoor duty",
+        "faceShape": "strong-jawed, masculine",
+        "eyes": "alert, professional",
+        "hair": "regulation military cut, dark",
+        "facialHair": "clean-shaven to regulation",
+        "distinctiveFeatures": "old friend of Falco's brother Festus"
+      },
+      "attire": {
+        "headwear": "ornate Praetorian helmet with horsehair crest when on duty",
+        "upperBody": "enameled breastplate over red tunic, muscled cuirass design",
+        "lowerBody": "military pteruges (leather strips) over red tunic extending to mid-thigh",
+        "footwear": "regulation military caligae, leather with iron studs",
+        "accessories": "great silver belt buckle, gladius on right hip, pugio dagger on left",
+        "clothingStyle": "elite Praetorian Guard uniform",
+        "clothingColors": "imperial purple cloak, red tunic, polished bronze armor"
+      },
+      "personality": {
+        "demeanor": "professional soldier, becomes emotional discussing fallen comrades",
+        "traits": "loyal to emperor, protective of Rome, honors fallen friends"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Praetorian Camp",
+    "photo": "character_profile_images\\julius_frontinus_1753091255430.png",
+    "chapters": [
+      14,
+      15
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Julia Justa",
+    "parameters": {
+      "identity": {
+        "role": "Senator's wife, Sosia's aunt",
+        "age": "late 40s",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "average 5'6\"",
+        "build": "matronly, well-maintained",
+        "posture": "dignified, patrician bearing"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman patrician, well-cared for",
+        "faceShape": "handsome rather than beautiful",
+        "eyes": "shrewd black eyes that miss nothing",
+        "hair": "dark, elaborately arranged in Roman matron style",
+        "facialHair": "none",
+        "distinctiveFeatures": "sensible expression, kind but no-nonsense"
+      },
+      "attire": {
+        "headwear": "none indoors, hair held with gold pins",
+        "upperBody": "fine stola in expensive fabric, draped elegantly",
+        "lowerBody": "stola reaching to floor in graceful folds",
+        "footwear": "indoor slippers of soft leather with gold thread",
+        "accessories": "wedding rings, gold arm bands, conservative jewelry",
+        "clothingStyle": "wealthy matron, tasteful not ostentatious",
+        "clothingColors": "deep blues and purples befitting status"
+      },
+      "personality": {
+        "demeanor": "sensible, protective, shrewd",
+        "traits": "decent woman, unhappily married, good surrogate mother"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Capena Gate sector",
+    "photo": "character_profile_images/julia_justa_1753098479848.png",
+    "chapters": [
+      13
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Astia",
+    "parameters": {
+      "identity": {
+        "role": "Waterfront woman, drayman's companion",
+        "age": "30s",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "short 5'3\"",
+        "build": "thin, worn by hard life",
+        "posture": "defensive, wary"
+      },
+      "facialFeatures": {
+        "skinTone": "weathered, sun-damaged from riverside life",
+        "faceShape": "thin, hard, prematurely aged",
+        "eyes": "calculating, bitter",
+        "hair": "bleached blonde, coarse from cheap treatments",
+        "facialHair": "none",
+        "distinctiveFeatures": "tired waterfront face, hard-lived"
+      },
+      "attire": {
+        "headwear": "none",
+        "upperBody": "cheap dyed tunic, faded and patched",
+        "lowerBody": "short tunic to knees for easier movement",
+        "footwear": "rope sandals, practical for wet surfaces",
+        "accessories": "cheap brass earrings, no wedding band",
+        "clothingStyle": "poor waterfront worker",
+        "clothingColors": "faded reds and yellows, once bright"
+      },
+      "personality": {
+        "demeanor": "bitter, suspicious, survivor",
+        "traits": "pragmatic, knows the streets, protective of information"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Tiber riverfront",
+    "photo": "character_profile_images/Astia_v1.png",
+    "chapters": [
+      14
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Helena",
+    "parameters": {
+      "identity": {
+        "role": "Divorced noblewoman, Sosia's cousin",
+        "age": "mid-20s",
+        "gender": "female"
+      },
+      "physicalBuild": {
+        "height": "tall for a woman, 5'7\"",
+        "build": "substantial but not overweight, solid piece",
+        "posture": "confident, educated bearing"
+      },
+      "facialFeatures": {
+        "skinTone": "Roman patrician, fair",
+        "faceShape": "intelligent, striking rather than pretty",
+        "eyes": "direct, thoughtful gaze",
+        "hair": "dark, conservatively styled",
+        "facialHair": "none",
+        "distinctiveFeatures": "air of independence unusual in noble women"
+      },
+      "attire": {
+        "headwear": "modest hair arrangement with minimal ornament",
+        "upperBody": "quality stola without excessive decoration",
+        "lowerBody": "stola in conservative length",
+        "footwear": "quality leather shoes suitable for walking",
+        "accessories": "minimal jewelry despite wealth, writing materials",
+        "clothingStyle": "understated elegance, intellectual rather than fashionable",
+        "clothingColors": "subdued colors, grays and dark blues"
+      },
+      "personality": {
+        "demeanor": "protective of Sosia, supports Vespasian, intellectual",
+        "traits": "influential, wonderful according to Sosia, divorced, independent thinking"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome",
+    "photo": "character_profile_images/Helena_v1.png",
+    "chapters": [
+      16
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "The Drayman",
+    "parameters": {
+      "identity": {
+        "role": "Cart driver, found the silver pig",
+        "age": "40s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "average 5'8\"",
+        "build": "stocky from physical labor",
+        "posture": "working man's slouch"
+      },
+      "facialFeatures": {
+        "skinTone": "weathered, outdoor worker",
+        "faceShape": "broad, common features",
+        "eyes": "bloodshot from drink",
+        "hair": "thinning, unkempt",
+        "facialHair": "stubbled, irregular",
+        "distinctiveFeatures": "frequently drunk, but functional"
+      },
+      "attire": {
+        "headwear": "battered felt cap",
+        "upperBody": "rough tunic, patched and stained",
+        "lowerBody": "short working tunic",
+        "footwear": "heavy boots for cargo work",
+        "accessories": "leather belt with knife",
+        "clothingStyle": "poor working man",
+        "clothingColors": "undyed browns, dirt-stained"
+      },
+      "personality": {
+        "demeanor": "boastful when drunk, frightened by discovery",
+        "traits": "honest enough to report find, regular drinker"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Trans-Tiberina district",
+    "photo": "placeholder.png",
+    "chapters": [
+      14
+    ],
+    "subCharacteristics": [
+      {
+        "id": "drayman_dead",
+        "name": "The Drayman (deceased)",
+        "parameters": {
+          "identity": {
+            "role": "Murder victim",
+            "age": "40s",
+            "gender": "male"
+          },
+          "physicalBuild": {
+            "height": "average 5'8\"",
+            "build": "waterlogged corpse",
+            "posture": "lifeless"
+          },
+          "facialFeatures": {
+            "skinTone": "blue-gray from drowning",
+            "faceShape": "bloated from water",
+            "eyes": "clouded, lifeless",
+            "hair": "wet, matted",
+            "facialHair": "stubbled",
+            "distinctiveFeatures": "signs of violence before drowning"
+          },
+          "attire": {
+            "headwear": "none, lost in river",
+            "upperBody": "same rough tunic, water-soaked",
+            "lowerBody": "tunic clinging to body",
+            "footwear": "boots missing",
+            "accessories": "belt and belongings gone",
+            "clothingStyle": "corpse pulled from river",
+            "clothingColors": "all darkened by water and mud"
+          },
+          "personality": {
+            "demeanor": "none - deceased",
+            "traits": "victim of foul play"
+          }
+        },
+        "timePeriod": "Ancient Rome, AD 70",
+        "location": "Tiber River, Rome",
+        "chapters": [
+          14
+        ],
+        "triggerEvent": "Found drowned after reporting silver pig",
+        "photo": "placeholder.png"
+      }
+    ]
+  },
+  {
+    "name": "Festus",
+    "parameters": {
+      "identity": {
+        "role": "Deceased soldier, Falco's brother",
+        "age": "died in late 20s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "tall like Frontinus remembered, 6'0\"",
+        "build": "soldier's build, athletic",
+        "posture": "military bearing, heroic"
+      },
+      "facialFeatures": {
+        "skinTone": "Mediterranean olive like his brother",
+        "faceShape": "handsome, similar to Falco but more confident",
+        "eyes": "dark like family trait",
+        "hair": "military cut, dark",
+        "facialHair": "clean-shaven military style",
+        "distinctiveFeatures": "charismatic smile, natural leader"
+      },
+      "attire": {
+        "headwear": "military helmet in combat",
+        "upperBody": "legionary armor, lorica segmentata",
+        "lowerBody": "military tunic and pteruges",
+        "footwear": "military caligae boots",
+        "accessories": "military belt, gladius, scutum shield",
+        "clothingStyle": "Roman legionary in Judean campaign",
+        "clothingColors": "red military tunic, bronze armor"
+      },
+      "personality": {
+        "demeanor": "brave, reckless, charismatic",
+        "traits": "first up the wall at Bethel, beloved by comrades, hero"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 68 (died)",
+    "location": "Judea, Bethel (where died)",
+    "photo": "placeholder.png",
+    "chapters": [
+      15,
+      17
+    ],
+    "subCharacteristics": []
+  },
+  {
+    "name": "Smaractus's Gladiators",
+    "parameters": {
+      "identity": {
+        "role": "Hired muscle, rent collectors",
+        "age": "20s-30s",
+        "gender": "male"
+      },
+      "physicalBuild": {
+        "height": "varied, typically tall and imposing",
+        "build": "heavily muscled from training",
+        "posture": "aggressive fighting stance"
+      },
+      "facialFeatures": {
+        "skinTone": "varied, often scarred",
+        "faceShape": "brutal, hardened",
+        "eyes": "cold, professional",
+        "hair": "short or shaved for helmets",
+        "facialHair": "varied",
+        "distinctiveFeatures": "gladiator physiques, scars from arena"
+      },
+      "attire": {
+        "headwear": "Mirmillo helmets (high-crested, fish-shaped) or none for Retiarii",
+        "upperBody": "Mirmillo: padded right arm with metal rings; Retiarii: bare-chested with shoulder guard",
+        "lowerBody": "subligaculum (loincloth) and padding",
+        "footwear": "wrapped legs and feet or sandals",
+        "accessories": "Mirmillo: practice wooden swords; Retiarii: nets and tridents (not in public)",
+        "clothingStyle": "gladiatorial equipment for intimidation",
+        "clothingColors": "leather browns, metal grays, minimal cloth"
+      },
+      "personality": {
+        "demeanor": "intimidating, violent, professional",
+        "traits": "trained fighters used for enforcement"
+      }
+    },
+    "timePeriod": "Ancient Rome, AD 70",
+    "location": "Rome, Aventine district",
+    "photo": "placeholder.png",
+    "chapters": [
+      17
     ],
     "subCharacteristics": []
   }

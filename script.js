@@ -4821,9 +4821,10 @@ async function generateKontextImage() {
         }
         
         // Handle RunPod job
+        let completed = false;
+        
         if (result.service === 'runpod') {
             const jobId = result.jobId;
-            let completed = false;
             let attempts = 0;
             const maxAttempts = 120; // 10 minutes
             
@@ -4867,7 +4868,6 @@ async function generateKontextImage() {
         } else {
             // Handle local generation
             const jobId = result.job_id;
-            let completed = false;
             let attempts = 0;
             const maxAttempts = 120; // 10 minutes
             
@@ -4897,23 +4897,21 @@ async function generateKontextImage() {
                     }
                 } else if (status.status === 'failed') {
                     throw new Error(status.error || 'Generation failed');
+                } else {
+                    // Still processing
+                    const progressText = resultDiv.querySelector('.flux-generating-text');
+                    if (progressText) {
+                        progressText.textContent = `Processing... (${Math.floor((attempts / maxAttempts) * 100)}%)`;
+                    }
                 }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
             }
             
-            // Update progress text
             if (!completed) {
-                const progressText = resultDiv.querySelector('.flux-generating-text');
-                if (progressText) {
-                    progressText.textContent = `Processing... (${Math.floor((attempts / maxAttempts) * 100)}%)`;
-                }
+                throw new Error('Generation timeout');
             }
-            
-            attempts++;
-            await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
-        }
-        
-        if (!completed) {
-            throw new Error('Generation timeout');
         }
         
     } catch (error) {
@@ -5125,7 +5123,8 @@ function openEditCharacterModal(character, imageElement) {
             }
             
             // Poll for completion
-            const jobId = result.job_id;
+            const jobId = result.jobId || result.job_id; // Handle both RunPod (jobId) and local (job_id)
+            const isRunPod = result.service === 'runpod';
             let completed = false;
             let attempts = 0;
             const maxAttempts = 120; // 10 minutes
@@ -5133,83 +5132,103 @@ function openEditCharacterModal(character, imageElement) {
             const statusDiv = modal.querySelector('.edit-status');
             
             while (!completed && attempts < maxAttempts) {
-                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+                const statusParams = isRunPod ? { jobId, service: 'runpod' } : { jobId };
+                const status = await ipcRenderer.invoke('flux-get-job-status', statusParams);
                 
                 if (status.error) {
                     throw new Error(status.error);
                 }
                 
-                if (status.status === 'completed') {
+                if ((isRunPod && status.status === 'success') || (!isRunPod && status.status === 'completed')) {
                     completed = true;
                     
-                    // Get the edited image
-                    const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
-                    if (imageBuffer && !imageBuffer.error) {
-                        const blob = new Blob([imageBuffer], { type: 'image/png' });
-                        const imageUrl = URL.createObjectURL(blob);
-                        
-                        // Save the edited image
-                        const bookDir = path.join(audiobooksDir, currentBook);
-                        const profileImagesDir = path.join(bookDir, 'character_profile_images');
-                        
-                        // Create character_profile_images directory if it doesn't exist
-                        if (!fs.existsSync(profileImagesDir)) {
-                            fs.mkdirSync(profileImagesDir, { recursive: true });
-                        }
-                        
-                        const timestamp = Date.now();
-                        const newFileName = `${character.name.toLowerCase().replace(/\s+/g, '_')}_${timestamp}.png`;
-                        const newFilePath = path.join(profileImagesDir, newFileName);
-                        
-                        // Save the image file
-                        await saveImageFromBlob(blob, newFilePath);
-                        
-                        // Update character photo with relative path
-                        character.photo = `character_profile_images/${newFileName}`;
-                        imageElement.src = newFilePath;
-                        
-                        // Save updated characters data
-                        await saveCharactersData();
-                        
-                        // Update the current character in the array
-                        const charIndex = currentCharacters.findIndex(c => c.name === character.name);
-                        if (charIndex !== -1) {
-                            currentCharacters[charIndex] = character;
-                        }
-                        
-                        // Refresh the character display to show new version
-                        renderCharacters(currentCharacters);
-                        
-                        // Update the preview image in the modal
-                        const previewImg = modal.querySelector('.edit-character-preview img');
-                        if (previewImg) {
-                            previewImg.src = newFilePath;
-                            // Add animation class
-                            previewImg.classList.add('updated');
-                            setTimeout(() => previewImg.classList.remove('updated'), 600);
-                        }
-                        
-                        // Show success message and reset form
-                        statusDiv.textContent = 'Edit completed successfully!';
-                        
-                        // Reset the form for potential next edit
-                        setTimeout(() => {
-                            // Hide result section and show form again
-                            modal.querySelector('#edit-result').style.display = 'none';
-                            modal.querySelector('.edit-character-form').style.display = 'block';
-                            
-                            // Clear the prompt textarea for next edit
-                            promptTextarea.value = '';
-                            promptTextarea.focus();
-                            
-                            // Update the modal title to reflect it's ready for another edit
-                            const modalTitle = modal.querySelector('.modal-header h3');
-                            if (modalTitle) {
-                                modalTitle.textContent = `${character.name} - Character Image (Updated)`;
+                    let blob;
+                    if (isRunPod) {
+                        // For RunPod, the image is in base64
+                        if (status.image) {
+                            const base64Data = status.image.includes('base64,') ? status.image.split(',')[1] : status.image;
+                            const binaryString = atob(base64Data);
+                            const bytes = new Uint8Array(binaryString.length);
+                            for (let i = 0; i < binaryString.length; i++) {
+                                bytes[i] = binaryString.charCodeAt(i);
                             }
-                        }, 2000);
+                            blob = new Blob([bytes], { type: 'image/png' });
+                        } else {
+                            throw new Error('No image data in completed job');
+                        }
+                    } else {
+                        // Get the edited image for local generation
+                        const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
+                        if (imageBuffer && !imageBuffer.error) {
+                            blob = new Blob([imageBuffer], { type: 'image/png' });
+                        } else {
+                            throw new Error('Failed to get edited image');
+                        }
                     }
-                } else if (status.status === 'failed') {
+                    
+                    const imageUrl = URL.createObjectURL(blob);
+                    
+                    // Save the edited image
+                    const bookDir = path.join(audiobooksDir, currentBook);
+                    const profileImagesDir = path.join(bookDir, 'character_profile_images');
+                    
+                    // Create character_profile_images directory if it doesn't exist
+                    if (!fs.existsSync(profileImagesDir)) {
+                        fs.mkdirSync(profileImagesDir, { recursive: true });
+                    }
+                    
+                    const timestamp = Date.now();
+                    const newFileName = `${character.name.toLowerCase().replace(/\s+/g, '_')}_${timestamp}.png`;
+                    const newFilePath = path.join(profileImagesDir, newFileName);
+                    
+                    // Save the image file
+                    await saveImageFromBlob(blob, newFilePath);
+                    
+                    // Update character photo with relative path
+                    character.photo = `character_profile_images/${newFileName}`;
+                    imageElement.src = newFilePath;
+                    
+                    // Save updated characters data
+                    await saveCharactersData();
+                    
+                    // Update the current character in the array
+                    const charIndex = currentCharacters.findIndex(c => c.name === character.name);
+                    if (charIndex !== -1) {
+                        currentCharacters[charIndex] = character;
+                    }
+                    
+                    // Refresh the character display to show new version
+                    renderCharacters(currentCharacters);
+                    
+                    // Update the preview image in the modal
+                    const previewImg = modal.querySelector('.edit-character-preview img');
+                    if (previewImg) {
+                        previewImg.src = newFilePath;
+                        // Add animation class
+                        previewImg.classList.add('updated');
+                        setTimeout(() => previewImg.classList.remove('updated'), 600);
+                    }
+                    
+                    // Show success message and reset form
+                    statusDiv.textContent = 'Edit completed successfully!';
+                    
+                    // Reset the form for potential next edit
+                    setTimeout(() => {
+                        // Hide result section and show form again
+                        modal.querySelector('#edit-result').style.display = 'none';
+                        modal.querySelector('.edit-character-form').style.display = 'block';
+                        
+                        // Clear the prompt textarea for next edit
+                        promptTextarea.value = '';
+                        promptTextarea.focus();
+                        
+                        // Update the modal title to reflect it's ready for another edit
+                        const modalTitle = modal.querySelector('.modal-header h3');
+                        if (modalTitle) {
+                            modalTitle.textContent = `${character.name} - Character Image (Updated)`;
+                        }
+                    }, 2000);
+                } else if ((isRunPod && status.status === 'error') || (!isRunPod && status.status === 'failed')) {
                     throw new Error(status.error || 'Edit failed');
                 }
                 
@@ -5460,6 +5479,23 @@ async function processBatchCharacterImages() {
 // Generate character image for batch processing
 async function generateFluxCharacterImageBatch(character, description) {
     try {
+        // Check if we're using RunPod - if so, skip local model validation
+        const currentService = await ipcRenderer.invoke('get-generation-service');
+        if (currentService !== 'runpod') {
+            // Check if required models are available (only for local generation)
+            const requiredModels = ['clip_l', 'ae'];
+            const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+            const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+            
+            requiredModels.push(textEncoder, fluxModel);
+            
+            const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+            if (missingModels.length > 0) {
+                console.error(`Missing required FLUX models for batch generation: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+                return false;
+            }
+        }
+        
         // Get tags for this character
         const charSpecificTags = characterTags[character.name] || [];
         
@@ -5511,61 +5547,123 @@ async function generateFluxCharacterImageBatch(character, description) {
             throw new Error(result.error);
         }
         
-        // Poll for completion
-        const jobId = result.job_id;
+        // Handle RunPod job or local generation
         let completed = false;
         let attempts = 0;
         const maxAttempts = 120; // 10 minutes
         
-        while (!completed && attempts < maxAttempts) {
-            const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+        if (result.service === 'runpod') {
+            // Handle RunPod generation
+            const jobId = result.jobId;
             
-            if (status.error) {
-                throw new Error(status.error);
-            }
-            
-            if (status.status === 'completed') {
-                completed = true;
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId, service: 'runpod' });
                 
-                // Get the generated image
-                const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
-                if (imageBuffer && !imageBuffer.error) {
-                    const blob = new Blob([imageBuffer], { type: 'image/png' });
-                    
-                    // Save the generated image
-                    const bookDir = path.join(audiobooksDir, currentBook);
-                    const characterImagesDir = path.join(bookDir, 'character_profile_images');
-                    
-                    // Create the directory if it doesn't exist
-                    if (!fs.existsSync(characterImagesDir)) {
-                        fs.mkdirSync(characterImagesDir, { recursive: true });
-                    }
-                    
-                    // Generate filename with version number
-                    let versionNum = 1;
-                    let filename;
-                    do {
-                        filename = `${character.name.replace(/[^a-zA-Z0-9]/g, '_')}_v${versionNum}.png`;
-                        versionNum++;
-                    } while (fs.existsSync(path.join(characterImagesDir, filename)));
-                    
-                    const imagePath = path.join(characterImagesDir, filename);
-                    const buffer = Buffer.from(await blob.arrayBuffer());
-                    fs.writeFileSync(imagePath, buffer);
-                    
-                    // Update character photo path
-                    character.photo = `character_profile_images/${filename}`;
-                    await saveCharactersData();
-                    
-                    return true;
+                if (status.error) {
+                    throw new Error(status.error);
                 }
-            } else if (status.status === 'failed') {
-                throw new Error(status.error || 'Generation failed');
+                
+                if (status.status === 'success') {
+                    completed = true;
+                    
+                    // For RunPod, the image is in base64
+                    if (status.image) {
+                        const base64Data = status.image.includes('base64,') ? status.image.split(',')[1] : status.image;
+                        const binaryString = atob(base64Data);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        const blob = new Blob([bytes], { type: 'image/png' });
+                        
+                        // Save the generated image
+                        const bookDir = path.join(audiobooksDir, currentBook);
+                        const characterImagesDir = path.join(bookDir, 'character_profile_images');
+                        
+                        // Create the directory if it doesn't exist
+                        if (!fs.existsSync(characterImagesDir)) {
+                            fs.mkdirSync(characterImagesDir, { recursive: true });
+                        }
+                        
+                        // Generate filename with version number
+                        let versionNum = 1;
+                        let filename;
+                        do {
+                            filename = `${character.name.replace(/[^a-zA-Z0-9]/g, '_')}_v${versionNum}.png`;
+                            versionNum++;
+                        } while (fs.existsSync(path.join(characterImagesDir, filename)));
+                        
+                        const imagePath = path.join(characterImagesDir, filename);
+                        const buffer = Buffer.from(await blob.arrayBuffer());
+                        fs.writeFileSync(imagePath, buffer);
+                        
+                        // Update character photo path
+                        character.photo = `character_profile_images/${filename}`;
+                        await saveCharactersData();
+                        
+                        return true;
+                    }
+                } else if (status.status === 'error') {
+                    throw new Error(status.error || 'Generation failed');
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000));
             }
+        } else {
+            // Handle local generation
+            const jobId = result.job_id;
             
-            // Wait before polling again
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            attempts++;
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+                
+                if (status.error) {
+                    throw new Error(status.error);
+                }
+                
+                if (status.status === 'completed') {
+                    completed = true;
+                    
+                    // Get the generated image
+                    const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
+                    if (imageBuffer && !imageBuffer.error) {
+                        const blob = new Blob([imageBuffer], { type: 'image/png' });
+                        
+                        // Save the generated image
+                        const bookDir = path.join(audiobooksDir, currentBook);
+                        const characterImagesDir = path.join(bookDir, 'character_profile_images');
+                        
+                        // Create the directory if it doesn't exist
+                        if (!fs.existsSync(characterImagesDir)) {
+                            fs.mkdirSync(characterImagesDir, { recursive: true });
+                        }
+                        
+                        // Generate filename with version number
+                        let versionNum = 1;
+                        let filename;
+                        do {
+                            filename = `${character.name.replace(/[^a-zA-Z0-9]/g, '_')}_v${versionNum}.png`;
+                            versionNum++;
+                        } while (fs.existsSync(path.join(characterImagesDir, filename)));
+                        
+                        const imagePath = path.join(characterImagesDir, filename);
+                        const buffer = Buffer.from(await blob.arrayBuffer());
+                        fs.writeFileSync(imagePath, buffer);
+                        
+                        // Update character photo path
+                        character.photo = `character_profile_images/${filename}`;
+                        await saveCharactersData();
+                        
+                        return true;
+                    }
+                } else if (status.status === 'failed') {
+                    throw new Error(status.error || 'Generation failed');
+                }
+                
+                // Wait before polling again
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                attempts++;
+            }
         }
         
         if (!completed) {
@@ -5676,67 +5774,140 @@ async function generateFluxCharacterImageForModal(character, description, parent
             throw new Error(result.error);
         }
         
-        // Poll for completion
-        const jobId = result.job_id;
+        // Handle RunPod job or local generation
         let completed = false;
-        let attempts = 0;
-        const maxAttempts = 120; // 10 minutes
-        
         const statusText = progressOverlay.querySelector('.progress-text');
         
-        while (!completed && attempts < maxAttempts) {
-            const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+        if (result.service === 'runpod') {
+            // Handle RunPod generation
+            const jobId = result.jobId;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
             
-            if (status.error) {
-                throw new Error(status.error);
-            }
-            
-            if (status.status === 'completed') {
-                completed = true;
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId, service: 'runpod' });
                 
-                // Get the generated image
-                const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
-                if (imageBuffer && !imageBuffer.error) {
-                    const blob = new Blob([imageBuffer], { type: 'image/png' });
-                    
-                    // Save the generated image to the proper directory structure
-                    const bookDir = path.join(audiobooksDir, currentBook);
-                    const characterImagesDir = path.join(bookDir, 'character_profile_images');
-                    
-                    // Create the directory if it doesn't exist
-                    if (!fs.existsSync(characterImagesDir)) {
-                        fs.mkdirSync(characterImagesDir, { recursive: true });
-                    }
-                    
-                    // Generate filename based on character name
-                    const sanitizedName = character.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                    const timestamp = Date.now();
-                    const filename = `${sanitizedName}_${timestamp}.png`;
-                    const imagePath = path.join(characterImagesDir, filename);
-                    
-                    // Save the image blob to file
-                    const arrayBuffer = await blob.arrayBuffer();
-                    const buffer = Buffer.from(arrayBuffer);
-                    fs.writeFileSync(imagePath, buffer);
-                    
-                    // Remove progress overlay
-                    progressOverlay.remove();
-                    
-                    // Call the completion callback to update the modal
-                    if (onComplete) {
-                        onComplete();
-                    }
-                    
-                    statusText.textContent = 'Image generated successfully!';
+                if (status.error) {
+                    throw new Error(status.error);
                 }
-            } else if (status.status === 'failed') {
-                throw new Error(status.error || 'Generation failed');
-            } else {
-                statusText.textContent = `Generating... (${Math.floor((attempts / maxAttempts) * 100)}%)`;
+                
+                if (status.status === 'success') {
+                    completed = true;
+                    
+                    // For RunPod, the image is in base64
+                    if (status.image) {
+                        const base64Data = status.image.includes('base64,') ? status.image.split(',')[1] : status.image;
+                        const binaryString = atob(base64Data);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        const blob = new Blob([bytes], { type: 'image/png' });
+                        
+                        // Save the generated image to the proper directory structure
+                        const bookDir = path.join(audiobooksDir, currentBook);
+                        const characterImagesDir = path.join(bookDir, 'character_profile_images');
+                        
+                        // Create the directory if it doesn't exist
+                        if (!fs.existsSync(characterImagesDir)) {
+                            fs.mkdirSync(characterImagesDir, { recursive: true });
+                        }
+                        
+                        // Generate filename based on character name
+                        const sanitizedName = character.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                        const timestamp = Date.now();
+                        const filename = `${sanitizedName}_${timestamp}.png`;
+                        const imagePath = path.join(characterImagesDir, filename);
+                        
+                        // Save the image blob to file
+                        const arrayBuffer = await blob.arrayBuffer();
+                        const buffer = Buffer.from(arrayBuffer);
+                        fs.writeFileSync(imagePath, buffer);
+                        
+                        // Remove progress overlay
+                        progressOverlay.remove();
+                        
+                        // Call the completion callback to update the modal
+                        if (onComplete) {
+                            onComplete();
+                        }
+                        
+                        statusText.textContent = 'Image generated successfully!';
+                    }
+                } else if (status.status === 'error') {
+                    throw new Error(status.error || 'Generation failed');
+                } else {
+                    // Still processing
+                    statusText.textContent = `Generating character portrait... (${attempts * 5}s)`;
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
             }
             
-            attempts++;
-            await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+            if (!completed) {
+                throw new Error('Generation timeout');
+            }
+        } else {
+            // Handle local generation
+            const jobId = result.job_id;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
+            
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+                
+                if (status.error) {
+                    throw new Error(status.error);
+                }
+                
+                if (status.status === 'completed') {
+                    completed = true;
+                    
+                    // Get the generated image
+                    const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
+                    if (imageBuffer && !imageBuffer.error) {
+                        const blob = new Blob([imageBuffer], { type: 'image/png' });
+                        
+                        // Save the generated image to the proper directory structure
+                        const bookDir = path.join(audiobooksDir, currentBook);
+                        const characterImagesDir = path.join(bookDir, 'character_profile_images');
+                        
+                        // Create the directory if it doesn't exist
+                        if (!fs.existsSync(characterImagesDir)) {
+                            fs.mkdirSync(characterImagesDir, { recursive: true });
+                        }
+                        
+                        // Generate filename based on character name
+                        const sanitizedName = character.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                        const timestamp = Date.now();
+                        const filename = `${sanitizedName}_${timestamp}.png`;
+                        const imagePath = path.join(characterImagesDir, filename);
+                        
+                        // Save the image blob to file
+                        const arrayBuffer = await blob.arrayBuffer();
+                        const buffer = Buffer.from(arrayBuffer);
+                        fs.writeFileSync(imagePath, buffer);
+                        
+                        // Remove progress overlay
+                        progressOverlay.remove();
+                        
+                        // Call the completion callback to update the modal
+                        if (onComplete) {
+                            onComplete();
+                        }
+                        
+                        statusText.textContent = 'Image generated successfully!';
+                    }
+                } else if (status.status === 'failed') {
+                    throw new Error(status.error || 'Generation failed');
+                } else {
+                    statusText.textContent = `Generating... (${Math.floor((attempts / maxAttempts) * 100)}%)`;
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+            }
         }
         
         if (!completed) {
@@ -5927,118 +6098,174 @@ async function generateFluxCharacterImage(character, subCharacter, description, 
             throw new Error(result.error);
         }
         
-        // Poll for completion
-        const jobId = result.job_id;
+        // Handle RunPod job or local generation
         let completed = false;
-        let attempts = 0;
-        const maxAttempts = 120; // 10 minutes
-        
+        let imageUrl = null;
         const statusText = modal.querySelector('.flux-generating-text');
         
-        while (!completed && attempts < maxAttempts) {
-            const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+        if (result.service === 'runpod') {
+            // Handle RunPod generation
+            const jobId = result.jobId;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
             
-            if (status.error) {
-                throw new Error(status.error);
-            }
-            
-            if (status.status === 'completed') {
-                completed = true;
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId, service: 'runpod' });
                 
-                // Get the generated image
-                const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
-                if (imageBuffer && !imageBuffer.error) {
-                    const blob = new Blob([imageBuffer], { type: 'image/png' });
-                    const imageUrl = URL.createObjectURL(blob);
-                    
-                    // Update the character image
-                    imageElement.src = imageUrl;
-                    
-                    // Save the generated image to the proper directory structure
-                    const bookDir = path.join(audiobooksDir, currentBook);
-                    const characterImagesDir = path.join(bookDir, 'character_profile_images');
-                    
-                    // Create the directory if it doesn't exist
-                    if (!fs.existsSync(characterImagesDir)) {
-                        fs.mkdirSync(characterImagesDir, { recursive: true });
-                    }
-                    
-                    // Generate filename based on character name
-                    const characterName = subCharacter ? subCharacter.name : character.name;
-                    const sanitizedName = characterName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                    const timestamp = Date.now();
-                    const filename = subCharacter ? 
-                        `${sanitizedName}_${subCharacter.id}_${timestamp}.png` : 
-                        `${sanitizedName}_${timestamp}.png`;
-                    const imagePath = path.join(characterImagesDir, filename);
-                    
-                    // Save the image blob to file
-                    const arrayBuffer = await blob.arrayBuffer();
-                    const buffer = Buffer.from(arrayBuffer);
-                    fs.writeFileSync(imagePath, buffer);
-                    
-                    // Update character data with the new image path
-                    const charactersJsonPath = getCharactersFilePath(currentBook);
-                    let characters = JSON.parse(fs.readFileSync(charactersJsonPath, 'utf-8'));
-                    
-                    // Find the character and update the photo path
-                    const charIndex = characters.findIndex(c => c.name === character.name);
-                    if (charIndex !== -1) {
-                        if (subCharacter) {
-                            // Update sub-characteristic photo
-                            const subCharIndex = characters[charIndex].subCharacteristics.findIndex(
-                                sc => sc.id === subCharacter.id
-                            );
-                            if (subCharIndex !== -1) {
-                                characters[charIndex].subCharacteristics[subCharIndex].photo = 
-                                    path.join('character_profile_images', filename);
-                            }
-                        } else {
-                            // Update main character photo
-                            characters[charIndex].photo = path.join('character_profile_images', filename);
-                        }
-                        
-                        // Save updated character data
-                        fs.writeFileSync(charactersJsonPath, JSON.stringify(characters, null, 2));
-                        
-                        // Reload characters to update the display
-                        loadCharacters(currentBook);
-                        
-                        // Close the modal
-                        modal.remove();
-                        
-                        // Also refresh the Audio Books display to show the new character image
-                        const bookItems = document.querySelectorAll('#book-list .book-item');
-                        bookItems.forEach(bookItem => {
-                            if (bookItem.textContent === currentBook) {
-                                bookItem.click(); // This will reload the chapters and character displays
-                            }
-                        });
-                    }
-                    
-                    statusText.textContent = 'Image generated successfully!';
-                    setTimeout(() => {
-                        document.body.removeChild(modal);
-                    }, 1500);
+                if (status.error) {
+                    throw new Error(status.error);
                 }
-            } else if (status.status === 'failed') {
-                throw new Error(status.error || 'Generation failed');
-            } else {
-                statusText.textContent = `Generating... (${Math.floor((attempts / maxAttempts) * 100)}%)`;
+                
+                if (status.status === 'success') {
+                    completed = true;
+                    
+                    // For RunPod, the image is in base64
+                    if (status.image) {
+                        const base64Data = status.image.includes('base64,') ? status.image.split(',')[1] : status.image;
+                        const binaryString = atob(base64Data);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        const blob = new Blob([bytes], { type: 'image/png' });
+                        imageUrl = URL.createObjectURL(blob);
+                    }
+                } else if (status.status === 'error') {
+                    throw new Error(status.error || 'Generation failed');
+                } else {
+                    // Still processing
+                    if (statusText) {
+                        statusText.textContent = `Generating character portrait... (${attempts * 5}s)`;
+                    }
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
             }
             
-            attempts++;
-            await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+            if (!completed) {
+                throw new Error('Generation timeout');
+            }
+        } else {
+            // Handle local generation
+            const jobId = result.job_id;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
+            
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+                
+                if (status.error) {
+                    throw new Error(status.error);
+                }
+                
+                if (status.status === 'completed') {
+                    completed = true;
+                    
+                    // Get the generated image
+                    const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
+                    if (imageBuffer && !imageBuffer.error) {
+                        const blob = new Blob([imageBuffer], { type: 'image/png' });
+                        imageUrl = URL.createObjectURL(blob);
+                    }
+                } else if (status.status === 'failed') {
+                    throw new Error(status.error || 'Generation failed');
+                } else {
+                    // Still processing
+                    if (statusText) {
+                        statusText.textContent = `Processing... ${Math.round((attempts / maxAttempts) * 100)}%`;
+                    }
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+            }
+            
+            if (!completed) {
+                throw new Error('Generation timeout');
+            }
         }
         
-        if (!completed) {
-            throw new Error('Generation timeout');
+        // Now we have the imageUrl from either RunPod or local generation
+        if (imageUrl) {
+            // Update the character image
+            imageElement.src = imageUrl;
+            
+            // Save the generated image to the proper directory structure
+            const bookDir = path.join(audiobooksDir, currentBook);
+            const characterImagesDir = path.join(bookDir, 'character_profile_images');
+            
+            // Create the directory if it doesn't exist
+            if (!fs.existsSync(characterImagesDir)) {
+                fs.mkdirSync(characterImagesDir, { recursive: true });
+            }
+            
+            // Generate filename based on character name
+            const characterName = subCharacter ? subCharacter.name : character.name;
+            const sanitizedName = characterName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const timestamp = Date.now();
+            const filename = subCharacter ? 
+                `${sanitizedName}_${subCharacter.id}_${timestamp}.png` : 
+                `${sanitizedName}_${timestamp}.png`;
+            const imagePath = path.join(characterImagesDir, filename);
+            
+            // Save the image to file - need to get the blob from the URL
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const arrayBuffer = await blob.arrayBuffer();
+            const buffer = Buffer.from(arrayBuffer);
+            fs.writeFileSync(imagePath, buffer);
+            
+            // Update character data with the new image path
+            const charactersJsonPath = getCharactersFilePath(currentBook);
+            let characters = JSON.parse(fs.readFileSync(charactersJsonPath, 'utf-8'));
+            
+            // Find the character and update the photo path
+            const charIndex = characters.findIndex(c => c.name === character.name);
+            if (charIndex !== -1) {
+                if (subCharacter) {
+                    // Update sub-characteristic photo
+                    const subCharIndex = characters[charIndex].subCharacteristics.findIndex(
+                        sc => sc.id === subCharacter.id
+                    );
+                    if (subCharIndex !== -1) {
+                        characters[charIndex].subCharacteristics[subCharIndex].photo = 
+                            path.join('character_profile_images', filename);
+                    }
+                } else {
+                    // Update main character photo
+                    characters[charIndex].photo = path.join('character_profile_images', filename);
+                }
+                
+                // Save updated character data
+                fs.writeFileSync(charactersJsonPath, JSON.stringify(characters, null, 2));
+                
+                // Reload characters to update the display
+                loadCharacters(currentBook);
+                
+                // Also refresh the Audio Books display to show the new character image
+                const bookItems = document.querySelectorAll('#book-list .book-item');
+                bookItems.forEach(bookItem => {
+                    if (bookItem.textContent === currentBook) {
+                        bookItem.click(); // This will reload the chapters and character displays
+                    }
+                });
+            }
+            
+            statusText.textContent = 'Image generated successfully!';
+            setTimeout(() => {
+                if (modal && modal.parentNode) {
+                    modal.remove();
+                }
+            }, 1500);
         }
         
     } catch (error) {
         console.error('Error generating character image:', error);
         alert(`Error generating image: ${error.message}`);
-        document.body.removeChild(modal);
+        if (modal && modal.parentNode) {
+            modal.remove();
+        }
     }
 }
 

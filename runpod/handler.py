@@ -91,7 +91,7 @@ def ensure_models(hf_token=None):
     flux_path = f"{models_base}/unet/flux1-kontext-dev.safetensors"
     if os.path.exists(flux_path):
         size_mb = os.path.getsize(flux_path) / (1024 * 1024)
-        if size_mb < 20000:  # Should be ~24GB
+        if size_mb < 10000:  # Should be ~12GB for FP8
             logger.warning(f"Found corrupted FLUX model ({size_mb:.1f} MB), deleting...")
             try:
                 os.remove(flux_path)
@@ -108,8 +108,8 @@ def ensure_models(hf_token=None):
         {
             "name": "flux1-kontext-dev.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev.safetensors",
-            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/flux1-kontext-dev.safetensors",
-            "requires_auth": True
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-kontext-dev-fp8_e4m3fn.safetensors",
+            "requires_auth": False
         },
         {
             "name": "t5xxl_fp8_e4m3fn.safetensors",
@@ -319,8 +319,8 @@ def handler(job):
                     model_name = os.path.basename(model_path)
                     
                     # Check for corrupted downloads (files that are too small)
-                    if model_name == "flux1-kontext-dev.safetensors" and size_mb < 20000:  # Should be ~24GB
-                        logger.error(f"FLUX model is corrupted! Only {size_mb:.1f} MB, should be ~24,000 MB")
+                    if model_name == "flux1-kontext-dev.safetensors" and size_mb < 10000:  # Should be ~12GB for FP8
+                        logger.error(f"FLUX model is corrupted! Only {size_mb:.1f} MB, should be ~12,000 MB")
                         # Delete the corrupted file so it can be re-downloaded
                         os.remove(model_path)
                         still_missing.append(model_path)

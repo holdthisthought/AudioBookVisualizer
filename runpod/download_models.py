@@ -31,8 +31,8 @@ def main():
     # Models to download
     models = [
         {
-            "name": "FLUX.1 Kontext Dev",
-            "url": "https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/resolve/main/flux1-kontext-dev.safetensors",
+            "name": "FLUX.1 Kontext Dev FP8",
+            "url": "https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-kontext-dev-fp8_e4m3fn.safetensors",
             "path": f"{models_base}/unet/flux1-kontext-dev.safetensors"
         },
         {

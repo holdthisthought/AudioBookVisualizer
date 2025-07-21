@@ -233,7 +233,8 @@ class FluxServiceRunPod {
         const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
         // Use the exact model names available on the RunPod endpoint
         // Based on the error logs, these are the available models:
-        const modelName = 'flux1-kontext-dev.safetensors'; // Kontext Dev model
+        // Model name depends on precision setting
+        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors'; // Without '_scaled' suffix
 
         return {
@@ -316,7 +317,8 @@ class FluxServiceRunPod {
         const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
         
         // Model names for RunPod deployment
-        const modelName = 'flux1-kontext-dev.safetensors';
+        // Model name depends on precision setting
+        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
@@ -471,7 +473,8 @@ class FluxServiceRunPod {
         const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
         
         // Model names for RunPod deployment
-        const modelName = 'flux1-kontext-dev.safetensors';
+        // Model name depends on precision setting
+        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);

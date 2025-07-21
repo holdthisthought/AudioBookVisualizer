@@ -73,7 +73,10 @@ class FluxServiceRunPod {
             throw new Error('RunPod service not initialized');
         }
 
-        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, characterImages } = params;
+        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, characterImages, modelPrecision } = params;
+        
+        // Use the model precision from params, falling back to the initialized value
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
 
         // Create the appropriate workflow based on character count
         let workflow;
@@ -230,11 +233,12 @@ class FluxServiceRunPod {
 
     // Workflow creation methods (similar to flux-service-local.js)
     createTextToImageWorkflow(params) {
-        const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
+        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, modelPrecision } = params;
         // Use the exact model names available on the RunPod endpoint
         // Based on the error logs, these are the available models:
         // Model name depends on precision setting
-        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
+        const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors'; // Without '_scaled' suffix
 
         return {
@@ -314,11 +318,12 @@ class FluxServiceRunPod {
     }
 
     async createKontextWorkflow(params, characterImages) {
-        const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
+        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, modelPrecision } = params;
         
         // Model names for RunPod deployment
         // Model name depends on precision setting
-        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
+        const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
@@ -399,7 +404,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": this.modelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
                 }
             },
             "11": {
@@ -470,11 +475,12 @@ class FluxServiceRunPod {
     }
 
     async createKontextSingleWorkflow(params, characterImage) {
-        const { prompt, width, height, steps, guidance, seed, sampler, scheduler } = params;
+        const { prompt, width, height, steps, guidance, seed, sampler, scheduler, modelPrecision } = params;
         
         // Model names for RunPod deployment
         // Model name depends on precision setting
-        const modelName = this.modelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
+        const actualModelPrecision = modelPrecision || this.modelPrecision;
+        const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
         const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
@@ -527,7 +533,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": this.modelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
                 }
             },
             "8": {

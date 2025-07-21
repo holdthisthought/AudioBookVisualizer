@@ -882,6 +882,41 @@ ipcMain.handle('flux-edit-image', async (event, { prompt, image, settings }) => 
 
 ipcMain.handle('flux-generate-kontext', async (event, { prompt, character_image_1, character_image_2, settings }) => {
     try {
+        const params = {
+            prompt,
+            characterImages: [character_image_1, character_image_2],
+            modelPrecision: settings.modelPrecision || 'fp8',
+            width: settings.width || 512,
+            height: settings.height || 512,
+            steps: settings.steps || 20,
+            guidance: settings.guidance || 3.5,
+            seed: settings.seed,
+            sampler: settings.sampler || 'euler',
+            scheduler: settings.scheduler || 'simple'
+        };
+        
+        // Use RunPod if selected
+        if (currentGenerationService === 'runpod') {
+            console.log('[FLUX] Using RunPod service for Kontext generation');
+            
+            if (!RUNPOD_API_KEY) {
+                throw new Error('RunPod API key not configured');
+            }
+            
+            // Initialize RunPod service if needed
+            if (!fluxServiceRunPod.isConfigured) {
+                await fluxServiceRunPod.initialize({
+                    runpodApiKey: RUNPOD_API_KEY,
+                    runpodEndpointId: RUNPOD_ENDPOINT_ID,
+                    modelPrecision: settings.modelPrecision || 'fp8',
+                    huggingfaceToken: HUGGINGFACE_TOKEN
+                });
+            }
+            
+            const jobId = await fluxServiceRunPod.generateImage(params);
+            return { jobId, service: 'runpod' };
+        }
+        
         // Check if ComfyUI is configured
         const comfyStatus = await comfyUIManager.getStatus();
         
@@ -939,6 +974,41 @@ ipcMain.handle('flux-generate-kontext', async (event, { prompt, character_image_
 // Single character Kontext generation
 ipcMain.handle('flux-generate-kontext-single', async (event, { prompt, character_image, settings }) => {
     try {
+        const params = {
+            prompt,
+            characterImages: [character_image],
+            modelPrecision: settings.modelPrecision || 'fp8',
+            width: settings.width || 512,
+            height: settings.height || 512,
+            steps: settings.steps || 20,
+            guidance: settings.guidance || 3.5,
+            seed: settings.seed,
+            sampler: settings.sampler || 'euler',
+            scheduler: settings.scheduler || 'simple'
+        };
+        
+        // Use RunPod if selected
+        if (currentGenerationService === 'runpod') {
+            console.log('[FLUX] Using RunPod service for single Kontext generation');
+            
+            if (!RUNPOD_API_KEY) {
+                throw new Error('RunPod API key not configured');
+            }
+            
+            // Initialize RunPod service if needed
+            if (!fluxServiceRunPod.isConfigured) {
+                await fluxServiceRunPod.initialize({
+                    runpodApiKey: RUNPOD_API_KEY,
+                    runpodEndpointId: RUNPOD_ENDPOINT_ID,
+                    modelPrecision: settings.modelPrecision || 'fp8',
+                    huggingfaceToken: HUGGINGFACE_TOKEN
+                });
+            }
+            
+            const jobId = await fluxServiceRunPod.generateImage(params);
+            return { jobId, service: 'runpod' };
+        }
+        
         // Check if ComfyUI is configured
         const comfyStatus = await comfyUIManager.getStatus();
         

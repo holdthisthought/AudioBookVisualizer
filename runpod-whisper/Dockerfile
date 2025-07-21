@@ -1,33 +1,18 @@
 # Whisper RunPod Serverless Endpoint
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+# Use RunPod's PyTorch image to save space
+FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 # Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies
+# Install only essential system dependencies
 RUN apt-get update && apt-get install -y \
-    python3.10 \
-    python3-pip \
-    git \
     ffmpeg \
-    wget \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set Python 3.10 as default
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-
-# Upgrade pip
-RUN python -m pip install --upgrade pip
-
-# Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel
-
-# Install PyTorch first with CUDA 11.8
-RUN pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu118
-
-# Install other dependencies
+# Install Python dependencies (PyTorch already in base image)
 RUN pip install --no-cache-dir \
     runpod==1.6.2 \
     faster-whisper==1.0.3 \

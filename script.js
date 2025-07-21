@@ -1623,17 +1623,21 @@ REMEMBER: You are EDITING the Chapter JSON files, not creating new output. Open 
 // Scene image generation using FLUX Kontext
 async function generateSceneImage(scene, sceneIndex) {
     try {
-        // Check required models
-        const requiredModels = ['clip_l', 'ae'];
-        const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
-        const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
-        
-        requiredModels.push(textEncoder, fluxModel);
-        
-        const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
-        if (missingModels.length > 0) {
-            alert(`Please download required models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
-            return;
+        // Check if we're using RunPod - if so, skip local model validation
+        const currentService = await ipcRenderer.invoke('get-generation-service');
+        if (currentService !== 'runpod') {
+            // Check required models (only for local generation)
+            const requiredModels = ['clip_l', 'ae'];
+            const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+            const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+            
+            requiredModels.push(textEncoder, fluxModel);
+            
+            const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+            if (missingModels.length > 0) {
+                alert(`Please download required models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+                return;
+            }
         }
         
         // Build prompt from parameters or use description for backwards compatibility
@@ -4612,17 +4616,21 @@ async function generateTestImage() {
         return;
     }
     
-    // Check if required models are available
-    const requiredModels = ['clip_l', 'ae'];
-    const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
-    const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
-    
-    requiredModels.push(textEncoder, fluxModel);
-    
-    const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
-    if (missingModels.length > 0) {
-        alert(`Please download required models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
-        return;
+    // Check if we're using RunPod - if so, skip local model validation
+    const currentService = await ipcRenderer.invoke('get-generation-service');
+    if (currentService !== 'runpod') {
+        // Check if required models are available (only for local generation)
+        const requiredModels = ['clip_l', 'ae'];
+        const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+        const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+        
+        requiredModels.push(textEncoder, fluxModel);
+        
+        const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+        if (missingModels.length > 0) {
+            alert(`Please download required models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+            return;
+        }
     }
     
     const generateBtn = document.getElementById('flux-test-generate');
@@ -5344,17 +5352,21 @@ function createCharacterProgressIndicator(total) {
 async function processBatchCharacterImages() {
     if (selectedCharactersForBatch.size === 0) return;
     
-    // Check if required models are available
-    const requiredModels = ['clip_l', 'ae'];
-    const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
-    const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
-    
-    requiredModels.push(textEncoder, fluxModel);
-    
-    const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
-    if (missingModels.length > 0) {
-        alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
-        return;
+    // Check if we're using RunPod - if so, skip local model validation
+    const currentService = await ipcRenderer.invoke('get-generation-service');
+    if (currentService !== 'runpod') {
+        // Check if required models are available (only for local generation)
+        const requiredModels = ['clip_l', 'ae'];
+        const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+        const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+        
+        requiredModels.push(textEncoder, fluxModel);
+        
+        const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+        if (missingModels.length > 0) {
+            alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+            return;
+        }
     }
     
     const charactersToProcess = Array.from(selectedCharactersForBatch);
@@ -5522,17 +5534,21 @@ async function generateFluxCharacterImageBatch(character, description) {
 
 // Generate character image for modal without auto-setting it
 async function generateFluxCharacterImageForModal(character, description, parentModal, onComplete) {
-    // Check if required models are available
-    const requiredModels = ['clip_l', 'ae'];
-    const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
-    const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
-    
-    requiredModels.push(textEncoder, fluxModel);
-    
-    const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
-    if (missingModels.length > 0) {
-        alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
-        return;
+    // Check if we're using RunPod - if so, skip local model validation
+    const currentService = await ipcRenderer.invoke('get-generation-service');
+    if (currentService !== 'runpod') {
+        // Check if required models are available (only for local generation)
+        const requiredModels = ['clip_l', 'ae'];
+        const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+        const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+        
+        requiredModels.push(textEncoder, fluxModel);
+        
+        const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+        if (missingModels.length > 0) {
+            alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+            return;
+        }
     }
     
     // Create a progress overlay within the parent modal
@@ -5776,17 +5792,21 @@ function buildPromptFromParameters(character) {
 
 // Generate character image with FLUX
 async function generateFluxCharacterImage(character, subCharacter, description, imageElement) {
-    // Check if required models are available
-    const requiredModels = ['clip_l', 'ae'];
-    const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
-    const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
-    
-    requiredModels.push(textEncoder, fluxModel);
-    
-    const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
-    if (missingModels.length > 0) {
-        alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
-        return;
+    // Check if we're using RunPod - if so, skip local model validation
+    const currentService = await ipcRenderer.invoke('get-generation-service');
+    if (currentService !== 'runpod') {
+        // Check if required models are available (only for local generation)
+        const requiredModels = ['clip_l', 'ae'];
+        const textEncoder = fluxSettings.modelPrecision === 'fp16' ? 't5xxl_fp16' : 't5xxl_fp8';
+        const fluxModel = fluxSettings.modelPrecision === 'fp8' ? 'flux_kontext_fp8' : 'flux_kontext';
+        
+        requiredModels.push(textEncoder, fluxModel);
+        
+        const missingModels = requiredModels.filter(key => !fluxModelsStatus[key]?.available);
+        if (missingModels.length > 0) {
+            alert(`Please download required FLUX models first: ${missingModels.map(k => fluxModelsStatus[k]?.name).join(', ')}`);
+            return;
+        }
     }
     
     // Create a modal for generation progress

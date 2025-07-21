@@ -77,15 +77,18 @@ class FluxServiceRunPod {
         
         // Use the model precision from params, falling back to the initialized value
         const actualModelPrecision = modelPrecision || this.modelPrecision;
+        
+        // Add the actual model precision to params for workflow creation
+        const workflowParams = { ...params, modelPrecision: actualModelPrecision };
 
         // Create the appropriate workflow based on character count
         let workflow;
         if (!characterImages || characterImages.length === 0) {
-            workflow = this.createTextToImageWorkflow(params);
+            workflow = this.createTextToImageWorkflow(workflowParams);
         } else if (characterImages.length === 1) {
-            workflow = await this.createKontextSingleWorkflow(params, characterImages[0]);
+            workflow = await this.createKontextSingleWorkflow(workflowParams, characterImages[0]);
         } else {
-            workflow = await this.createKontextWorkflow(params, characterImages);
+            workflow = await this.createKontextWorkflow(workflowParams, characterImages);
         }
 
         // Submit job to RunPod

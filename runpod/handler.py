@@ -108,7 +108,8 @@ def ensure_models(hf_token=None, weight_dtype="fp8"):
     ]
     
     # Add the appropriate T5 model based on precision
-    if weight_dtype == "fp16":
+    # 'default' weight_dtype means use native precision (FP16)
+    if weight_dtype in ["fp16", "default"]:
         required_models.append({
             "name": "t5xxl_fp16.safetensors",
             "path": f"{models_base}/clip/t5xxl_fp16.safetensors",
@@ -298,8 +299,10 @@ def handler(job):
                 break
         
         # Map precision to model filenames
-        flux_model_name = "flux1-kontext-dev-fp16.safetensors" if weight_dtype == "fp16" else "flux1-kontext-dev-fp8.safetensors"
-        t5_model_name = "t5xxl_fp16.safetensors" if weight_dtype == "fp16" else "t5xxl_fp8_e4m3fn.safetensors"
+        # 'default' weight_dtype means use the model's native precision (FP16 for the FP16 model)
+        is_fp16 = weight_dtype in ["fp16", "default"]
+        flux_model_name = "flux1-kontext-dev-fp16.safetensors" if is_fp16 else "flux1-kontext-dev-fp8.safetensors"
+        t5_model_name = "t5xxl_fp16.safetensors" if is_fp16 else "t5xxl_fp8_e4m3fn.safetensors"
         
         # Check if any critical models are missing
         # Use Network Volume if available

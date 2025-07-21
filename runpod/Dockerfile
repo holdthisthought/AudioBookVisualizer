@@ -86,4 +86,5 @@ EOF
 RUN chmod +x /workspace/start.sh
 
 # RunPod serverless entrypoint
+# Updated: 2025-01-21 - Added FP16 model support
 CMD ["/workspace/start.sh"]

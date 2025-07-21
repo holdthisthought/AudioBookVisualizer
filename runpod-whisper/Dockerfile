@@ -41,14 +41,12 @@ RUN mkdir -p /models/whisper
 ENV HF_HOME=/models
 ENV WHISPER_CACHE=/models/whisper
 
-# Download each Whisper model separately for better reliability
-RUN echo "Downloading Whisper models..." && \
+# Pre-download only the smaller models to save space during build
+# Larger models will be downloaded on first use
+RUN echo "Pre-downloading essential Whisper models..." && \
     python -c "from faster_whisper import WhisperModel; m = WhisperModel('tiny', device='cpu', compute_type='int8'); del m; print('tiny ✓')" && \
     python -c "from faster_whisper import WhisperModel; m = WhisperModel('base', device='cpu', compute_type='int8'); del m; print('base ✓')" && \
-    python -c "from faster_whisper import WhisperModel; m = WhisperModel('small', device='cpu', compute_type='int8'); del m; print('small ✓')" && \
-    python -c "from faster_whisper import WhisperModel; m = WhisperModel('medium', device='cpu', compute_type='int8'); del m; print('medium ✓')" && \
-    python -c "from faster_whisper import WhisperModel; m = WhisperModel('large-v3', device='cpu', compute_type='int8'); del m; print('large-v3 ✓')" && \
-    echo "All Whisper models downloaded successfully!"
+    echo "Essential models downloaded. Larger models will download on first use."
 
 # Copy handler
 COPY handler.py /app/handler.py

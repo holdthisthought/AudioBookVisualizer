@@ -167,15 +167,23 @@ def process_audio(audio_data: bytes, model_size: str, **kwargs) -> Dict[str, Any
         tmp_file_path = tmp_file.name
     
     try:
-        # Get model
-        device = "cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu"
+        # Get model - RunPod always has GPU available
+        import torch
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         compute_type = "float16" if device == "cuda" else "int8"
+        
+        print(f"Using device: {device} with compute type: {compute_type}")
+        if device == "cuda":
+            print(f"GPU: {torch.cuda.get_device_name(0)}")
+            print(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
+        
         model = get_model(model_size, device, compute_type)
         
         # Transcribe
-        print(f"Transcribing audio with {model_size} model...")
+        print(f"Transcribing audio with {model_size} model on {device}...")
         start_time = time.time()
         
+        # Use condition_on_previous_text=False to speed up transcription
         segments, info = model.transcribe(
             tmp_file_path,
             language=kwargs.get("language", None),
@@ -185,14 +193,22 @@ def process_audio(audio_data: bytes, model_size: str, **kwargs) -> Dict[str, Any
             temperature=kwargs.get("temperature", 0),
             word_timestamps=kwargs.get("word_timestamps", True),
             vad_filter=kwargs.get("vad_filter", True),
-            vad_parameters=kwargs.get("vad_parameters", None)
+            vad_parameters=kwargs.get("vad_parameters", None),
+            condition_on_previous_text=False,  # Speed up by not conditioning on previous text
+            without_timestamps=False  # We want timestamps
         )
         
         # Process segments
         segments_list = []
         full_text = []
+        segment_count = 0
         
+        print("Processing segments...")
         for segment in segments:
+            segment_count += 1
+            if segment_count % 10 == 0:
+                print(f"Processed {segment_count} segments...")
+                
             seg_dict = {
                 "id": segment.id,
                 "start": segment.start,

@@ -4820,38 +4820,84 @@ async function generateKontextImage() {
             throw new Error(result.error);
         }
         
-        // Poll for completion
-        const jobId = result.job_id;
-        let completed = false;
-        let attempts = 0;
-        const maxAttempts = 120; // 10 minutes
-        
-        while (!completed && attempts < maxAttempts) {
-            const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
+        // Handle RunPod job
+        if (result.service === 'runpod') {
+            const jobId = result.jobId;
+            let completed = false;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
             
-            if (status.error) {
-                throw new Error(status.error);
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId, service: 'runpod' });
+                
+                if (status.error) {
+                    throw new Error(status.error);
+                }
+                
+                if (status.status === 'success') {
+                    completed = true;
+                    
+                    // For RunPod, the image is in base64
+                    if (status.image) {
+                        resultDiv.innerHTML = `
+                            <img src="data:image/png;base64,${status.image}" alt="Character fusion scene" class="flux-result-image">
+                            <div class="kontext-result-info">
+                                <p><strong>Characters:</strong> ${char1.name} & ${char2.name}</p>
+                                <p><strong>Scene:</strong> ${promptTextarea.value}</p>
+                            </div>
+                        `;
+                    }
+                } else if (status.status === 'error') {
+                    throw new Error(status.error || 'Generation failed');
+                } else {
+                    // Still processing
+                    const progressText = resultDiv.querySelector('.flux-generating-text');
+                    if (progressText) {
+                        progressText.textContent = `Generating fusion scene... (${attempts * 5}s)`;
+                    }
+                }
+                
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
             }
             
-            if (status.status === 'completed') {
-                completed = true;
+            if (!completed) {
+                throw new Error('Generation timeout');
+            }
+        } else {
+            // Handle local generation
+            const jobId = result.job_id;
+            let completed = false;
+            let attempts = 0;
+            const maxAttempts = 120; // 10 minutes
+            
+            while (!completed && attempts < maxAttempts) {
+                const status = await ipcRenderer.invoke('flux-get-job-status', { jobId });
                 
-                // Get the generated image
-                const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
-                if (imageBuffer && !imageBuffer.error) {
-                    const blob = new Blob([imageBuffer], { type: 'image/png' });
-                    const imageUrl = URL.createObjectURL(blob);
-                    
-                    resultDiv.innerHTML = `
-                        <img src="${imageUrl}" alt="Character fusion scene" class="flux-result-image">
-                        <div class="kontext-result-info">
-                            <p><strong>Characters:</strong> ${char1.name} & ${char2.name}</p>
-                            <p><strong>Scene:</strong> ${promptTextarea.value}</p>
-                        </div>
-                    `;
+                if (status.error) {
+                    throw new Error(status.error);
                 }
-            } else if (status.status === 'failed') {
-                throw new Error(status.error || 'Generation failed');
+                
+                if (status.status === 'completed') {
+                    completed = true;
+                    
+                    // Get the generated image
+                    const imageBuffer = await ipcRenderer.invoke('flux-get-image', { jobId });
+                    if (imageBuffer && !imageBuffer.error) {
+                        const blob = new Blob([imageBuffer], { type: 'image/png' });
+                        const imageUrl = URL.createObjectURL(blob);
+                        
+                        resultDiv.innerHTML = `
+                            <img src="${imageUrl}" alt="Character fusion scene" class="flux-result-image">
+                            <div class="kontext-result-info">
+                                <p><strong>Characters:</strong> ${char1.name} & ${char2.name}</p>
+                                <p><strong>Scene:</strong> ${promptTextarea.value}</p>
+                            </div>
+                        `;
+                    }
+                } else if (status.status === 'failed') {
+                    throw new Error(status.error || 'Generation failed');
+                }
             }
             
             // Update progress text

@@ -239,7 +239,7 @@ class FluxServiceRunPod {
         // Model name depends on precision setting
         const actualModelPrecision = modelPrecision || this.modelPrecision;
         const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
-        const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors'; // Without '_scaled' suffix
+        const t5ModelName = actualModelPrecision === 'fp16' ? 't5xxl_fp16.safetensors' : 't5xxl_fp8_e4m3fn.safetensors';
 
         return {
             "6": {
@@ -303,7 +303,7 @@ class FluxServiceRunPod {
             "32": {
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "default" : "fp8_e4m3fn"
                 },
                 "class_type": "UNETLoader"
             },
@@ -324,7 +324,7 @@ class FluxServiceRunPod {
         // Model name depends on precision setting
         const actualModelPrecision = modelPrecision || this.modelPrecision;
         const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
-        const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
+        const t5ModelName = actualModelPrecision === 'fp16' ? 't5xxl_fp16.safetensors' : 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
         
@@ -404,7 +404,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "default" : "fp8_e4m3fn"
                 }
             },
             "11": {
@@ -481,7 +481,7 @@ class FluxServiceRunPod {
         // Model name depends on precision setting
         const actualModelPrecision = modelPrecision || this.modelPrecision;
         const modelName = actualModelPrecision === 'fp16' ? 'flux1-kontext-dev-fp16.safetensors' : 'flux1-kontext-dev-fp8.safetensors';
-        const t5ModelName = 't5xxl_fp8_e4m3fn.safetensors';
+        const t5ModelName = actualModelPrecision === 'fp16' ? 't5xxl_fp16.safetensors' : 't5xxl_fp8_e4m3fn.safetensors';
         
         const actualSeed = seed || Math.floor(Math.random() * 0xFFFFFFFF);
 
@@ -533,7 +533,7 @@ class FluxServiceRunPod {
                 "class_type": "UNETLoader",
                 "inputs": {
                     "unet_name": modelName,
-                    "weight_dtype": actualModelPrecision === 'fp16' ? "fp16" : "fp8_e4m3fn"
+                    "weight_dtype": actualModelPrecision === 'fp16' ? "default" : "fp8_e4m3fn"
                 }
             },
             "8": {

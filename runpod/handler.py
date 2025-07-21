@@ -94,12 +94,6 @@ def ensure_models(hf_token=None, weight_dtype="fp8"):
     # Define required models including FLUX model based on precision
     required_models = [
         {
-            "name": "t5xxl_fp8_e4m3fn.safetensors",
-            "path": f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
-            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors",
-            "requires_auth": False
-        },
-        {
             "name": "clip_l.safetensors",
             "path": f"{models_base}/clip/clip_l.safetensors",
             "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors",
@@ -112,6 +106,22 @@ def ensure_models(hf_token=None, weight_dtype="fp8"):
             "requires_auth": True
         }
     ]
+    
+    # Add the appropriate T5 model based on precision
+    if weight_dtype == "fp16":
+        required_models.append({
+            "name": "t5xxl_fp16.safetensors",
+            "path": f"{models_base}/clip/t5xxl_fp16.safetensors",
+            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors",
+            "requires_auth": False
+        })
+    else:
+        required_models.append({
+            "name": "t5xxl_fp8_e4m3fn.safetensors",
+            "path": f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
+            "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors",
+            "requires_auth": False
+        })
     
     # Add the appropriate FLUX model based on requested precision
     if weight_dtype == "fp16":
@@ -287,8 +297,9 @@ def handler(job):
                 logger.info(f"Workflow requests {weight_dtype} precision")
                 break
         
-        # Map precision to model filename
+        # Map precision to model filenames
         flux_model_name = "flux1-kontext-dev-fp16.safetensors" if weight_dtype == "fp16" else "flux1-kontext-dev-fp8.safetensors"
+        t5_model_name = "t5xxl_fp16.safetensors" if weight_dtype == "fp16" else "t5xxl_fp8_e4m3fn.safetensors"
         
         # Check if any critical models are missing
         # Use Network Volume if available
@@ -298,7 +309,7 @@ def handler(job):
             models_base = "/workspace/ComfyUI/models"
         critical_models = [
             f"{models_base}/unet/{flux_model_name}",
-            f"{models_base}/clip/t5xxl_fp8_e4m3fn.safetensors",
+            f"{models_base}/clip/{t5_model_name}",
             f"{models_base}/clip/clip_l.safetensors",
             f"{models_base}/vae/ae.safetensors"
         ]

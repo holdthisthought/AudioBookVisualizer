@@ -410,10 +410,8 @@ class FluxServiceRunPod {
             "11": {
                 "class_type": "ReferenceLatent",
                 "inputs": {
-                    "reference": ["6", 0],
-                    "latent": ["7", 0],
-                    "reference_level": 2.0,
-                    "shift_mode": "simple"
+                    "conditioning": ["15", 0],
+                    "latent": ["6", 0]
                 }
             },
             "12": {
@@ -438,14 +436,14 @@ class FluxServiceRunPod {
                     "model": ["12", 0],
                     "positive": ["14", 0],
                     "negative": ["9", 0],
-                    "latent_image": ["11", 0]
+                    "latent_image": ["7", 0]
                 }
             },
             "14": {
                 "class_type": "FluxGuidance",
                 "inputs": {
                     "guidance": guidance,
-                    "conditioning": ["15", 0]
+                    "conditioning": ["11", 0]
                 }
             },
             "15": {
@@ -539,10 +537,8 @@ class FluxServiceRunPod {
             "8": {
                 "class_type": "ReferenceLatent",
                 "inputs": {
-                    "reference": ["4", 0],
-                    "latent": ["4b", 0],
-                    "reference_level": 2.0,
-                    "shift_mode": "simple"
+                    "conditioning": ["12", 0],
+                    "latent": ["4", 0]
                 }
             },
             "9": {
@@ -567,14 +563,14 @@ class FluxServiceRunPod {
                     "model": ["9", 0],
                     "positive": ["11", 0],
                     "negative": ["6", 0],
-                    "latent_image": ["8", 0]
+                    "latent_image": ["4b", 0]
                 }
             },
             "11": {
                 "class_type": "FluxGuidance",
                 "inputs": {
                     "guidance": guidance,
-                    "conditioning": ["12", 0]
+                    "conditioning": ["8", 0]
                 }
             },
             "12": {

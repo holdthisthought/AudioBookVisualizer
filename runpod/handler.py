@@ -215,6 +215,66 @@ def start_comfyui():
     logger.error("ComfyUI server failed to start")
     return False
 
+def upload_image(image_data: str, filename: str) -> Optional[str]:
+    """Upload a base64 image to ComfyUI"""
+    try:
+        # Remove data:image/png;base64, prefix if present
+        if image_data.startswith('data:'):
+            image_data = image_data.split(',')[1]
+        
+        # Decode base64 to bytes
+        image_bytes = base64.b64decode(image_data)
+        
+        # Create multipart form data
+        files = {
+            'image': (filename, image_bytes, 'image/png'),
+            'type': (None, 'input'),
+            'overwrite': (None, 'true')
+        }
+        
+        response = requests.post(
+            f"{COMFYUI_URL}/upload/image",
+            files=files
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            uploaded_name = result.get('name', filename)
+            logger.info(f"Successfully uploaded image: {uploaded_name}")
+            return uploaded_name
+        else:
+            logger.error(f"Failed to upload image: Status {response.status_code}, Response: {response.text}")
+            return None
+    except Exception as e:
+        logger.error(f"Error uploading image: {str(e)}")
+        return None
+
+def process_workflow_images(workflow: Dict[str, Any]) -> Dict[str, Any]:
+    """Process LoadImage nodes in workflow and upload base64 images"""
+    processed_workflow = workflow.copy()
+    
+    for node_id, node_data in processed_workflow.items():
+        if node_data.get('class_type') == 'LoadImage':
+            inputs = node_data.get('inputs', {})
+            if 'image' in inputs and inputs.get('upload') == 'image':
+                # This is a base64 image that needs to be uploaded
+                image_data = inputs['image']
+                if image_data and isinstance(image_data, str) and len(image_data) > 100:
+                    # Generate a unique filename
+                    filename = f"input_{node_id}_{int(time.time())}.png"
+                    uploaded_name = upload_image(image_data, filename)
+                    
+                    if uploaded_name:
+                        # Update the workflow to use the uploaded filename
+                        processed_workflow[node_id]['inputs']['image'] = uploaded_name
+                        # Remove the upload field as it's no longer needed
+                        if 'upload' in processed_workflow[node_id]['inputs']:
+                            del processed_workflow[node_id]['inputs']['upload']
+                    else:
+                        logger.error(f"Failed to upload image for node {node_id}")
+    
+    return processed_workflow
+
 def queue_prompt(prompt: Dict[str, Any]) -> Optional[str]:
     """Submit a prompt to ComfyUI and return the prompt ID"""
     try:
@@ -376,6 +436,15 @@ def handler(job):
             workflow = json.loads(workflow)
         
         logger.info(f"Workflow has {len(workflow)} nodes")
+        
+        # Log workflow structure for debugging
+        logger.info("Workflow nodes:")
+        for node_id, node_data in workflow.items():
+            logger.info(f"  Node {node_id}: {node_data.get('class_type', 'Unknown')}")
+        
+        # Process any base64 images in LoadImage nodes
+        logger.info("Processing workflow images...")
+        workflow = process_workflow_images(workflow)
         
         # Queue the prompt
         prompt_id = queue_prompt(workflow)

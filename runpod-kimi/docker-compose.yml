@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  kimi-k2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chester00000/audiobook-visualizer-kimi:local
+    container_name: kimi-k2-local
+    environment:
+      - MODEL_NAME=moonshotai/Kimi-K2-Instruct
+      - MODEL_PATH=/workspace/models
+      - DOWNLOAD_MODEL_ON_START=true
+      - CUDA_VISIBLE_DEVICES=0  # Adjust based on your GPU setup
+    volumes:
+      # Mount model cache to avoid re-downloading
+      - ./models:/workspace/models
+      # Mount handler for development (optional)
+      # - ./handler.py:/workspace/handler.py
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Uncomment for interactive testing
+    # stdin_open: true
+    # tty: true
+    # command: /bin/bash
+
+  # Test client for local development
+  test-client:
+    image: curlimages/curl:latest
+    depends_on:
+      - kimi-k2
+    command: >
+      sh -c "
+        echo 'Waiting for Kimi-K2 to start...';
+        sleep 30;
+        curl -X POST http://kimi-k2:8000/runsync \
+          -H 'Content-Type: application/json' \
+          -d '{
+            \"input\": {
+              \"prompt\": \"Extract character traits from: The old wizard walked slowly.\",
+              \"max_tokens\": 256,
+              \"temperature\": 0.7
+            }
+          }'
+      "
+    profiles:
+      - test

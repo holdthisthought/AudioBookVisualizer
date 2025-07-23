@@ -1,0 +1,17 @@
+# Ignore files not needed in the Docker image
+README.md
+test_local.py
+build_and_deploy.sh
+.dockerignore
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build

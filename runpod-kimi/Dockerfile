@@ -1,4 +1,4 @@
-FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
+FROM runpod/pytorch:2.2.0-py3.10-cuda12.1.0-devel-ubuntu22.04
 
 # Set working directory
 WORKDIR /workspace
@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt /workspace/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install vLLM (required for efficient inference)
-RUN pip install vllm>=0.5.0
+# Try to install vLLM, but don't fail the build if it doesn't work
+# vLLM has complex dependencies that may conflict
+RUN pip install --no-cache-dir vllm==0.5.0 || echo "Warning: vLLM installation failed, will use transformers instead"
 
 # Note: The model will be downloaded on first run to avoid large image sizes
 # This also allows flexibility in model selection via environment variables
